@@ -8,6 +8,8 @@ Plugin URI: http://wordpress.org/extend/plugins/memcached/
 Author: Ryan Boren, Denis de Bernardy, Matt Martz
 
 Install this file to wp-content/object-cache.php
+
+2013-4-4 : cail for wordpress sae 3.4.2
 */
 
 // Users with setups where multiple installs share a common wp-config.php or $table_prefix
@@ -356,6 +358,10 @@ class WP_Object_Cache {
 		//error_log("Connection failure for $host:$port\n", 3, '/tmp/memcached.txt');
 	}
 
+	function __construct() { // cail
+		self::WP_Object_Cache();
+	}
+
 	function WP_Object_Cache() {
 		global $memcached_servers;
 
@@ -368,18 +374,8 @@ class WP_Object_Cache {
 		if ( is_int( key($buckets) ) )
 			$buckets = array('default' => $buckets);
 
-		foreach ( $buckets as $bucket => $servers) {
-			$this->mc[$bucket] = new Memcache();
-			foreach ( $servers as $server  ) {
-				list ( $node, $port ) = explode(':', $server);
-				if ( !$port )
-					$port = ini_get('memcache.default_port');
-				$port = intval($port);
-				if ( !$port )
-					$port = 11211;
-				$this->mc[$bucket]->addServer($node, $port, true, 1, 1, 15, true, array($this, 'failure_callback'));
-				$this->mc[$bucket]->setCompressThreshold(20000, 0.2);
-			}
+		foreach ( $buckets as $bucket => $servers) { // cail
+		    $this->mc[$bucket] = memcache_init();
 		}
 
 		global $blog_id, $table_prefix;
