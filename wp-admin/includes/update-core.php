@@ -417,9 +417,9 @@ $_old_files = array(
 global $_new_bundled_files;
 
 $_new_bundled_files = array(
-'plugins/akismet/' => '2.0',
-'themes/twentyten/' => '3.0',
-'themes/twentyeleven/' => '3.2'
+'plugins/wp-mail-smtp/' => '0.9.1',
+'plugins/restricted-site-access/' => '5.0.1',
+'themes/p2/' => '1.4.2'
 );
 
 /**

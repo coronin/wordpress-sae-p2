@@ -1268,8 +1268,6 @@ function wp_welcome_panel() {
 			echo '</p>';
 		else:
 			$customize_links = array();
-			if ( 'twentyeleven' == $theme->get_stylesheet() )
-				$customize_links[] = sprintf( __( '<a href="%s">Choose light or dark</a>' ), esc_url( admin_url( 'themes.php?page=theme_options' ) ) );
 
 			if ( current_theme_supports( 'custom-background' ) )
 				$customize_links[] = sprintf( __( '<a href="%s">Set a background color</a>' ), esc_url( admin_url( 'themes.php?page=custom-background' ) ) );
