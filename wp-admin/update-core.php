@@ -18,7 +18,7 @@ if ( is_multisite() && ! is_network_admin() ) {
 	exit();
 }
 
-if ( ! current_user_can( 'update_core' ) )
+if ( ! current_user_can( 'update_core' ) && ! current_user_can( 'update_themes' ) && ! current_user_can( 'update_plugins' ) )
 	wp_die( __( 'You do not have sufficient permissions to update this site.' ) );
 
 function list_core_update( $update ) {
@@ -40,7 +40,7 @@ function list_core_update( $update ) {
 		$download = __('Download nightly build');
 	} else {
 		if ( $current ) {
-			$message = sprintf('您正在使用最新版本的 WordPress。您无需升级。尽管如此，您还是可以下载 %s 的安装包手动重新安装', $version_string);
+			@printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=update-core-latest&version='.$version_string.'&lang='.WPLANG) );
 		} else {
 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
@@ -55,7 +55,7 @@ function list_core_update( $update ) {
 			elseif ( !$mysql_compat )
 				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
 			else
-				$message = 	sprintf('您可以下载 <a href=\"http://wp4sae.org/Version_%1$s\">WordPress %2$s 版本</a> 的安装包手动安装：', $update->current, $version_string);
+				@printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=update-core-update-to&version='.$version_string.'&current='.$update->current.'&lang='.WPLANG) );
 			if ( !$mysql_compat || !$php_compat )
 				$show_buttons = false;
 		}
@@ -71,11 +71,9 @@ function list_core_update( $update ) {
 	echo '<input name="version" value="'. esc_attr($update->current) .'" type="hidden"/>';
 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
 	if ( $show_buttons ) {
-		if ( $first_pass ) {
-			$first_pass = false;
-		} else {
-		}
-		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
+		echo '&nbsp;<a href="';
+		@printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=download&version='.$version_string.'&lang='.WPLANG) );
+		echo '" class="button">' . $download . '</a>&nbsp;';
 	}
 	if ( 'en_US' != $update->locale )
 		if ( !isset( $update->dismissed ) || !$update->dismissed )
@@ -127,28 +125,9 @@ function dismissed_updates() {
  * @return null
  */
 function core_upgrade_preamble() {
-	global $upgrade_error, $wp_version;
+	global $wp_version;
 
 	$updates = get_core_updates();
-?>
-	<div class="wrap">
-	<?php screen_icon('tools'); ?>
-	<h2><?php _e('WordPress Updates'); ?></h2>
-<?php
-	if ( $upgrade_error ) {
-		echo '<div class="error"><p>';
-		if ( $upgrade_error == 'themes' )
-			_e('Please select one or more themes to update.');
-		else
-			_e('Please select one or more plugins to update.');
-		echo '</p></div>';
-	}
-
-	echo '<p>';
-	/* translators: %1 date, %2 time. */
-	printf( __('Last checked on %1$s at %2$s.'), date_i18n( get_option( 'date_format' ) ), date_i18n( get_option( 'time_format' ) ) );
-	echo ' &nbsp; <a class="button" href="' . esc_url( self_admin_url('update-core.php') ) . '">' . __( 'Check Again' ) . '</a>';
-	echo '</p>';
 
 	if ( !isset($updates[0]->response) || 'latest' == $updates[0]->response ) {
 		echo '<h3>';
@@ -179,13 +158,6 @@ function core_upgrade_preamble() {
 		echo '<p>' . sprintf( __( '<a href="%s">Learn more about WordPress %s</a>.' ), esc_url( self_admin_url( 'about.php' ) ), $normalized_version ) . '</p>';
 	}
 	dismissed_updates();
-
-	if ( current_user_can( 'update_plugins' ) )
-		list_plugin_updates();
-	if ( current_user_can( 'update_themes' ) )
-		list_theme_updates();
-	do_action('core_upgrade_preamble');
-	echo '</div>';
 }
 
 function list_plugin_updates() {
@@ -209,9 +181,10 @@ function list_plugin_updates() {
 		$core_update_version = $core_updates[0]->current;
 	?>
 <h3><?php _e( 'Plugins' ); ?></h3>
-<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后手动升级。' );/*_e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' );*/ ?></p>
+<p><?php @printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=plugins-has-update&lang='.WPLANG) ); ?></p>
 <form method="post" action="<?php echo $form_action; ?>" name="upgrade-plugins" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
+<p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
 <table class="widefat" cellspacing="0" id="update-plugins-table">
 	<thead>
 	<tr>
@@ -374,7 +347,7 @@ function do_core_upgrade( $reinstall = false ) {
 	}
 
 	show_message( __('WordPress updated successfully') );
-	show_message( '<span class="hide-if-no-js">' . sprintf( __( 'Welcome to WordPress %1$s. You will be redirected to the About WordPress screen. If not, click <a href="%s">here</a>.' ), $result, esc_url( self_admin_url( 'about.php?updated' ) ) ) . '</span>' );
+	show_message( '<span class="hide-if-no-js">' . sprintf( __( 'Welcome to WordPress %1$s. You will be redirected to the About WordPress screen. If not, click <a href="%2$s">here</a>.' ), $result, esc_url( self_admin_url( 'about.php?updated' ) ) ) . '</span>' );
 	show_message( '<span class="hide-if-js">' . sprintf( __( 'Welcome to WordPress %1$s. <a href="%2$s">Learn more</a>.' ), $result, esc_url( self_admin_url( 'about.php?updated' ) ) ) . '</span>' );
 	?>
 	</div>
@@ -448,10 +421,41 @@ if ( 'upgrade-core' == $action ) {
 
 	wp_version_check();
 	require_once(ABSPATH . 'wp-admin/admin-header.php');
-	core_upgrade_preamble();
+	?>
+	<div class="wrap">
+	<?php screen_icon('tools'); ?>
+	<h2><?php _e('WordPress Updates'); ?></h2>
+	<?php
+	if ( $upgrade_error ) {
+		echo '<div class="error"><p>';
+		if ( $upgrade_error == 'themes' )
+			_e('Please select one or more themes to update.');
+		else
+			_e('Please select one or more plugins to update.');
+		echo '</p></div>';
+	}
+
+	echo '<p>';
+	/* translators: %1 date, %2 time. */
+	printf( __('Last checked on %1$s at %2$s.'), date_i18n( get_option( 'date_format' ) ), date_i18n( get_option( 'time_format' ) ) );
+	echo ' &nbsp; <a class="button" href="' . esc_url( self_admin_url('update-core.php') ) . '">' . __( 'Check Again' ) . '</a>';
+	echo '</p>';
+
+	if ( current_user_can( 'update_core' ) )
+		core_upgrade_preamble();
+	if ( current_user_can( 'update_plugins' ) )
+		list_plugin_updates();
+	if ( current_user_can( 'update_themes' ) )
+		list_theme_updates();
+	do_action('core_upgrade_preamble');
+	echo '</div>';
 	include(ABSPATH . 'wp-admin/admin-footer.php');
 
 } elseif ( 'do-core-upgrade' == $action || 'do-core-reinstall' == $action ) {
+
+	if ( ! current_user_can( 'update_core' ) )
+		wp_die( __( 'You do not have sufficient permissions to update this site.' ) );
+
 	check_admin_referer('upgrade-core');
 
 	// do the (un)dismiss actions before headers,

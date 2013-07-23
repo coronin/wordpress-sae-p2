@@ -2,7 +2,6 @@
 /**
  * Plugins administration panel.
  *
- * @modified Elmer Zhang <freeboy6716@gmail.com>
  * @package WordPress
  * @subpackage Administration
  */
@@ -10,14 +9,7 @@
 /** WordPress Administration Bootstrap */
 require_once('./admin.php');
 
-if ( is_multisite() ) {
-	$menu_perms = get_site_option( 'menu_items', array() );
-
-	if ( empty( $menu_perms['plugins'] ) && ! current_user_can( 'manage_network_plugins' ) )
-		wp_die( __( 'Cheatin&#8217; uh?' ) );
-}
-
-if ( !current_user_can('activate_plugins') )
+if ( ! current_user_can('activate_plugins') )
 	wp_die( __( 'You do not have sufficient permissions to manage plugins for this site.' ) );
 
 $wp_list_table = _get_list_table('WP_Plugins_List_Table');
@@ -38,12 +30,19 @@ if ( $action ) {
 			if ( ! current_user_can('activate_plugins') )
 				wp_die(__('You do not have sufficient permissions to activate plugins for this site.'));
 
+			if ( is_multisite() && ! is_network_admin() && is_network_only_plugin( $plugin ) ) {
+				wp_redirect( self_admin_url("plugins.php?plugin_status=$status&paged=$page&s=$s") );
+				exit;
+			}
+
 			check_admin_referer('activate-plugin_' . $plugin);
 
 			$result = activate_plugin($plugin, self_admin_url('plugins.php?error=true&plugin=' . $plugin), is_network_admin() );
 			if ( is_wp_error( $result ) ) {
 				if ( 'unexpected_output' == $result->get_error_code() ) {
-					WP_DEBUG && file_put_contents('saemc://plugin_error', $result->get_error_data()); //ezdebug
+					if(WP_DEBUG){
+					 	@file_put_contents('saemc://plugin_error', $result->get_error_data());
+					}
 					$redirect = self_admin_url('plugins.php?error=true&charsout=' . strlen($result->get_error_data()) . '&plugin=' . $plugin . "&plugin_status=$status&paged=$page&s=$s");
 					wp_redirect(add_query_arg('_error_nonce', wp_create_nonce('plugin-activation-error_' . $plugin), $redirect));
 					exit;
@@ -53,11 +52,6 @@ if ( $action ) {
 			}
 
 			if ( ! is_network_admin() ) {
-                if ( is_network_only_plugin( $plugin ) ) {
-                    wp_redirect( self_admin_url("plugins.php?plugin_status=$status&paged=$page&s=$s") );
-                    exit;
-                }
-
 				$recent = (array) get_option( 'recently_activated' );
 				unset( $recent[ $plugin ] );
 				update_option( 'recently_activated', $recent );
@@ -79,17 +73,17 @@ if ( $action ) {
 			$plugins = isset( $_POST['checked'] ) ? (array) $_POST['checked'] : array();
 
 			// Only activate plugins which are not already active.
-            if ( is_network_admin() ) {
-                foreach ( $plugins as $i => $plugin ) {
-                    if ( is_plugin_active_for_network( $plugin ) )
-                        unset( $plugins[ $i ] );
-                }
-            } else {
-                foreach ( $plugins as $i => $plugin ) {
-                    if ( is_plugin_active( $plugin ) || is_network_only_plugin( $plugin ) )
-                        unset( $plugins[ $i ] );
-                }
-            }
+			if ( is_network_admin() ) {
+				foreach ( $plugins as $i => $plugin ) {
+					if ( is_plugin_active_for_network( $plugin ) )
+						unset( $plugins[ $i ] );
+				}
+			} else {
+				foreach ( $plugins as $i => $plugin ) {
+					if ( is_plugin_active( $plugin ) || is_network_only_plugin( $plugin ) )
+						unset( $plugins[ $i ] );
+				}
+			}
 
 			if ( empty($plugins) ) {
 				wp_redirect( self_admin_url("plugins.php?plugin_status=$status&paged=$page&s=$s") );
@@ -417,9 +411,6 @@ if ( !empty($invalid) )
 <div class="wrap">
 <?php screen_icon(); ?>
 <h2><?php echo esc_html( $title );
-if ( false && ( ! is_multisite() || is_network_admin() ) && current_user_can('install_plugins') ) { ?>
- <a href="<?php echo self_admin_url( 'plugin-install.php' ); ?>" class="add-new-h2"><?php echo esc_html_x('Add New', 'plugin'); ?></a>
-<?php }
 if ( $s )
 	printf( '<span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', esc_html( $s ) ); ?>
 </h2>

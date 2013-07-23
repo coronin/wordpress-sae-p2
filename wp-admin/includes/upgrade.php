@@ -123,43 +123,6 @@ function wp_install_defaults($user_id) {
 	$wpdb->insert( $wpdb->term_taxonomy, array('term_id' => $cat_id, 'taxonomy' => 'category', 'description' => '', 'parent' => 0, 'count' => 1));
 	$cat_tt_id = $wpdb->insert_id;
 
-	// Default link category
-	$cat_name = __('Blogroll');
-	/* translators: Default link category slug */
-	$cat_slug = sanitize_title(_x('Blogroll', 'Default link category slug'));
-
-	if ( global_terms_enabled() ) {
-		$blogroll_id = $wpdb->get_var( $wpdb->prepare( "SELECT cat_ID FROM {$wpdb->sitecategories} WHERE category_nicename = %s", $cat_slug ) );
-		if ( $blogroll_id == null ) {
-			$wpdb->insert( $wpdb->sitecategories, array('cat_ID' => 0, 'cat_name' => $cat_name, 'category_nicename' => $cat_slug, 'last_updated' => current_time('mysql', true)) );
-			$blogroll_id = $wpdb->insert_id;
-		}
-		update_option('default_link_category', $blogroll_id);
-	} else {
-		$blogroll_id = 2;
-	}
-
-	$wpdb->insert( $wpdb->terms, array('term_id' => $blogroll_id, 'name' => $cat_name, 'slug' => $cat_slug, 'term_group' => 0) );
-	$wpdb->insert( $wpdb->term_taxonomy, array('term_id' => $blogroll_id, 'taxonomy' => 'link_category', 'description' => '', 'parent' => 0, 'count' => 7));
-	$blogroll_tt_id = $wpdb->insert_id;
-
-	// Now drop in some default links
-	$default_links = array();
- 	$default_links[] = array(	'link_url' => 'http://wp4sae.org/',
- 								'link_name' => 'WordPress for SAE',
- 								'link_rss' => 'http://wp4sae.org/feed/',
-								'link_notes' => '');
-
-	$default_links[] = array(	'link_url' => __( 'http://wordpress.org/news/' ),
-								'link_name' => __( 'WordPress Blog' ),
-								'link_rss' => __( 'http://wordpress.org/news/feed/' ),
-								'link_notes' => '');
-
-	foreach ( $default_links as $link ) {
-		$wpdb->insert( $wpdb->links, $link);
-		$wpdb->insert( $wpdb->term_relationships, array('term_taxonomy_id' => $blogroll_tt_id, 'object_id' => $wpdb->insert_id) );
-	}
-
 	// First post
 	$now = date('Y-m-d H:i:s');
 	$now_gmt = gmdate('Y-m-d H:i:s');
@@ -177,26 +140,10 @@ function wp_install_defaults($user_id) {
 		$first_post = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');
 	}
 
-	$first_title = @file_get_contents('http://wp4saeapi.sinaapp.com/first_title.txt');
-	if (!$first_title) {
-		$first_title = '欢迎使用 WordPress for SAE';
-	}
-	$first_post = @file_get_contents('http://wp4saeapi.sinaapp.com/first_post.txt');
-	if (!$first_post) {
-		$first_post = '欢迎使用 WordPress for SAE。如果您看到这篇文章，表示您的Blog已经在SAE安装成功。您可以编辑或者删除它，然后开始您的博客！
-
-WordPress for SAE 技术支持博客：<a title="WordPress for SAE 技术支持" href="http://wp4sae.org">http://wp4sae.org</a>。请关注此博客，以及时获>取最新信息。
-如果您在使用WordPress for SAE的过程中，有任何疑问、意见或建议，请到<a title="WordPress for SAE 技术支持" href="http://wp4sae.org">技术支持博客</a>提>出，我们将会尽快为您解答。 
-
-WordPress for SAE具有以下特性：
-<ol>
-    <li>数据库主从分离，提升性能，节省云豆消耗</li>
-    <li>轻量的Memcache缓存模块，加快网页显示速度的同时减少资源消耗，为您节省云豆。</li>
-    <li>已内置urlrewrite规则，用户设置固定链接时只需要在控制板中设置一下即可，无需再修改appconfig(.htaccess)配置</li>
-    <li>附件直接上传到Storage，支持图片附件的缩略图生成。</li>
-</ol>
-';
-	}
+	$first_title = @file_get_contents('http://wp4cloudapi.sinaapp.com/?a=first-post-title&lang='.WPLANG);
+	if(!$first_title){$first_title = __('Hello world!');}
+	$first_post = @file_get_contents('http://wp4cloudapi.sinaapp.com/?a=first-post-content&lang='.WPLANG);
+	if(!$first_title){$first_title = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');}
 
 	$wpdb->insert( $wpdb->posts, array(
 								'post_author' => $user_id,
@@ -218,9 +165,10 @@ WordPress for SAE具有以下特性：
 	$wpdb->insert( $wpdb->term_relationships, array('term_taxonomy_id' => $cat_tt_id, 'object_id' => 1) );
 
 	// Default comment
-	$first_comment_author = __('Mr WordPress');
-	$first_comment_url = 'http://wordpress.org/';
-	$first_comment = __('Hi, this is a comment.<br />To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.');
+	$first_comment_author = __('soulteary');
+	$first_comment_email = 'soulteary@qq.com';
+	$first_comment_url = 'http://www.soulteary.com/';
+	$first_comment = __('开发者你好，如果你在使用中遇到任何问题，欢迎一起探讨。');
 	if ( is_multisite() ) {
 		$first_comment_author = get_site_option( 'first_comment_author', $first_comment_author );
 		$first_comment_url = get_site_option( 'first_comment_url', network_home_url() );
@@ -229,7 +177,7 @@ WordPress for SAE具有以下特性：
 	$wpdb->insert( $wpdb->comments, array(
 								'comment_post_ID' => 1,
 								'comment_author' => $first_comment_author,
-								'comment_author_email' => '',
+								'comment_author_email' => $first_comment_email,
 								'comment_author_url' => $first_comment_url,
 								'comment_date' => $now,
 								'comment_date_gmt' => $now_gmt,
@@ -243,7 +191,7 @@ WordPress for SAE具有以下特性：
 
 ...or something like this:
 
-<blockquote>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickies to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.</blockquote>
+<blockquote>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.</blockquote>
 
 As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to delete this page and create new pages for your content. Have fun!" ), admin_url() );
 	if ( is_multisite() )
@@ -275,7 +223,7 @@ As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to d
 	update_option( 'widget_archives', array ( 2 => array ( 'title' => '', 'count' => 0, 'dropdown' => 0 ), '_multiwidget' => 1 ) );
 	update_option( 'widget_categories', array ( 2 => array ( 'title' => '', 'count' => 0, 'hierarchical' => 0, 'dropdown' => 0 ), '_multiwidget' => 1 ) );
 	update_option( 'widget_meta', array ( 2 => array ( 'title' => '' ), '_multiwidget' => 1 ) );
-	update_option( 'sidebars_widgets', array ( 'wp_inactive_widgets' => array ( ), 'sidebar-1' => array ( 0 => 'search-2', 1 => 'recent-posts-2', 2 => 'recent-comments-2', 3 => 'archives-2', 4 => 'categories-2', 5 => 'meta-2', ), 'sidebar-2' => array ( ), 'sidebar-3' => array ( ), 'sidebar-4' => array ( ), 'sidebar-5' => array ( ), 'array_version' => 3 ) );
+	update_option( 'sidebars_widgets', array ( 'wp_inactive_widgets' => array ( ), 'sidebar-1' => array ( 0 => 'search-2', 1 => 'recent-posts-2', 2 => 'recent-comments-2', 3 => 'archives-2', 4 => 'categories-2', 5 => 'meta-2', ), 'sidebar-2' => array ( ), 'sidebar-3' => array ( ), 'array_version' => 3 ) );
 
 	if ( ! is_multisite() )
 		update_user_meta( $user_id, 'show_welcome_panel', 1 );
@@ -315,7 +263,7 @@ if ( !function_exists('wp_new_blog_notification') ) :
  * @param string $password User's Password.
  */
 function wp_new_blog_notification($blog_title, $blog_url, $user_id, $password) {
-	$user = new WP_User($user_id);
+	$user = new WP_User( $user_id );
 	$email = $user->user_email;
 	$name = $user->user_login;
 	$message = sprintf(__("Your new WordPress site has been successfully set up at:
@@ -456,6 +404,11 @@ function upgrade_all() {
 	if ( $wp_current_db_version < 20080 )
 		upgrade_340();
 
+	if ( $wp_current_db_version < 22422 )
+		upgrade_350();
+
+	maybe_disable_link_manager();
+
 	maybe_disable_automattic_widgets();
 
 	update_option( 'db_version', $wp_db_version );
@@ -563,11 +516,11 @@ function upgrade_110() {
 	$time_difference = $all_options->time_difference;
 
 		$server_time = time()+date('Z');
-	$weblogger_time = $server_time + $time_difference*3600;
+	$weblogger_time = $server_time + $time_difference * HOUR_IN_SECONDS;
 	$gmt_time = time();
 
-	$diff_gmt_server = ($gmt_time - $server_time) / 3600;
-	$diff_weblogger_server = ($weblogger_time - $server_time) / 3600;
+	$diff_gmt_server = ($gmt_time - $server_time) / HOUR_IN_SECONDS;
+	$diff_weblogger_server = ($weblogger_time - $server_time) / HOUR_IN_SECONDS;
 	$diff_gmt_weblogger = $diff_gmt_server - $diff_weblogger_server;
 	$gmt_offset = -$diff_gmt_weblogger;
 
@@ -1046,11 +999,6 @@ function upgrade_260() {
 
 	if ( $wp_current_db_version < 8000 )
 		populate_roles_260();
-
-	if ( $wp_current_db_version < 8201 ) {
-		update_option('enable_app', 1);
-		update_option('enable_xmlrpc', 1);
-	}
 }
 
 /**
@@ -1239,6 +1187,33 @@ function upgrade_340() {
 }
 
 /**
+ * Execute changes made in WordPress 3.5.
+ *
+ * @since 3.5.0
+ */
+function upgrade_350() {
+	global $wp_current_db_version, $wpdb;
+
+	if ( $wp_current_db_version < 22006 && $wpdb->get_var( "SELECT link_id FROM $wpdb->links LIMIT 1" ) )
+		update_option( 'link_manager_enabled', 1 ); // Previously set to 0 by populate_options()
+
+	if ( $wp_current_db_version < 21811 && is_main_site() && ! defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+		$meta_keys = array();
+		foreach ( array_merge( get_post_types(), get_taxonomies() ) as $name ) {
+			if ( false !== strpos( $name, '-' ) )
+			$meta_keys[] = 'edit_' . str_replace( '-', '_', $name ) . '_per_page';
+		}
+		if ( $meta_keys ) {
+			$meta_keys = implode( "', '", $meta_keys );
+			$wpdb->query( "DELETE FROM $wpdb->usermeta WHERE meta_key IN ('$meta_keys')" );
+		}
+	}
+
+	if ( $wp_current_db_version < 22422 && $term = get_term_by( 'slug', 'post-format-standard', 'post_format' ) )
+		wp_delete_term( $term->term_id, 'post_format' );
+}
+
+/**
  * Execute network level changes
  *
  * @since 3.0.0
@@ -1301,6 +1276,20 @@ function upgrade_network() {
 			}
 			update_site_option( 'allowedthemes', $converted );
 			delete_site_option( 'allowed_themes' );
+		}
+	}
+
+	// 3.5
+	if ( $wp_current_db_version < 21823 )
+		update_site_option( 'ms_files_rewriting', '1' );
+
+	// 3.5.2
+	if ( $wp_current_db_version < 22442 ) {
+		$illegal_names = get_site_option( 'illegal_names' );
+		if ( is_array( $illegal_names ) && count( $illegal_names ) === 1 ) {
+			$illegal_name = reset( $illegal_names );
+			$illegal_names = explode( ' ', $illegal_name );
+			update_site_option( 'illegal_names', $illegal_names );
 		}
 	}
 }
@@ -1950,9 +1939,7 @@ function wp_check_mysql_version() {
 }
 
 /**
- * {@internal Missing Short Description}}
- *
- * {@internal Missing Long Description}}
+ * Disables the Automattic widgets plugin, which was merged into core.
  *
  * @since 2.2.0
  */
@@ -1966,6 +1953,18 @@ function maybe_disable_automattic_widgets() {
 			break;
 		}
 	}
+}
+
+/**
+ * Disables the Link Manager on upgrade, if at the time of upgrade, no links exist in the DB.
+ *
+ * @since 3.5.0
+ */
+function maybe_disable_link_manager() {
+	global $wp_current_db_version, $wpdb;
+
+	if ( $wp_current_db_version >= 22006 && get_option( 'link_manager_enabled' ) && ! $wpdb->get_var( "SELECT link_id FROM $wpdb->links LIMIT 1" ) )
+		update_option( 'link_manager_enabled', 0 );
 }
 
 /**

@@ -16,7 +16,12 @@ if ( !current_user_can('export') )
 require_once('./includes/export.php');
 $title = __('Export');
 
-function add_js() {
+/**
+ * Display JavaScript on the page.
+ *
+ * @since 3.5.0
+ */
+function export_add_js() {
 ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -36,7 +41,7 @@ function add_js() {
 </script>
 <?php
 }
-add_action( 'admin_head', 'add_js' );
+add_action( 'admin_head', 'export_add_js' );
 
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
@@ -89,6 +94,8 @@ if ( isset( $_GET['download'] ) ) {
 		$args['content'] = $_GET['content'];
 	}
 
+	$args = apply_filters( 'export_args', $args );
+
 	export_wp( $args );
 	die();
 }
@@ -126,7 +133,13 @@ function export_date_options( $post_type = 'post' ) {
 <p><?php _e('When you click the button below WordPress will create an XML file for you to save to your computer.'); ?></p>
 <p><?php _e('This format, which we call WordPress eXtended RSS or WXR, will contain your posts, pages, comments, custom fields, categories, and tags.'); ?></p>
 <p><?php _e('Once you&#8217;ve saved the download file, you can use the Import function in another WordPress installation to import the content from this site.'); ?></p>
-<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导出可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将Mysql数据导出。</p>
+<style>
+.sae-warning{
+	font-weight:bolder;
+	color:red;
+}
+</style>
+<p class="sae-warning"><?php @printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=export-announce&lang='.WPLANG) ); ?></p>
 
 <h3><?php _e( 'Choose what to export' ); ?></h3>
 <form action="" method="get" id="export-filters">
@@ -205,7 +218,9 @@ function export_date_options( $post_type = 'post' ) {
 <p><label><input type="radio" name="content" value="<?php echo esc_attr( $post_type->name ); ?>" /> <?php echo esc_html( $post_type->label ); ?></label></p>
 <?php endforeach; ?>
 
-<?php submit_button( __('Download Export File'), 'secondary' ); ?>
+<?php do_action( 'export_filters' ) ?>
+
+<?php submit_button( __('Download Export File') ); ?>
 </form>
 </div>
 

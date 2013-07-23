@@ -29,22 +29,19 @@ get_current_screen()->set_help_sidebar(
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
-$popular_importers = array();
-if ( current_user_can('install_plugins') )
-	$popular_importers = array(
-		'blogger' => array( __('Blogger'), __('Install the Blogger importer to import posts, comments, and users from a Blogger blog.'), 'install' ),
-		'wpcat2tag' => array(__('Categories and Tags Converter'), __('Install the category/tag converter to convert existing categories to tags or tags to categories, selectively.'), 'install', 'wp-cat2tag' ),
-		'livejournal' => array( __( 'LiveJournal' ), __( 'Install the LiveJournal importer to import posts from LiveJournal using their API.' ), 'install' ),
-		'movabletype' => array( __('Movable Type and TypePad'), __('Install the Movable Type importer to import posts and comments from a Movable Type or TypePad blog.'), 'install', 'mt' ),
-		'opml' => array( __('Blogroll'), __('Install the blogroll importer to import links in OPML format.'), 'install' ),
-		'rss' => array( __('RSS'), __('Install the RSS importer to import posts from an RSS feed.'), 'install' ),
-		'tumblr' => array( __('Tumblr'), __('Install the Tumblr importer to import posts &amp; media from Tumblr using their API.'), 'install' ),
-		'wordpress' => array( 'WordPress', __('Install the WordPress importer to import posts, pages, comments, custom fields, categories, and tags from a WordPress export file.'), 'install' )
-	);
+if ( current_user_can( 'install_plugins' ) )
+	$popular_importers = wp_get_popular_importers();
+else
+	$popular_importers = array();
 
-if ( ! empty( $_GET['invalid'] ) && !empty($popular_importers[$_GET['invalid']][3]) ) {
-	wp_redirect( admin_url('import.php?import=' . $popular_importers[$_GET['invalid']][3]) );
-	exit;
+// Detect and redirect invalid importers like 'movabletype', which is registered as 'mt'
+if ( ! empty( $_GET['invalid'] ) && isset( $popular_importers[ $_GET['invalid'] ] ) ) {
+	$importer_id = $popular_importers[ $_GET['invalid'] ]['importer-id'];
+	if ( $importer_id != $_GET['invalid'] ) { // Prevent redirect loops.
+		wp_redirect( admin_url( 'admin.php?import=' . $importer_id ) );
+		exit;
+	}
+	unset( $importer_id );
 }
 
 add_thickbox();
@@ -60,7 +57,13 @@ $parent_file = 'tools.php';
 <?php if ( ! empty( $_GET['invalid'] ) ) : ?>
 	<div class="error"><p><strong><?php _e('ERROR:')?></strong> <?php printf( __('The <strong>%s</strong> importer is invalid or is not installed.'), esc_html( $_GET['invalid'] ) ); ?></p></div>
 <?php endif; ?>
-<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导入可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将数据库导入。我们会尽快为大家提供完美的数据迁移解决方案，请大家关注官方博客。</p>
+<style>
+.sae-install-warning{
+	font-weight:bolder;
+	color:red;
+}
+</style>
+<p class="sae-install-warning"><?php @printf( file_get_contents('http://wp4cloudapi.sinaapp.com/?a=admin-export&lang='.WPLANG) ); ?></p>
 <p><?php _e('If you have posts or comments in another system, WordPress can import those into this site. To get started, choose a system to import from below:'); ?></p>
 
 <?php
@@ -69,28 +72,26 @@ $importers = get_importers();
 
 // If a popular importer is not registered, create a dummy registration that links to the plugin installer.
 foreach ( $popular_importers as $pop_importer => $pop_data ) {
-	if ( isset( $importers[$pop_importer] ) )
+	if ( isset( $importers[ $pop_importer ] ) )
 		continue;
-	if ( isset( $pop_data[3] ) && isset( $importers[ $pop_data[3] ] ) )
+	if ( isset( $importers[ $pop_data['importer-id'] ] ) )
 		continue;
-
-	$importers[$pop_importer] = $popular_importers[$pop_importer];
+	$importers[ $pop_data['importer-id'] ] = array( $pop_data['name'], $pop_data['description'], 'install' => $pop_data['plugin-slug'] );
 }
 
-if ( empty($importers) ) {
-	echo '<p>'.__('No importers are available.').'</p>'; // TODO: make more helpful
+if ( empty( $importers ) ) {
+	echo '<p>' . __('No importers are available.') . '</p>'; // TODO: make more helpful
 } else {
-	uasort($importers, create_function('$a, $b', 'return strcmp($a[0], $b[0]);'));
+	uasort($importers, create_function('$a, $b', 'return strnatcasecmp($a[0], $b[0]);'));
 ?>
 <table class="widefat importers" cellspacing="0">
 
 <?php
-	$style = '';
-	foreach ($importers as $id => $data) {
-		$style = ('class="alternate"' == $style || 'class="alternate active"' == $style) ? '' : 'alternate';
+	$alt = '';
+	foreach ($importers as $importer_id => $data) {
 		$action = '';
-		if ( 'install' == $data[2] ) {
-			$plugin_slug = $id . '-importer';
+		if ( isset( $data['install'] ) ) {
+			$plugin_slug = $data['install'];
 			if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug ) ) {
 				// Looks like Importer is installed, But not active
 				$plugins = get_plugins( '/' . $plugin_slug );
@@ -112,13 +113,12 @@ if ( empty($importers) ) {
 				}
 			}
 		} else {
-			$action = "<a href='" . esc_url("admin.php?import=$id") . "' title='" . esc_attr( wptexturize(strip_tags($data[1])) ) ."'>{$data[0]}</a>";
+			$action = "<a href='" . esc_url( "admin.php?import=$importer_id" ) . "' title='" . esc_attr( wptexturize( strip_tags( $data[1] ) ) ) ."'>{$data[0]}</a>";
 		}
 
-		if ($style != '')
-			$style = 'class="'.$style.'"';
+		$alt = $alt ? '' : ' class="alternate"';
 		echo "
-			<tr $style>
+			<tr$alt>
 				<td class='import-system row-title'>$action</td>
 				<td class='desc'>{$data[1]}</td>
 			</tr>";
@@ -126,11 +126,7 @@ if ( empty($importers) ) {
 ?>
 
 </table>
-<?php
-}
-
-?>
-
+<?php } ?>
 </div>
 
 <?php
