@@ -560,10 +560,9 @@ $_old_files = array(
 global $_new_bundled_files;
 
 $_new_bundled_files = array(
-'plugins/akismet/' => '2.0',
-'themes/twentyten/' => '3.0',
-'themes/twentyeleven/' => '3.2',
-'themes/twentytwelve/' => '3.5',
+'plugins/wp-mail-smtp/' => '0.9.1',
+'plugins/restricted-site-access/' => '5.0.1',
+'themes/p2/' => '1.5',
 );
 
 /**
@@ -692,15 +691,6 @@ function update_core($from, $to) {
 			$wp_lang_dir = $wp_filesystem->find_folder($lang_dir);
 			if ( $wp_lang_dir )
 				$result = copy_dir($from . $distro . 'wp-content/languages/', $wp_lang_dir);
-		}
-	}
-
-	// 3.5 -> 3.5+ - an empty twentytwelve directory was created upon upgrade to 3.5 for some users, preventing installation of Twenty Twelve.
-	if ( '3.5' == $old_wp_version ) {
-		if ( is_dir( WP_CONTENT_DIR . '/themes/twentytwelve' ) && ! file_exists( WP_CONTENT_DIR . '/themes/twentytwelve/style.css' )  ) {
-			// Bumping the introduced version to 3.5.1 for the affected users causes Twenty Twelve to be installed for the first time
-			if ( $wp_filesystem->delete( $wp_filesystem->wp_themes_dir() . 'twentytwelve/' ) )
-				$_new_bundled_files[ 'themes/twentytwelve/' ] = '3.5.1';
 		}
 	}
 

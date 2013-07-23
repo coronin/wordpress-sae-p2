@@ -95,7 +95,7 @@ define('NONCE_SALT',       hash_hmac('sha1', SAE_ACCESSKEY . 'NONCE_SALT', SAE_S
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'w352_';
+$table_prefix  = 'wp_';
 
 /**
  * WordPress Localized Language, defaults to English.
