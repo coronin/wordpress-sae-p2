@@ -291,7 +291,7 @@ class WP_Users_List_Table extends WP_List_Table {
 					$r .= "<td $attributes>$avatar $edit</td>";
 					break;
 				case 'name':
-					$r .= "<td $attributes>$user_object->first_name $user_object->last_name</td>";
+					$r .= "<td $attributes>$user_object->last_name$user_object->first_name</td>";
 					break;
 				case 'email':
 					$r .= "<td $attributes><a href='mailto:$email' title='" . esc_attr( sprintf( __( 'E-mail: %s' ), $email ) ) . "'>$email</a></td>";
