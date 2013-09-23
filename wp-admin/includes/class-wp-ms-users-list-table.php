@@ -197,7 +197,7 @@ class WP_MS_Users_List_Table extends WP_List_Table {
 					break;
 
 					case 'name':
-						echo "<td $attributes>$user->first_name $user->last_name</td>";
+						echo "<td $attributes>$user->last_name$user->first_name</td>";
 					break;
 
 					case 'email':

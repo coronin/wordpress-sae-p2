@@ -1344,7 +1344,7 @@ function wp_insert_user( $userdata ) {
 			$display_name = $user_login;
 		elseif ( $first_name && $last_name )
 			/* translators: 1: first name, 2: last name */
-			$display_name = sprintf( _x( '%1$s %2$s', 'Display name based on first name and last name' ), $first_name, $last_name );
+			$display_name = sprintf( _x( '%1$s%2$s', 'Display name based on first name and last name' ), $last_name , $first_name );
 		elseif ( $first_name )
 			$display_name = $first_name;
 		elseif ( $last_name )

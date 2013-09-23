@@ -301,7 +301,7 @@ function wp_list_authors($args = '') {
 		$link = '';
 
 		if ( $show_fullname && $author->first_name && $author->last_name )
-			$name = "$author->first_name $author->last_name";
+			$name = "$author->last_name$author->first_name";
 		else
 			$name = $author->display_name;
 
