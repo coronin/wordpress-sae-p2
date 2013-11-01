@@ -50,13 +50,14 @@ class P2 {
 
 		// Include the P2 components
 		$includes = array( 'compat', 'terms-in-comments', 'js-locale',
-			'mentions', 'search', 'js', 'options-page',
-			'template-tags', 'widgets/recent-tags', 'widgets/recent-comments',
+			'mentions', 'search', 'js', 'options-page', 'widgets/recent-tags', 'widgets/recent-comments',
 			'list-creator' );
+
+		require_once( P2_INC_PATH . "/template-tags.php" );
 
 		// Logged-out/unprivileged users use the add_feed() + ::ajax_read() API rather than the /admin-ajax.php API
 		// current_user_can( 'read' ) should be equivalent to is_user_member_of_blog() || is_super_admin()
-		if ( defined('DOING_AJAX') && DOING_AJAX && current_user_can( 'read' ) )
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && ( p2_user_can_post() || current_user_can( 'read' ) ) )
 			$includes[] = 'ajax';
 
 		foreach ( $includes as $name ) {
@@ -197,14 +198,7 @@ function p2_setup() {
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'post-formats', p2_get_supported_post_formats( 'post-format' ) );
 
-	$args = apply_filters( 'p2_custom_background_args', array( 'default-color' => 'f1f1f1' ) );
-	if ( function_exists( 'get_custom_header' ) ) {
-		add_theme_support( 'custom-background', $args );
-	} else {
-		// Compat: Versions of WordPress prior to 3.4.
-		define( 'BACKGROUND_COLOR', $args['default-color'] );
-		add_custom_background();
-	}
+	add_theme_support( 'custom-background', apply_filters( 'p2_custom_background_args', array( 'default-color' => 'f1f1f1' ) ) );
 
 	add_filter( 'the_content', 'make_clickable', 12 ); // Run later to avoid shortcode conflicts
 

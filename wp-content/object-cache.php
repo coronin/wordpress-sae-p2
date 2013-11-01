@@ -359,8 +359,8 @@ class WP_Object_Cache {
 	}
 
 	function __construct() { // cail
-		self::WP_Object_Cache();
-	}
+		self::WP_Object_Cache(); // cail
+	} // cail
 
 	function WP_Object_Cache() {
 		global $memcached_servers;
@@ -374,8 +374,8 @@ class WP_Object_Cache {
 		if ( is_int( key($buckets) ) )
 			$buckets = array('default' => $buckets);
 
-		foreach ( $buckets as $bucket => $servers) { // cail
-		    $this->mc[$bucket] = memcache_init();
+		foreach ( $buckets as $bucket => $servers) {
+			$this->mc[$bucket] = memcache_init(); // cail
 		}
 
 		global $blog_id, $table_prefix;

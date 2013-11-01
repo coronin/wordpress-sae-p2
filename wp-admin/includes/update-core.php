@@ -586,7 +586,7 @@ global $_new_bundled_files;
 $_new_bundled_files = array(
   'plugins/wp-mail-smtp/' => '0.9.1',
   'plugins/restricted-site-access/' => '5.0.1',
-  'themes/p2/' => '1.5',
+  'themes/p2/' => '1.5.1',
 );
 
 /**
