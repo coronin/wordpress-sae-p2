@@ -38,25 +38,25 @@ define('WP_USE_MULTIPLE_DB', true);
 
 /** Support Muitiple Database */
 $db_list = array(
-  	'write'=> array(
-			array(
-				'db_host' => SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,
-				'db_user'=> SAE_MYSQL_USER,
-				'db_password'=> SAE_MYSQL_PASS,
-				'db_name'=> SAE_MYSQL_DB,
-				'db_charset'=> 'utf8'
-				)
-			),
-		'read'=> array(
-			array(
-				'db_host' => SAE_MYSQL_HOST_S.':'.SAE_MYSQL_PORT,
-				'db_user'=> SAE_MYSQL_USER,
-				'db_password'=> SAE_MYSQL_PASS,
-				'db_name'=> SAE_MYSQL_DB,
-				'db_charset'=> 'utf8'
-				)
-			),
-		);
+    'write' => array(
+        array(
+            'db_host' => SAE_MYSQL_HOST_M . ':' . SAE_MYSQL_PORT,
+            'db_user' => SAE_MYSQL_USER,
+            'db_password' => SAE_MYSQL_PASS,
+            'db_name' => SAE_MYSQL_DB,
+            'db_charset' => 'utf8'
+        )
+    ),
+    'read' => array(
+        array(
+            'db_host' => SAE_MYSQL_HOST_S . ':' . SAE_MYSQL_PORT,
+            'db_user' => SAE_MYSQL_USER,
+            'db_password' => SAE_MYSQL_PASS,
+            'db_name' => SAE_MYSQL_DB,
+            'db_charset' => 'utf8'
+        )
+    ),
+);
 $global_db_list = $db_list['write'];
 
 /** SAE Storage Domain */

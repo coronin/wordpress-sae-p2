@@ -82,7 +82,7 @@ final class WP_Theme implements ArrayAccess {
 	/**
 	 * The directory name of the theme's files, inside the theme root.
 	 *
-	 * In the case of a child theme, this is directory name of the the child theme.
+	 * In the case of a child theme, this is directory name of the child theme.
 	 * Otherwise, 'stylesheet' is the same as 'template'.
 	 *
 	 * @access private
@@ -201,7 +201,7 @@ final class WP_Theme implements ArrayAccess {
 		} elseif ( ! file_exists( $this->theme_root . '/' . $theme_file ) ) {
 			$this->headers['Name'] = $this->stylesheet;
 			if ( ! file_exists( $this->theme_root . '/' . $this->stylesheet ) )
-				$this->errors = new WP_Error( 'theme_not_found', __( 'The theme directory does not exist.' ) );
+				$this->errors = new WP_Error( 'theme_not_found', sprintf( __( 'The theme directory "%s" does not exist.' ), $this->stylesheet ) );
 			else
 				$this->errors = new WP_Error( 'theme_no_stylesheet', __( 'Stylesheet is missing.' ) );
 			$this->template = $this->stylesheet;
@@ -715,7 +715,7 @@ final class WP_Theme implements ArrayAccess {
 	/**
 	 * The directory name of the theme's "stylesheet" files, inside the theme root.
 	 *
-	 * In the case of a child theme, this is directory name of the the child theme.
+	 * In the case of a child theme, this is directory name of the child theme.
 	 * Otherwise, get_stylesheet() is the same as get_template().
 	 *
 	 * @since 3.4.0
