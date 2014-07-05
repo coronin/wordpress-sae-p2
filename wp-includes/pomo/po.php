@@ -11,8 +11,6 @@ require_once dirname(__FILE__) . '/translations.php';
 
 define('PO_MAX_LINE_LEN', 79);
 
-ini_set('auto_detect_line_endings', 1);
-
 /**
  * Routines for working with PO files
  */
@@ -274,7 +272,7 @@ class PO extends Gettext_Translations {
 					return false;
 				}
 				// add comment
-				$this->add_comment_to_entry($entry, $line);;
+				$this->add_comment_to_entry($entry, $line);
 			} elseif (preg_match('/^msgctxt\s+(".*")/', $line, $m)) {
 				if ($is_final($context)) {
 					PO::read_line($f, 'put-back');

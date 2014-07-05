@@ -1,0 +1,38 @@
+<appwizard>
+    <introduction>
+        <name>WordPress For SAE 3.9</name>
+        <author>soulteary</author>
+        <icon>sae_app_logo.png</icon>
+        <homepage>http://wp4cloud.sinaapp.com/</homepage>
+        <description>
+            <![CDATA[
+<p>WordPress For SAE</p>
+<p>更新说明：</p>
+ <ol>
+   <li>更新WordPress 3.9。</li>
+   <li>大量优化修改，详见博客。</li>
+ </ol>
+]]>
+        </description>
+    </introduction>
+    <platform>
+        <services>
+            <service>Mysql</service>
+            <service name="wordpress"  params="public">Storage</service>
+            <service size="2M">Memcache</service>
+        </services>
+        <appconfig>
+            <tpl>
+                <![CDATA[
+name: <<appname>>
+version: <<version>>
+handle:
+    - rewrite: if(!is_dir() && !is_file()) goto "index.php?%{QUERY_STRING}"
+]]>
+            </tpl>
+        </appconfig>
+    </platform>
+    <code>
+        <initScript>/</initScript>
+    </code>
+</appwizard>

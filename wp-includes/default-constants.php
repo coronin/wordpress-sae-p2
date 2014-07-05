@@ -38,20 +38,6 @@ function wp_initial_constants() {
 	if ( ! isset($blog_id) )
 		$blog_id = 1;
 
-	// set memory limits.
-	if ( function_exists( 'memory_get_usage' ) ) {
-		$current_limit = @ini_get( 'memory_limit' );
-		$current_limit_int = intval( $current_limit );
-		if ( false !== strpos( $current_limit, 'G' ) )
-			$current_limit_int *= 1024;
-		$wp_limit_int = intval( WP_MEMORY_LIMIT );
-		if ( false !== strpos( WP_MEMORY_LIMIT, 'G' ) )
-			$wp_limit_int *= 1024;
-
-		if ( -1 != $current_limit && ( -1 == WP_MEMORY_LIMIT || $current_limit_int < $wp_limit_int ) )
-			@ini_set( 'memory_limit', WP_MEMORY_LIMIT );
-	}
-
 	if ( !defined('WP_CONTENT_DIR') )
 		define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' ); // no trailing slash, full paths only - WP_CONTENT_URL is defined further down
 
@@ -160,7 +146,8 @@ function wp_plugin_directory_constants() {
 function wp_cookie_constants() {
 	/**
 	 * Used to guarantee unique hash cookies
-	 * @since 1.5
+	 *
+	 * @since 1.5.0
 	 */
 	if ( !defined( 'COOKIEHASH' ) ) {
 		$siteurl = get_site_option( 'siteurl' );
@@ -311,6 +298,10 @@ function wp_templating_constants() {
 	 * @since 3.0.0
 	 */
 	if ( !defined('WP_DEFAULT_THEME') )
+<<<<<<< HEAD
 		define( 'WP_DEFAULT_THEME', 'p2' );
+=======
+		define( 'WP_DEFAULT_THEME', 'twentyfourteen' );
+>>>>>>> 6a617c8221aab6dee6321ac646c44cd30635b810
 
 }
