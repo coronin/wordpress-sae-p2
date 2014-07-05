@@ -681,18 +681,9 @@ $_old_files = array(
 global $_new_bundled_files;
 
 $_new_bundled_files = array(
-<<<<<<< HEAD
   'plugins/wp-mail-smtp/' => '0.9.1',
   'plugins/restricted-site-access/' => '5.0.1',
-  'themes/p2/' => '1.5.1',
-=======
-	'plugins/akismet/'       => '2.0',
-	'themes/twentyten/'      => '3.0',
-	'themes/twentyeleven/'   => '3.2',
-	'themes/twentytwelve/'   => '3.5',
-	'themes/twentythirteen/' => '3.6',
-	'themes/twentyfourteen/' => '3.8',
->>>>>>> 6a617c8221aab6dee6321ac646c44cd30635b810
+  'themes/p2/' => '1.5.4',
 );
 
 /**

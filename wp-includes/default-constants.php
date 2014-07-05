@@ -298,10 +298,6 @@ function wp_templating_constants() {
 	 * @since 3.0.0
 	 */
 	if ( !defined('WP_DEFAULT_THEME') )
-<<<<<<< HEAD
 		define( 'WP_DEFAULT_THEME', 'p2' );
-=======
-		define( 'WP_DEFAULT_THEME', 'twentyfourteen' );
->>>>>>> 6a617c8221aab6dee6321ac646c44cd30635b810
 
 }

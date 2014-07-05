@@ -37,16 +37,7 @@ final class WP_Theme implements ArrayAccess {
 	 * @var array
 	 */
 	private static $default_themes = array(
-<<<<<<< HEAD
 		'p2' => 'P2 for WordPress',
-=======
-		'classic'        => 'WordPress Classic',
-		'default'        => 'WordPress Default',
-		'twentyten'      => 'Twenty Ten',
-		'twentyeleven'   => 'Twenty Eleven',
-		'twentytwelve'   => 'Twenty Twelve',
-		'twentythirteen' => 'Twenty Thirteen',
-		'twentyfourteen' => 'Twenty Fourteen',
 	);
 
 	/**
@@ -55,7 +46,6 @@ final class WP_Theme implements ArrayAccess {
 	private static $tag_map = array(
 		'fixed-width'    => 'fixed-layout',
 		'flexible-width' => 'fluid-layout',
->>>>>>> 6a617c8221aab6dee6321ac646c44cd30635b810
 	);
 
 	/**

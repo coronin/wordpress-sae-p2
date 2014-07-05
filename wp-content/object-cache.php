@@ -375,11 +375,6 @@ class WP_Object_Cache {
 			$buckets = array('default' => $buckets);
 
 		foreach ( $buckets as $bucket => $servers) {
-<<<<<<< HEAD
-			$this->mc[$bucket] = memcache_init(); // cail
-		}
-
-=======
 			$this->mc[$bucket] = memcache_init();
         }
         if(!$this->mc[$bucket]){
@@ -405,7 +400,6 @@ if(ret===true){
 </body>
 </html>');
         }
->>>>>>> 6a617c8221aab6dee6321ac646c44cd30635b810
 		global $blog_id, $table_prefix;
 		$this->global_prefix = '';
 		$this->blog_prefix = '';
