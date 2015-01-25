@@ -57,7 +57,7 @@ remove_action('wp_head', 'wp_generator');
 	'height'                 => 90,
 	'flex-height'            => false,
 	'flex-width'             => false,
-	'default-text-color'     => 'B81005',
+	'default-text-color'     => 'caa201',
 	'header-text'            => false,
 	'uploads'                => true,
 	'wp-head-callback' 		 => '',

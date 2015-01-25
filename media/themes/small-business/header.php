@@ -28,7 +28,7 @@
   	  <div id="top-menu-container">
       
 	  <nav id="smallbusiness-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
-	  <?php get_search_form(); ?>  
+	  <!-- php get_search_form(); -->  
       </div>
       <div id ="header">
       <div id ="header-content">

@@ -144,8 +144,8 @@ address {
 
 #smallbusiness-top-menu {
 	float: right;
-	border-right:1px solid #940d05;
-	border-left:1px solid #d61003;
+	border-right:1px solid #886d00;
+	border-left:1px solid #d6ce2f;
 }
 
 #smallbusiness-top-menu li {
@@ -153,8 +153,8 @@ address {
 }
 
 #smallbusiness-top-menu li a {
-	border-right: 1px solid #d61003;
-	border-left: 1px solid #940d05;
+	border-right: 1px solid #d6ce2f;
+	border-left: 1px solid #886d00;
 }
 
 .widget .menu {
@@ -193,7 +193,7 @@ button,
 input[type="reset"],
 input[type="button"],
 input[type="submit"] {
-	background: url("images/btn.png") repeat-x scroll left top #F2240D;
+	background: url("images/btn.png") repeat-x scroll left top #ffe06a;
 }
 
 input[type="text"], 
@@ -245,8 +245,8 @@ ul.bjqs-controls li a.bjqs-next {
 
 blockquote,
 q {
-	border-right:10px solid #fb6441;
-	border-left:10px solid #fb6441;
+	border-right:10px solid #0e419c;
+	border-left:10px solid #0e419c;
 }
 
 blockquote:before,
