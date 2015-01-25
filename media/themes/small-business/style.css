@@ -702,7 +702,8 @@ margin:0;
 
 #right-sidebar form#searchform input[type="submit"], 
 #footer-sidebar form#searchform input[type="submit"] {		
-	padding: 8px 7px;
+	padding: 0 7px;
+	margin-left: 2px;
 }
 
 .textwedget {
@@ -1398,10 +1399,14 @@ input[type="submit"]:hover{
 	box-shadow:0px 0px 5px 0px #EEEEEE;
 	border:2px solid #ffd01c;
 }
-h3 span{color:#e64f0d;}
+h3 span{color:#e6cf0d;}
 .read-more, .read-more a{
 	color:#FFFFFF; 
 	text-shadow: 1px 1px 1px #555555;
 }
 .postmetadata a{color:#e3ae20;}
 .postmetadataw a{color:#15a7f3;}
+
+#today {
+  background: #fff;
+}

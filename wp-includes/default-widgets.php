@@ -394,12 +394,14 @@ class WP_Widget_Meta extends WP_Widget {
 			 * @since 3.6.0
 			 *
 			 * @param string $title_text Default title text for the WordPress.org link.
-			 */
+
 			echo apply_filters( 'widget_meta_poweredby', sprintf( '<li><a href="%s" title="%s">%s</a></li>',
 				esc_url( __( 'https://wordpress.org/' ) ),
 				esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.' ),
 				_x( 'WordPress.org', 'meta widget link text' )
 			) );
+
+			 */
 
 			wp_meta();
 ?>
