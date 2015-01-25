@@ -235,10 +235,15 @@ function install_plugins_favorites_form() {
 function display_plugins_table() {
 	global $wp_list_table;
 
-	if ( current_filter() == 'install_plugins_favorites' && empty( $_GET['user'] ) && ! get_user_option( 'wporg_favorites' ) )
-			return;
+	if ( current_filter() == 'install_plugins_favorites' && empty( $_GET['user'] ) && ! get_user_option( 'wporg_favorites' ) ) {
+		return;
+	}
 
-	$wp_list_table->display();
+	?>
+	<form id="plugin-filter" action="" method="post">
+		<?php $wp_list_table->display(); ?>
+	</form>
+	<?php
 }
 add_action( 'install_plugins_search',    'display_plugins_table' );
 add_action( 'install_plugins_popular',   'display_plugins_table' );
@@ -520,12 +525,12 @@ function install_plugin_information() {
 		switch ( $status['status'] ) {
 			case 'install':
 				if ( $status['url'] ) {
-					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载') . '</a>';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Now' ) . '</a>';
 				}
 				break;
 			case 'update_available':
 				if ( $status['url'] ) {
-					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载更新') .'</a>';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Update Now' ) .'</a>';
 				}
 				break;
 			case 'newer_installed':
