@@ -71,7 +71,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		if ( current_user_can( 'upload_plugins' ) ) {
 			// No longer a real tab. Here for filter compatibility.
 			// Gets skipped in get_views().
-			$tabs['upload'] = __( 'Upload Plugin' );
+			//$tabs['upload'] = __( 'Upload Plugin' ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 		}
 
 		$nonmenu_tabs = array( 'plugin-information' ); // Valid actions to perform which do not have a Menu item.

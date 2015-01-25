@@ -95,7 +95,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		 *                          Accepts an integer (bytes), or a shorthand string notation, such as '256M'.
 		 */
 		// Set artificially high because GD uses uncompressed images in memory
-		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
+		// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 		$this->image = @imagecreatefromstring( file_get_contents( $this->file ) );
 
@@ -394,11 +394,13 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
 		}
 
+		/*
 		// Set correct file permissions
 		$stat = stat( dirname( $filename ) );
 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
 		@ chmod( $filename, $perms );
-
+		*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		
 		/**
 		 * Filter the name of the saved image file.
 		 *

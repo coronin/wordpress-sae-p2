@@ -230,7 +230,7 @@ function update_right_now_message() {
 			$msg .= " <a href='" . network_admin_url( 'update-core.php' ) . "' class='button'>" . sprintf( __('Update to %s'), $cur->current ? $cur->current : __( 'Latest' ) ) . '</a>';
 	}
 
-	echo "<p id='wp-version-message'>$msg</p>";
+	echo "<p id='wp-version-message'>$msg<b>由 <a href='http://blog.gimhoy.com/archives/wordpress-on-sae.html'>Gimhoy</a> 移植至 SAE。<a href='http://go.gimhoy.com/donate'><span style='color:red'>捐赠</span></a></b></p>";
 }
 
 function get_plugin_updates() {

@@ -345,11 +345,13 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 		return $upload_error_handler( $file, sprintf( __('The uploaded file could not be moved to %s.' ), $error_path ) );
 	}
 
+	/*
 	// Set correct file permissions.
 	$stat = stat( dirname( $new_file ));
 	$perms = $stat['mode'] & 0000666;
 	@ chmod( $new_file, $perms );
-
+	*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	
 	// Compute the URL.
 	$url = $uploads['url'] . "/$filename";
 
@@ -521,7 +523,7 @@ function unzip_file($file, $to) {
 
 	// Unzip can use a lot of memory, but not this much hopefully
 	/** This filter is documented in wp-admin/admin.php */
-	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
+	// @ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 	$needed_dirs = array();
 	$to = trailingslashit($to);

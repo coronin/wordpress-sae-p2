@@ -310,16 +310,18 @@ function wp_save_image_file( $filename, $image, $mime_type, $post_id ) {
 
 		if ( null !== $saved )
 			return $saved;
+		
+		$tmpfile = tempnam(SAE_TMP_PATH, 'WPIMG');  // for SAE, modified by Gimhoy (blog.gimhoy.com) 			
 
 		switch ( $mime_type ) {
 			case 'image/jpeg':
 
 				/** This filter is documented in wp-includes/class-wp-image-editor.php */
-				return imagejpeg( $image, $filename, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
+				return imagejpeg( $image, $tmpfile, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
 			case 'image/png':
-				return imagepng( $image, $filename );
+				return imagepng($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 			case 'image/gif':
-				return imagegif( $image, $filename );
+				return imagegif($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 			default:
 				return false;
 		}

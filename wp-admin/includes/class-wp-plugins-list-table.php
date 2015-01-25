@@ -301,8 +301,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		if ( !is_multisite() || $this->screen->in_admin( 'network' ) ) {
 			if ( current_user_can( 'update_plugins' ) )
 				$actions['update-selected'] = __( 'Update' );
-			if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
-				$actions['delete-selected'] = __( 'Delete' );
+			/* if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
+				$actions['delete-selected'] = __( 'Delete' ); */ //for SAE, modified by Gimhoy (blog.gimhoy.com) 
 		}
 
 		return $actions;
@@ -400,8 +400,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 				} else {
 					if ( current_user_can( 'manage_network_plugins' ) )
 						$actions['activate'] = '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file) . '" title="' . esc_attr__('Activate this plugin for all sites in this network') . '" class="edit">' . __('Network Activate') . '</a>';
-					if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
-						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>';
+					/* if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
+						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 				}
 			} else {
 				if ( $is_active ) {
@@ -409,8 +409,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 				} else {
 					$actions['activate'] = '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file) . '" title="' . esc_attr__('Activate this plugin') . '" class="edit">' . __('Activate') . '</a>';
 
-					if ( ! is_multisite() && current_user_can('delete_plugins') )
-						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>';
+					/* if ( ! is_multisite() && current_user_can('delete_plugins') )
+						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 				} // end if $is_active
 
 			 } // end if $screen->in_admin( 'network' )

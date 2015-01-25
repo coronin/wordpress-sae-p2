@@ -1,0 +1,6 @@
+<appwizard><introduction><name>WordPress 3.8 on SAE</name><author>Gimhoy</author><icon></icon><homepage>http://blog.gimhoy.com</homepage><description><![CDATA[]]></description></introduction><platform><services><service>Mysql</service><service name="wordpress"  params="数据存储" private="false">Storage</service><service>KVDB</service><service size="1M">Memcache</service></services><appconfig><tpl><![CDATA[
+name: <<appname>>
+version: <<version>>
+handle:
+    - rewrite: if(!is_file() && !is_dir() && path ~ "^/(.*)") goto "index.php/$1"
+]]></tpl></appconfig></platform><code><initScript>index.php</initScript></code></appwizard>

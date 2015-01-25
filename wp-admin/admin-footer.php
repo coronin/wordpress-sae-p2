@@ -53,6 +53,7 @@ if ( !defined('ABSPATH') )
 		 */
 		echo apply_filters( 'update_footer', '' );
 		?>
+			  由 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">Gimhoy</a> 移植至 SAE
 	</p>
 	<div class="clear"></div>
 </div>
