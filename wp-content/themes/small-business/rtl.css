@@ -1,0 +1,333 @@
+/*
+Theme Name: Small Business
+Theme URI: http://d5creation.com/theme/smallbusiness/
+
+Author: D5 Creation
+Author URI: http://d5creation.com/
+
+Description: Small Business is a theme for Business. Customizable Background and other options will give the WordPress Driven Site an attractive look.  Small Business is super elegant and Professional Theme which will create the business widely expressed. The Slider will show the featured images and contents of posts  automatically.  Front Page, Right and Footer Sidebar will be usable for showing the widgets and PlugIns items. Full Wide page can be used for showing showcase or other pages. Small Business Pro has come with exciting Post Options, Theme Options and Extra Functionalities. D5 Creation's Support will be with you, Always!
+
+Version: 2.0
+
+Tags: gray, light, black, red, white, two-columns, right-sidebar, fixed-layout, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, rtl-language-support, front-page-post-form, full-width-template, theme-options 
+
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Small Business WordPress Theme, Copyright 2012: D5 Creation (www.d5creation.com)
+Small Business is distributed under the terms of the GNU GPL
+
+Text Domain: smallbusiness
+
+*/
+/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
+-------------------------------------------------------------- */
+
+caption, th, td {
+	text-align: right;
+}
+
+/* =WordPress Core and Addition
+-------------------------------------------------------------- */
+.alignnone,
+#content .alignnone,
+#content-full .alignnone,
+div .alignnone {
+	margin: 5px 0 20px 20px;
+}
+
+.alignleft,
+#content .alignleft,
+#content-full .alignleft,
+div .alignleft {
+	float:left;
+	margin: 5px 20px 20px 0;
+}
+
+.alignright,
+#content .alignright,
+#content-full .alignright,
+div .alignright {
+	float:right;
+	margin: 5px 0 20px 20px;
+}
+
+a img.alignleft {
+	float:left;
+	margin: 5px 20px 20px 0;
+}
+
+a img.alignnone {
+	margin: 5px 0 20px 20px;
+}
+
+a img.alignright {
+	float:right;
+	margin: 5px 0 20px 20px;
+}
+
+a img.aligncenter {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.wp-caption.alignnone {
+	margin: 5px 0 20px 20px;
+}
+
+.wp-caption.alignright {
+	margin: 5px 0 20px 20px;
+}
+
+.wp-caption.alignleft {
+	margin: 5px 20px 20px 0;
+}
+
+/* =Structure
+----------------------------------------------- */
+
+#top-menu-container input#s {
+	float: left;
+	padding: 5px 10px 5px 25px;
+	background: url("images/search.png") no-repeat scroll left 50% transparent;
+}
+
+img.site-logo, h1.site-title {
+	float: right;
+}
+
+#content {
+	float:right;
+}
+
+#left-sidebar {
+	float: left;
+}
+
+#social {
+	float: left;
+	margin-left: 20px;
+	margin-right: auto;
+}
+
+.facebook-link, 
+.twitter-link, 
+.youtube-link, 
+.li-link, 
+.feed-link {
+	float: right;
+}
+
+/* Common Elements 
+------------------------------------------------------------- */
+ol, 
+ul {
+	padding: 0 20px 10px 0;
+}
+
+address {
+	text-align: left;
+}
+
+/* Menu Elements 
+------------------------------------------------------------- */
+
+#smallbusiness-main-menu {
+	float: left;
+}
+
+.menu {
+	float: left;
+}
+
+#smallbusiness-main-menu li {
+	float: right;
+}
+
+#smallbusiness-main-menu li ul {
+	float: right;
+}
+
+#smallbusiness-main-menu ul ul, 
+.sub-menu, .sub-menu ul ul {
+	float: right;
+	right: 0;
+	left: auto;
+}
+
+#smallbusiness-main-menu ul ul ul {
+	right: 100%;
+	left: auto;
+}
+
+#smallbusiness-main-menu ul ul a {
+	text-align: right;
+}
+
+#smallbusiness-top-menu {
+	float: right;
+	border-right:1px solid #940d05;
+	border-left:1px solid #d61003;
+}
+
+#smallbusiness-top-menu li {
+	float: right;
+}
+
+#smallbusiness-top-menu li a {
+	border-right: 1px solid #d61003;
+	border-left: 1px solid #940d05;
+}
+
+.widget .menu {
+	float:right;
+}
+
+/* Wedget Elements 
+------------------------------------------------------------- */
+
+#left-sidebar .widget {
+	float: left;
+}
+
+#left-sidebar .widget li {
+	padding: 5px 17px 5px 0;
+}
+
+#footer-sidebar #first-footer-widget {
+	float:right;
+}
+
+#footer-sidebar #footer-widgets {
+	margin-right: 49.5px;
+	float:right;
+	margin-left: auto;
+}
+
+#footer-sidebar .widget li {
+	padding: 3px 17px 3px 0;
+}
+
+/* Design Elements 
+------------------------------------------------------------- */
+
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"] {
+	background: url("images/btn.png") repeat-x scroll left top #F2240D;
+}
+
+input[type="text"], 
+textarea, input#s, 
+input[type="password"] {
+	border-right:1px solid #999999;
+	border-left:1px solid #FFFFFF;
+}
+
+.post.sticky, 
+.sticky {
+	background:url("images/sticky.png") no-repeat scroll left top #F2F2F2;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+
+#slideshow .post-slide {
+	margin: 70px 465px 0 0;
+	text-align: right;
+}
+
+ol.bjqs-markers li {
+	float:right;
+}
+
+ul.bjqs-controls li a.bjqs-prev {
+	background: url("images/prev.png") no-repeat scroll right top transparent;
+	right: 10px;
+	left: auto;
+}
+
+ul.bjqs-controls li a.bjqs-next {
+	background: url("images/next.png") no-repeat scroll right top transparent;
+	left: 10px;
+	right: auto;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+
+.featured-box-first {
+	float:right;
+}
+
+.featured-box {
+	margin-right: 49.5px;
+	float:right;
+	margin-left: auto;
+}
+
+blockquote,
+q {
+	border-right:10px solid #fb6441;
+	border-left:10px solid #fb6441;
+}
+
+blockquote:before,
+q:before {
+	margin-left:.20em;
+	margin-right: auto;
+}
+
+blockquote:after,
+q:after {
+	margin-right:.20em;
+	margin-left: auto;
+}
+
+#container .attachment-thumbnail,
+#container .attachment-category-thumb {
+	float: right;
+	margin: 5px 0 10px 15px;
+}
+
+h1.page-title, 
+h1.arc-post-title {
+	text-align: right;
+}
+
+h2.post-title, 
+h2.comments, 
+h3#reply-title, 
+h2.post-title-color {
+	text-align: right;
+}
+
+.floatright {
+	float: right;
+	text-align:right;
+}
+
+.floatleft {
+	float: left;
+	text-align:left;
+}
+
+#page-nav .alignleft {
+	text-align:left;
+}
+
+#page-nav .alignright {
+	text-align:right;
+}
+
+#commentsbox .commentlist {
+	margin: 0 -25px 0 0;
+}
+
+#commentsbox img.avatar {
+	right: 0;
+	left: auto;
+}
+
+#commentsbox .commentlist li.comment {
+	padding: 5px 50px 0 0;
+}
