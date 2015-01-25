@@ -6,6 +6,9 @@
 */
   
 
+remove_action('wp_head', 'wp_generator');
+
+
 // Load the D5 Framework Optios Page and Meta Page
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
 	function smallbusiness_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 2 ); }
@@ -73,7 +76,7 @@
 	
 	wp_enqueue_script( 'jquery');
 	wp_enqueue_script( 'smallbusiness-menu-style', get_template_directory_uri(). '/js/menu.js' );
-	wp_enqueue_style('smallbusiness-gfonts', '//fonts.googleapis.com/css?family=Coda:400', false );
+	wp_enqueue_style('smallbusiness-gfonts', '//fonts.useso.com/css?family=Coda:400', false );
 	}
 	add_action( 'wp_enqueue_scripts', 'smallbusiness_enqueue_scripts' );
 
