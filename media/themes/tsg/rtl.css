@@ -110,7 +110,7 @@ address {
 /* Menu Elements 
 ------------------------------------------------------------- */
 
-#smallbusiness-main-menu {
+#tsg2011-main-menu {
 	float: left;
 }
 
@@ -118,41 +118,41 @@ address {
 	float: left;
 }
 
-#smallbusiness-main-menu li {
+#tsg2011-main-menu li {
 	float: right;
 }
 
-#smallbusiness-main-menu li ul {
+#tsg2011-main-menu li ul {
 	float: right;
 }
 
-#smallbusiness-main-menu ul ul, 
+#tsg2011-main-menu ul ul, 
 .sub-menu, .sub-menu ul ul {
 	float: right;
 	right: 0;
 	left: auto;
 }
 
-#smallbusiness-main-menu ul ul ul {
+#tsg2011-main-menu ul ul ul {
 	right: 100%;
 	left: auto;
 }
 
-#smallbusiness-main-menu ul ul a {
+#tsg2011-main-menu ul ul a {
 	text-align: right;
 }
 
-#smallbusiness-top-menu {
+#tsg2011-top-menu {
 	float: right;
 	border-right:1px solid #886d00;
 	border-left:1px solid #ffe06a;
 }
 
-#smallbusiness-top-menu li {
+#tsg2011-top-menu li {
 	float: right;
 }
 
-#smallbusiness-top-menu li a {
+#tsg2011-top-menu li a {
 	border-right: 1px solid #ffe06a;
 	border-left: 1px solid #886d00;
 }

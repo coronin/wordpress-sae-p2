@@ -17,7 +17,7 @@
   <div id="container">
       <div id="top-menu-container">
 
-      <nav id="smallbusiness-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
+      <nav id="tsg2011-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
       <!-- php get_search_form(); -->
       </div>
       <div id ="header">
@@ -29,7 +29,7 @@
         <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2
 
         ><!-- Site Main Menu Goes Here -->
-        <nav id="smallbusiness-main-menu">
+        <nav id="tsg2011-main-menu">
         <?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?>
         </nav>
 

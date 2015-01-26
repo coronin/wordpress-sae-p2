@@ -477,7 +477,7 @@ del {
 /* Menu Elements
 ------------------------------------------------------------- */
 
-#smallbusiness-main-menu {
+#tsg2011-main-menu {
     float: right;
     font-family: 'Coda',cursive,sans-serif;
     line-height: 1;
@@ -489,18 +489,18 @@ del {
 	float: right;
 }
 
-#smallbusiness-main-menu ul {
+#tsg2011-main-menu ul {
     list-style: none outside none;
 }
 
-#smallbusiness-main-menu li {
+#tsg2011-main-menu li {
     float: left;
     position: relative;
 	margin: 0 3px;
 }
 
 
-#smallbusiness-main-menu a {
+#tsg2011-main-menu a {
     display: block;
     font-size: 13px;
     min-width: 40px;
@@ -511,13 +511,13 @@ del {
 	color: #caa201;
 }
 
-#smallbusiness-main-menu li ul {
+#tsg2011-main-menu li ul {
     float: left;
     position: relative;
 	margin: 0;
 }
 
-#smallbusiness-main-menu ul ul,
+#tsg2011-main-menu ul ul,
 .sub-menu, .sub-menu ul ul {
     display: none;
 	float: left;
@@ -531,17 +531,17 @@ del {
 	border: 3px solid #caa201;
 }
 
-#smallbusiness-main-menu ul li ul li {
+#tsg2011-main-menu ul li ul li {
 margin:0;
 }
 
-#smallbusiness-main-menu ul ul ul {
+#tsg2011-main-menu ul ul ul {
     left: 100%;
     top: 0;
 	z-index: 999;
 }
 
-#smallbusiness-main-menu ul ul a  {
+#tsg2011-main-menu ul ul a  {
     padding: 9px 15px;
     width: 140px;
 	text-align: left;
@@ -553,23 +553,23 @@ margin:0;
 }
 
 
-#smallbusiness-main-menu ul ul a{}
-#smallbusiness-main-menu ul ul a:hover,
-#smallbusiness-main-menu ul ul .current-menu-item > a,
-#smallbusiness-main-menu ul ul .current-menu-ancestor > a,
-#smallbusiness-main-menu ul ul .current_page_item > a,
-#smallbusiness-main-menu ul ul .current_page_ancestor > a{
+#tsg2011-main-menu ul ul a{}
+#tsg2011-main-menu ul ul a:hover,
+#tsg2011-main-menu ul ul .current-menu-item > a,
+#tsg2011-main-menu ul ul .current-menu-ancestor > a,
+#tsg2011-main-menu ul ul .current_page_item > a,
+#tsg2011-main-menu ul ul .current_page_ancestor > a{
 	background:#caa201;
 	color:#FFFFFF;
 }
 
 
 
-#smallbusiness-main-menu ul li:hover > ul {
+#tsg2011-main-menu ul li:hover > ul {
 	display: block;
 }
 
-#smallbusiness-top-menu {
+#tsg2011-top-menu {
 	display: block;
     float: left;
     max-width: 550px;
@@ -578,17 +578,17 @@ margin:0;
 	border-right:1px solid #ffe06a;
 }
 
-#smallbusiness-top-menu ul{
+#tsg2011-top-menu ul{
 	list-style: none outside none;
 	padding: 0;
 }
 
-#smallbusiness-top-menu li{
+#tsg2011-top-menu li{
 	position: relative;
 	float: left;
 }
 
-#smallbusiness-top-menu li a{
+#tsg2011-top-menu li a{
 	border-left: 1px solid #ffe06a;
     border-right: 1px solid #886d00;
     color: #EEEEEE;
@@ -1368,11 +1368,11 @@ h2#client-text.post-title {
 .youtube-link,
 .li-link,
 .feed-link{background-color: #fd7b6d; border-color: #fcb3ab #fcb3ab #911406 #911406;}
-#smallbusiness-main-menu a:hover,
-#smallbusiness-main-menu .current-menu-item > a,
-#smallbusiness-main-menu .current-menu-ancestor > a,
-#smallbusiness-main-menu .current_page_item > a,
-#smallbusiness-main-menu .current_page_ancestor > a{
+#tsg2011-main-menu a:hover,
+#tsg2011-main-menu .current-menu-item > a,
+#tsg2011-main-menu .current-menu-ancestor > a,
+#tsg2011-main-menu .current_page_item > a,
+#tsg2011-main-menu .current_page_ancestor > a{
 	color:#FFFFFF;
 	background:#caa201;
 	transition: background-color 1s linear;

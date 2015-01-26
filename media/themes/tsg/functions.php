@@ -6,18 +6,18 @@
 
 // Load the D5 Framework Optios Page and Meta Page
     define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
-    function smallbusiness_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 2 ); }
+    function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 2 ); }
     require_once get_template_directory() . '/inc/options-framework.php';
 
 //  Tell WordPress for wp_title in order to modify document title content
-    function smallbusiness_filter_wp_title( $title ) {
+    function tsg2011_filter_wp_title( $title ) {
     $site_name = get_bloginfo( 'name' );
     $filtered_title = $site_name . $title;
     return $filtered_title;
     }
-    add_filter( 'wp_title', 'smallbusiness_filter_wp_title' );
+    add_filter( 'wp_title', 'tsg2011_filter_wp_title' );
 
-    function smallbusiness_setup() {
+    function tsg2011_setup() {
     add_theme_support( 'automatic-feed-links' );
     register_nav_menus( array( 'main-menu' => "Main Menu", 'top-menu' => "Top Menu" ) );
 
@@ -38,14 +38,14 @@
 
 
 //  WordPress 3.4 Custom Background Support
-    $smallbusiness_custom_background = array(
+    $tsg2011_custom_background = array(
     'default-color'          => 'AAAAAA',
     'default-image'          => '',
     );
-    add_theme_support( 'custom-background', $smallbusiness_custom_background );
+    add_theme_support( 'custom-background', $tsg2011_custom_background );
 
 //  WordPress 3.4 Custom Header Support
-    $smallbusiness_custom_header = array(
+    $tsg2011_custom_header = array(
     'default-image'          => get_template_directory_uri() . '/images/logo.png',
     'random-default'         => false,
     'width'                  => 300,
@@ -59,24 +59,24 @@
     'admin-head-callback'    => '',
     'admin-preview-callback' => '',
     );
-    add_theme_support( 'custom-header', $smallbusiness_custom_header ); }
-    add_action( 'after_setup_theme', 'smallbusiness_setup' );
+    add_theme_support( 'custom-header', $tsg2011_custom_header ); }
+    add_action( 'after_setup_theme', 'tsg2011_setup' );
 
 //  Functions for adding script
-    function smallbusiness_enqueue_scripts() {
-    wp_enqueue_style('smallbusiness-style', get_stylesheet_uri(), false, '1.7');
+    function tsg2011_enqueue_scripts() {
+    wp_enqueue_style('tsg2011-style', get_stylesheet_uri(), false, '1.7');
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
 
     wp_enqueue_script( 'jquery');
-    wp_enqueue_script( 'smallbusiness-menu-style', get_template_directory_uri(). '/js/menu.js' );
-    wp_enqueue_style('smallbusiness-gfonts', '//fonts.useso.com/css?family=Coda:400', false );
+    wp_enqueue_script( 'tsg2011-menu-style', get_template_directory_uri(). '/js/menu.js' );
+    wp_enqueue_style('tsg2011-gfonts', '//fonts.useso.com/css?family=Coda:400', false );
     }
-    add_action( 'wp_enqueue_scripts', 'smallbusiness_enqueue_scripts' );
+    add_action( 'wp_enqueue_scripts', 'tsg2011_enqueue_scripts' );
 
 //  Functions for adding some custom code within the head tag of site
-    function smallbusiness_custom_code() {
+    function tsg2011_custom_code() {
 
 ?>
 
@@ -99,35 +99,35 @@
 
 }
 
-    add_action('wp_head', 'smallbusiness_custom_code');
+    add_action('wp_head', 'tsg2011_custom_code');
 
 
 //  function tied to the excerpt_more filter hook.
-    function smallbusiness_excerpt_length( $length ) {
+    function tsg2011_excerpt_length( $length ) {
     global $sbExcerptLength;
     if ($sbExcerptLength) {
     return $sbExcerptLength;
     } else {
     return 50; //default value
     } }
-    add_filter( 'excerpt_length', 'smallbusiness_excerpt_length', 999 );
+    add_filter( 'excerpt_length', 'tsg2011_excerpt_length', 999 );
 
-    function smallbusiness_excerpt_more($more) {
+    function tsg2011_excerpt_more($more) {
        global $post;
     return '<a href="'. get_permalink($post->ID) . '" class="read-more">Read the Rest...</a>';
     }
-    add_filter('excerpt_more', 'smallbusiness_excerpt_more');
+    add_filter('excerpt_more', 'tsg2011_excerpt_more');
 
 //  Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link
-    function smallbusiness_page_menu_args( $args ) {
+    function tsg2011_page_menu_args( $args ) {
     $args['show_home'] = true;
     return $args;
     }
-    add_filter( 'wp_page_menu_args', 'smallbusiness_page_menu_args' );
+    add_filter( 'wp_page_menu_args', 'tsg2011_page_menu_args' );
 
 
 //  Registers the Widgets and Sidebars for the site
-    function smallbusiness_widgets_init() {
+    function tsg2011_widgets_init() {
 
 
     register_sidebar( array(
@@ -181,7 +181,7 @@
     ) );
 
     }
-    add_action( 'widgets_init', 'smallbusiness_widgets_init' );
+    add_action( 'widgets_init', 'tsg2011_widgets_init' );
 
 
 
@@ -189,12 +189,12 @@
 
     //  When the post has no post title, but is required to link to the single-page post view.
 
-    add_filter('the_title', 'smallbusiness_title');
-    function smallbusiness_title($title) {
+    add_filter('the_title', 'tsg2011_title');
+    function tsg2011_title($title) {
         if ( '' == $title ) {
             return '(Untitled)';
         } else { return $title; }
     }
 
-//  Remove WordPress Custom Header Support for the theme smallbusiness
+//  Remove WordPress Custom Header Support for the theme
 //  remove_theme_support('custom-header');

@@ -8,7 +8,7 @@
 <?php get_header(); wp_enqueue_script( 'slider-main', get_template_directory_uri() . '/js/slider.js' ); ?>
       <div id="slider">
             <div id="slideshow"><ul class="bjqs">
-            <?php $sbargs = smallbusiness_ppp(); query_posts( $sbargs );
+            <?php $sbargs = tsg2011_ppp(); query_posts( $sbargs );
             if (have_posts()) : while (have_posts()) : the_post();?>
             <li><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('slide-thumb'); ?><div class="post-slide"><h2><?php the_title(); ?></h2><?php  $sbExcerptLength=30; the_excerpt(); ?></div></a></li>
             <?php endwhile; endif; wp_reset_query(); ?>

@@ -231,7 +231,7 @@ certain countries either by patents or by copyrighted interfaces, the
 original copyright holder who places the Program under this License
 may add an explicit geographical distribution limitation excluding
 those countries, so that distribution is permitted only in or among
-countries not thus excluded.  In such case, this License insmallbusinesss
+countries not thus excluded.  In such case, this License in TSG
 the limitation as if written in the body of this License.
 
   9. The Free Software Foundation may publish revised and/or new versions
@@ -247,7 +247,7 @@ Software Foundation.  If the Program does not specify a version number of
 this License, you may choose any version ever published by the Free Software
 Foundation.
 
-  10. If you wish to insmallbusiness parts of the Program into other free
+  10. If you wish to in TSG parts of the Program into other free
 programs whose distribution conditions are different, write to the author
 to ask for permission.  For software which is copyrighted by the Free
 Software Foundation, write to the Free Software Foundation; we sometimes
