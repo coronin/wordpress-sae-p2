@@ -204,7 +204,7 @@ img {
     padding: 5px 25px 5px 10px;
     width: 150px;
 	background: url("images/search.png") no-repeat scroll right 50% transparent;
-    border: 1px solid #d6ce2f;
+    border: 1px solid #ffe06a;
     box-shadow: 0 0 3px 0 #886d00;
     color: #999999;
 }
@@ -575,7 +575,7 @@ margin:0;
     max-width: 550px;
 	height: 25px;
 	border-left:1px solid #886d00;
-	border-right:1px solid #d6ce2f;
+	border-right:1px solid #ffe06a;
 }
 
 #smallbusiness-top-menu ul{
@@ -589,7 +589,7 @@ margin:0;
 }
 
 #smallbusiness-top-menu li a{
-	border-left: 1px solid #d6ce2f;
+	border-left: 1px solid #ffe06a;
     border-right: 1px solid #886d00;
     color: #EEEEEE;
     font-size: 11px;
@@ -807,8 +807,8 @@ input[type="submit"]{
 	cursor:pointer;
 	margin:5px 0;
 	background: url("images/btn.png") repeat-x scroll right top #ffe06a;
-	border: 2px solid #e0b50a;
-	box-shadow: 0 0 5px 0 #fae6b6;
+	border: 2px solid #caa201;
+	box-shadow: 0 0 5px 0 #ffffdf;
 	color: #F7F7F7;
 	text-shadow: 1px 1px 1px #000000;
 }
@@ -1128,7 +1128,7 @@ h3.arc-src {
 	border-radius: 10px 0;
 	background:url("images/btn.png") repeat-x scroll 0 0 #caa201;
 	border:1px solid #EEEEEE;
-	box-shadow:0 0 3px 0 #fee099;
+	box-shadow:0 0 3px 0 #ffffdf;
 }
 
 form#loginform input[type="text"],
@@ -1392,14 +1392,14 @@ input[type="reset"]:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover{
 	box-shadow:0px 0px 5px 0px #EEEEEE;
-	border:2px solid #ffd01c;
+	border:2px solid #eeb621;
 }
 h3 span{color:#e6cf0d;}
 .read-more, .read-more a{
 	color:#FFFFFF;
 	text-shadow: 1px 1px 1px #555555;
 }
-.postmetadata a{color:#e3ae20;}
+.postmetadata a{color:#eeb621;}
 .postmetadataw a{color:#15a7f3;}
 
 #today {

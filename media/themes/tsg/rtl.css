@@ -145,7 +145,7 @@ address {
 #smallbusiness-top-menu {
 	float: right;
 	border-right:1px solid #886d00;
-	border-left:1px solid #d6ce2f;
+	border-left:1px solid #ffe06a;
 }
 
 #smallbusiness-top-menu li {
@@ -153,7 +153,7 @@ address {
 }
 
 #smallbusiness-top-menu li a {
-	border-right: 1px solid #d6ce2f;
+	border-right: 1px solid #ffe06a;
 	border-left: 1px solid #886d00;
 }
 
