@@ -15,7 +15,7 @@
             </ul></div>
         </div>
 
-<h1 id="heading"><?php echo of_get_option('heading_text', 'Go with Small Business Pro for exciting Post Options, Theme Options and Extra Functionalities.'); ?></h1>
+<h1 id="heading"><?php echo of_get_option('heading_text', 'TODO: Post Options, Theme Options and Extra Functionalities.'); ?></h1>
 
 <?php get_template_part( 'featured-box' );  ?><br />
 

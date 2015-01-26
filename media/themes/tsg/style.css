@@ -175,7 +175,7 @@ body {
     line-height: 1.6;
 	word-wrap: break-word;
 	color:#333333;
-	background:#AAAAAA;
+	background:#0e419c;
 }
 
 
@@ -1065,10 +1065,11 @@ q:after {
 	color:#0e419c;
 }
 
-q p {
+q p,
+blockquote p {
 	display:inline;
 }
-blockquote p {
+blockquote p p {
     display:block;
     margin-top:0.6em;
 }

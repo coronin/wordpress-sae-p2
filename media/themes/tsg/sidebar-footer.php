@@ -26,7 +26,7 @@
 
     <div id="footer-widgets" class="widget">
     <?php if ( is_active_sidebar( 'sidebar-4' ) ) : dynamic_sidebar( 'sidebar-4' ); else: if (of_get_option ( 'fsidebar', '1') == '1'):?>
-        <aside class="widget widget_text"><h3 class="widget-title">Sample Text</h3><div class="textwidget">Small Business is a theme for Small Business Companies. Customizable Background and other options will give the WordPress Driven Site an attractive look. Small Business is super elegant and Professional Theme which will create the business widely expressed. Right and Footer Sidebar will be usable for showing the widgets and PlunIns items.</div></aside>
+        <aside class="widget widget_text"><h3 class="widget-title">Sample Text</h3><div class="textwidget">Customizable Background and other options will give the WordPress Driven Site an attractive look. Small Business is super elegant and Professional Theme which will create the business widely expressed. Right and Footer Sidebar will be usable for showing the widgets and PlunIns items.</div></aside>
        <?php endif; endif;?>
     </div><!-- #second .widget-area -->
 
