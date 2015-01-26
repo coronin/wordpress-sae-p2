@@ -1065,13 +1065,15 @@ q:after {
 	color:#0e419c;
 }
 
-q p,
 blockquote p {
-	display:inline;
-}
-blockquote p p {
     display:block;
-    margin-top:0.6em;
+    margin-top:0.8em;
+}
+
+q p,
+blockquote p:first-child,
+blockquote p:last-child {
+	display:inline;
 }
 
 #container .attachment-thumbnail,
