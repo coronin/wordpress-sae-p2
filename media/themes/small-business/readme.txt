@@ -1,7 +1,7 @@
 ----------------------------------
 Small Business
 ----------------------------------
-Version: 	2.0
+Version: 	2.0+TSG
 Developer: 	D5 Creation
 Author URI: 	http://d5creation.com
 

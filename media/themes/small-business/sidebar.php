@@ -1,28 +1,47 @@
-<?php
-/* Small Business Theme's Right Sidebar Area
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
-*/
-?>
+
 <div id="right-sidebar">
-<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
-				<aside id="archives" class="widget">
-					<h3 class="widget-title">Archives</h3>
-					<ul>
-						<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
-					</ul>
-				</aside>
+<?php if ( is_page() ) { ?>
+  <?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
+    <aside id="archives" class="widget">
+        <h3 class="widget-title">Archives</h3>
+        <ul>
+            <?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
+        </ul>
+    </aside>
+  <?php endif; ?>
+<?php } elseif ( is_single() ) { ?>
 
-				<aside id="meta" class="widget">
-					<h3 class="widget-title">Meta</h3>
-					<ul>
-						<?php wp_register(); ?>
-						<li><?php wp_loginout(); ?></li>
-						<?php wp_meta(); ?>
-					</ul>
-				</aside>
+  <?php $display_categories = array(3,2);
+        foreach ($display_categories as $category) { ?>
 
-<?php endif; // end sidebar widget area ?>
+    <aside id="archives" class="widget">
+    <?php query_posts("showposts=5&cat=$category"); ?>
+      <h3 class="widget-title">
+        <a href="<?php echo get_category_link($category); ?>">
+          TSG <?php single_cat_title(); ?>
+        </a>
+      </h3>
+      <ul>
+        <?php while (have_posts()) : the_post(); ?>
+        <li>
+          <a href="<?php the_permalink() ?>" rel="bookmark" title="/?p=<?php the_ID(); ?>">
+            <?php the_title(); ?>
+          </a>
+        </li>
+        <?php endwhile; wp_reset_query(); ?>
+      </ul>
+    </aside>
+
+  <?php } ?>
+
+<?php } else { ?>
+    <aside id="archives" class="widget">
+        <h3 class="widget-title">Archives</h3>
+        <ul>
+            <?php wp_get_archives( array( 'type' => 'monthly', 'order' => 'ASC' ) ); ?>
+        </ul>
+    </aside>
+<?php } ?>
+
 </div>

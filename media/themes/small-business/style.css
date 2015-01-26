@@ -702,7 +702,7 @@ margin:0;
 
 #right-sidebar form#searchform input[type="submit"], 
 #footer-sidebar form#searchform input[type="submit"] {		
-	padding: 0 7px;
+	padding: 7px;
 	margin-left: 2px;
 }
 
