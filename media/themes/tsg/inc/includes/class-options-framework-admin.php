@@ -82,8 +82,8 @@ class Options_Framework_Admin {
 	static function menu_settings() {
 
 		$menu = array(
-			'page_title' => 'Small Business Options',
-			'menu_title' => 'Small Business Options',
+			'page_title' => 'TSG Options',
+			'menu_title' => 'TSG Options',
 			'capability' => 'edit_theme_options',
 			'menu_slug' => 'options-framework'
 		);

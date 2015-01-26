@@ -1,12 +1,4 @@
-<?php
-
-/* 	Small Business Theme's 404 Error Page
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
-*/
-
-get_header(); ?>
+<?php get_header(); ?>
 
 <h1 class="page-title">Not Found</h1>
 <h3 class="arc-src"><span>Apologies, but the page you requested could not be found. Perhaps searching will help.</span></h3>
@@ -17,5 +9,5 @@ get_header(); ?>
 <h2 class="post-title-color">You can also Visit the Following. These are the Featured Contents</h2>
 <div class="content-ver-sep"></div><br />
 <?php get_template_part( 'featured-box' ); ?>
- 
+
 <?php get_footer(); ?>

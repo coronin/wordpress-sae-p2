@@ -1,13 +1,3 @@
-<?php
-
-/* 	Small Business Theme's Header
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
-*/
-
-?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -25,29 +15,28 @@
 <body <?php body_class(); ?> >
 
   <div id="container">
-  	  <div id="top-menu-container">
-      
-	  <nav id="smallbusiness-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
-	  <!-- php get_search_form(); -->  
+      <div id="top-menu-container">
+
+      <nav id="smallbusiness-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
+      <!-- php get_search_form(); -->
       </div>
       <div id ="header">
       <div id ="header-content">
-      
-		<!-- Site Titele and Description Goes Here -->
+
+        <!-- Site Titele and Description Goes Here -->
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>"/></a>
-        
-		<h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2
-                
+
+        <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2
+
         ><!-- Site Main Menu Goes Here -->
         <nav id="smallbusiness-main-menu">
-		<?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?>
+        <?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?>
         </nav>
-      
+
       </div><!-- header-content -->
       </div><!-- header -->
-      
-            
-      
-	  
-	 
-	  
+
+
+
+
+

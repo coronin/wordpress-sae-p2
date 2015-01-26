@@ -1,11 +1,5 @@
-<?php
-/* Small Business Theme's Index Page to hsow Blog Posts
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
-*/
+<?php get_header(); ?>
 
-get_header(); ?>
 <div id="content">
  <?php if (have_posts()) : while (have_posts()) : the_post();?>
 <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -34,12 +28,12 @@ get_header(); ?>
 
  <h1 class="arc-post-title">Sorry, we couldn't find anything that matched your search.</h1>
 
-		<h3 class="arc-src"><span>You Can Try Another Search...</span></h3>
-		<?php get_search_form(); ?>
-		<p><a href="<?php echo home_url(); ?>" title="Browse the Home Page">&laquo; Or Return to the Home Page</a></p><br />
-		<h2 class="post-title-color">You can also Visit the Following. These are the Featured Contents</h2>
-		<div class="content-ver-sep"></div><br />
-		<?php get_template_part( 'featured-box' ); ?>
+        <h3 class="arc-src"><span>You Can Try Another Search...</span></h3>
+        <?php get_search_form(); ?>
+        <p><a href="<?php echo home_url(); ?>" title="Browse the Home Page">&laquo; Or Return to the Home Page</a></p><br />
+        <h2 class="post-title-color">You can also Visit the Following. These are the Featured Contents</h2>
+        <div class="content-ver-sep"></div><br />
+        <?php get_template_part( 'featured-box' ); ?>
 
 <?php endif; ?>
 

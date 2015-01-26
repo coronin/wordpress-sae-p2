@@ -1,4 +1,3 @@
-
 <div id="right-sidebar">
 
 <?php if ( is_page() ) { ?>

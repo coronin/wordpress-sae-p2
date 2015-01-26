@@ -38,7 +38,7 @@ final class WP_Theme implements ArrayAccess {
 	 */
 	private static $default_themes = array(
 		'p2' => 'P2 for WordPress',
-		'small-business' => 'Small Business for WordPress',
+		'tsg' => 'TAN School of Genetics',
 	);
 
 	/**

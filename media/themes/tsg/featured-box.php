@@ -1,10 +1,4 @@
-<?php
-/* 	Small Business Theme's Featured Box to show the Featured Items of Front Page
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
-*/
-?>
+
 
 <div id="featured-boxs">
 

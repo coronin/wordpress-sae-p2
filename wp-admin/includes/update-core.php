@@ -683,7 +683,7 @@ global $_new_bundled_files;
 $_new_bundled_files = array(
 	'plugins/akismet/'       => '2.0',
 	'themes/p2/'      => '1.5.5',
-	'themes/small-business/'   => '2.0',
+	'themes/tsg/'   => '2.0',
     'plugins/wp-mail-smtp/' => '0.9.5',
     'plugins/restricted-site-access/' => '5.1',
     'plugins/baidu-sitemap-generator/' => '1.6.5',

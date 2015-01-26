@@ -1,10 +1,7 @@
 <?php
 /*
-	Template Name: Full Width
- 	smallbusiness Theme's Full Width Page to show the Pages Selected Full Width
-	Copyright: 2012-2014, D5 Creation, www.d5creation.com
-	Based on the Simplest D5 Framework for WordPress
-	Since Small Business 1.0
+    Template Name: Full Width
+    Theme's Full Width Page to show the Pages Selected Full Width
 */
 ?>
 
@@ -20,7 +17,7 @@
  <?php edit_post_link('Edit This Entry', '<p>', '</p>'); ?>
  <?php comments_template( '', true ); ?>
  <?php endwhile; endif; ?>
- 
+
 
 
 

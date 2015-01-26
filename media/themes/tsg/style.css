@@ -27,7 +27,7 @@ body {
 	line-height: 1;
 }
 
-ol, 
+ol,
 ul {
 	list-style: none;
 }
@@ -46,14 +46,14 @@ caption, th, td {
 	text-align: left;
 }
 
-blockquote:before, 
+blockquote:before,
 blockquote:after,
-q:before, 
+q:before,
 q:after {
 	content: "";
 }
 
-blockquote, 
+blockquote,
 q {
 	quotes: "" "";
 }
@@ -62,16 +62,16 @@ a img {
 	border: 0;
 }
 
-article, 
-aside, 
-details, 
-figcaption, 
+article,
+aside,
+details,
+figcaption,
 figure,
-footer, 
-header, 
-hgroup, 
-menu, 
-nav, 
+footer,
+header,
+hgroup,
+menu,
+nav,
 section {
 	display: block;
 }
@@ -87,7 +87,7 @@ div .alignnone  {
 }
 
 .aligncenter,
-#content .aligncenter, 
+#content .aligncenter,
 #content-full .aligncenter,
 div.aligncenter {
     display:block;
@@ -174,7 +174,7 @@ body {
     font-size: 14px;
     line-height: 1.6;
 	word-wrap: break-word;
-	color:#333333; 
+	color:#333333;
 	background:#AAAAAA;
 }
 
@@ -252,7 +252,7 @@ img.site-logo, h1.site-title {
 }
 
 #content-full {
-	
+
     width: 930px;
 }
 
@@ -295,29 +295,25 @@ img.site-logo, h1.site-title {
 
 .twitter-link {
 	background: url("images/twittericon.png") no-repeat scroll center 50% transparent;
-    
 }
 
 .youtube-link {
 	background: url("images/youtubeicon.png") no-repeat scroll center 50% transparent;
-    
 }
 
 .li-link {
 	background: url("images/liicon.png") no-repeat scroll center 50% transparent;
-    
 }
 
 .feed-link {
 	background: url("images/feedicon.png") no-repeat scroll center 50% transparent;
-    
 }
 
 
-.facebook-link, 
-.twitter-link, 
-.youtube-link, 
-.li-link, 
+.facebook-link,
+.twitter-link,
+.youtube-link,
+.li-link,
 .feed-link {
 	float: left;
     height: 20px;
@@ -329,10 +325,10 @@ img.site-logo, h1.site-title {
     border-width: 1px;
 }
 
-.facebook-link:hover, 
-.twitter-link:hover, 
-.youtube-link:hover, 
-.li-link:hover, 
+.facebook-link:hover,
+.twitter-link:hover,
+.youtube-link:hover,
+.li-link:hover,
 .feed-link:hover {
 	opacity: 1;
 }
@@ -360,9 +356,9 @@ h3.subtitle {
 	color: #AAAAAA;
 }
 
-/* Common Elements 
+/* Common Elements
 ------------------------------------------------------------- */
-ol, 
+ol,
 ul {
 	padding: 0 0 10px 20px;
 	display: block;
@@ -378,7 +374,7 @@ ol {
 }
 
 strong {
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 dl {
@@ -465,20 +461,20 @@ address {
 }
 
 embed  {
-	max-width: 100%;	
+	max-width: 100%;
 }
 
 caption {
 	color:#999999;
 }
 
-s, 
-strike, 
+s,
+strike,
 del {
     text-decoration: line-through;
 }
 
-/* Menu Elements 
+/* Menu Elements
 ------------------------------------------------------------- */
 
 #smallbusiness-main-menu {
@@ -521,7 +517,7 @@ del {
 	margin: 0;
 }
 
-#smallbusiness-main-menu ul ul, 
+#smallbusiness-main-menu ul ul,
 .sub-menu, .sub-menu ul ul {
     display: none;
 	float: left;
@@ -607,7 +603,7 @@ margin:0;
 	float:left;
 }
 
-/* Wedget Elements 
+/* Wedget Elements
 ------------------------------------------------------------- */
 .widget {
 	display: block;
@@ -633,13 +629,13 @@ margin:0;
 	color:#caa201;
 }
 
-#right-sidebar .widget, 
-#right-sidebar .widget li, 
-#right-sidebar .widget a, 
+#right-sidebar .widget,
+#right-sidebar .widget li,
+#right-sidebar .widget a,
 #right-sidebar .widget a:hover {
 	text-decoration: none;
 	color:#333333;
-} 
+}
 
 #right-sidebar .widget li {
 	list-style: none outside none;
@@ -671,14 +667,14 @@ margin:0;
 	text-shadow:1px 1px 1px #000000;
 }
 
-#footer-sidebar .widget, 
-#footer-sidebar .widget li, 
-#footer-sidebar .widget a, 
+#footer-sidebar .widget,
+#footer-sidebar .widget li,
+#footer-sidebar .widget a,
 #footer-sidebar .widget a:hover,
 #footer table {
 	text-decoration: none;
 	color:#e4e4c1;
-} 
+}
 
 #footer-sidebar .widget ul {
 	background: url("images/listiconf.gif") no-repeat scroll 0 7px transparent;
@@ -694,26 +690,26 @@ margin:0;
     border-top: 1px dotted #555555;
 }
 
-#right-sidebar input#s, 
+#right-sidebar input#s,
 #footer-sidebar input#s {
     width: 60%;
-	min-width: 100px;	
+	min-width: 100px;
 }
 
-#right-sidebar form#searchform input[type="submit"], 
-#footer-sidebar form#searchform input[type="submit"] {		
+#right-sidebar form#searchform input[type="submit"],
+#footer-sidebar form#searchform input[type="submit"] {
 	padding: 7px;
 	margin-left: 2px;
 }
 
 .textwedget {
-	width: 100%;		
+	width: 100%;
 }
 
-/* Design Elements 
+/* Design Elements
 ------------------------------------------------------------- */
 h1, h1 a, h1 a:visited, h1 a:hover, h2, h2 a, h2 a:visited, h2 a:hover, h3, h4, h5, h6 {
-	font-family: 'Coda',cursive,sans-serif; 
+	font-family: 'Coda',cursive,sans-serif;
     font-weight: normal;
     line-height: 1.25;
     margin: 0 0 10px;
@@ -721,27 +717,27 @@ h1, h1 a, h1 a:visited, h1 a:hover, h2, h2 a, h2 a:visited, h2 a:hover, h3, h4, 
 }
 
 h1 {
-	font-size: 30px;	
+	font-size: 30px;
 }
 
 h2 {
-	font-size: 23px;	
+	font-size: 23px;
 }
 
 h3 {
-	font-size: 20px;	
+	font-size: 20px;
 }
 
 h4 {
-	font-size: 17px;	
+	font-size: 17px;
 }
 
 h5 {
-	font-size: 15px;	
+	font-size: 15px;
 }
 
 h6 {
-	font-size: 13px;	
+	font-size: 13px;
 }
 
 p {
@@ -750,7 +746,7 @@ p {
 
 a {
 	text-decoration:none;
-	color:#eeb621;		
+	color:#eeb621;
 }
 
 b, strong {
@@ -792,7 +788,7 @@ table#wp-calendar {
 	background: none repeat scroll 0 0 transparent;
     border: medium none;
     box-shadow: none;
-    width: 100%;	
+    width: 100%;
 }
 
 button,
@@ -810,16 +806,16 @@ input[type="submit"]{
 	text-transform: uppercase;
 	cursor:pointer;
 	margin:5px 0;
-	background: url("images/btn.png") repeat-x scroll right top #ffe06a; 
-	border: 2px solid #e0b50a; 
-	box-shadow: 0 0 5px 0 #fae6b6; 
-	color: #F7F7F7; 
+	background: url("images/btn.png") repeat-x scroll right top #ffe06a;
+	border: 2px solid #e0b50a;
+	box-shadow: 0 0 5px 0 #fae6b6;
+	color: #F7F7F7;
 	text-shadow: 1px 1px 1px #000000;
 }
 
 
-input[type="text"], 
-textarea, input#s, 
+input[type="text"],
+textarea, input#s,
 input[type="password"] {
    	border-radius: 5px;
     font-size: 14px;
@@ -836,9 +832,9 @@ input[type="password"] {
     width: 200px;
 }
 
-button:active, 
-input[type="reset"]:active, 
-input[type="button"]:active, 
+button:active,
+input[type="reset"]:active,
+input[type="button"]:active,
 input[type="submit"]:active {
 	position:relative;
 	top:1px;
@@ -852,7 +848,7 @@ input#s {
 
 
 
-.post.sticky, 
+.post.sticky,
 .sticky {
 	margin-bottom: 30px;
     padding: 15px;
@@ -873,14 +869,14 @@ input#s {
 .bypostauthor {
 }
 
-#container, 
-#content, 
+#container,
+#content,
 #content-full {
 	font-size: 14px;
     text-align: justify;
 }
 
-#content img, 
+#content img,
 #content-full img {
 	height: auto;
     margin: 0;
@@ -1015,7 +1011,7 @@ ol.bjqs-markers li.active-marker a {
 	text-align: justify;
 }
 
-.featured-box, 
+.featured-box,
 .featured-box-first {
 	width:277px;
 	display:inline;
@@ -1023,7 +1019,6 @@ ol.bjqs-markers li.active-marker a {
 
 .featured-box-first {
 	float:left;
-	
 }
 
 .featured-box {
@@ -1070,9 +1065,12 @@ q:after {
 	color:#0e419c;
 }
 
-blockquote p,
 q p {
 	display:inline;
+}
+blockquote p {
+    display:block;
+    margin-top:0.6em;
 }
 
 #container .attachment-thumbnail,
@@ -1084,7 +1082,7 @@ q p {
 }
 
 
-h1.page-title, 
+h1.page-title,
 h1.arc-post-title {
 	font-size: 35px;
     text-transform: uppercase;
@@ -1093,9 +1091,9 @@ h1.arc-post-title {
 	color:#515151;
 }
 
-h2.post-title, 
-h2.comments, 
-h3#reply-title, 
+h2.post-title,
+h2.comments,
+h3#reply-title,
 h2.post-title-color {
 	font-size: 30px;
     margin-bottom: 0;
@@ -1118,11 +1116,10 @@ h3.arc-src {
 	color:#4d64ee;
 }
 
-.post, 
-.hentry, 
+.post,
+.hentry,
 .no-results {
 	margin-bottom: 20px;
-	
 }
 
 .read-more {
@@ -1132,12 +1129,11 @@ h3.arc-src {
 	background:url("images/btn.png") repeat-x scroll 0 0 #caa201;
 	border:1px solid #EEEEEE;
 	box-shadow:0 0 3px 0 #fee099;
-		
 }
 
-form#loginform input[type="text"], 
-form#loginform textarea, 
-form#loginform input#s, 
+form#loginform input[type="text"],
+form#loginform textarea,
+form#loginform input#s,
 form#loginform input[type="password"] {
 	width: 90%;
 }
@@ -1197,9 +1193,9 @@ p.postmetadata {
 
 #commentsbox {
 	margin: 20px 0;
-} 
+}
 
-#commentsbox ol, 
+#commentsbox ol,
 #commentsbox li {
     list-style: none outside none;
 }
@@ -1207,7 +1203,7 @@ p.postmetadata {
 
 
 
-#commentsbox .commentlist { 
+#commentsbox .commentlist {
 	margin: 0 0 0 -25px;
 }
 
@@ -1217,10 +1213,10 @@ p.postmetadata {
     text-align: center;
     text-shadow: none;
     text-transform: uppercase;
-	color:rgba(150, 150, 150, 0.7);	
+	color:rgba(150, 150, 150, 0.7);
 }
 
-#commentsbox .comment-author cite, 
+#commentsbox .comment-author cite,
 #commentsbox .comment-author cite a {
     font-weight: bold;
     letter-spacing: 3px;
@@ -1230,7 +1226,7 @@ p.postmetadata {
 
 
 
-ol.commentlist, 
+ol.commentlist,
 ul.commentlist, {
 	list-style: none outside none;
 }
@@ -1240,7 +1236,6 @@ ul.commentlist, {
 	left: 0;
     position: absolute;
     ttop: 7px;
-    
 }
 
 #commentsbox ul.children {
@@ -1272,8 +1267,8 @@ ul.commentlist, {
     margin-bottom: 6px;
 }
 
-#commentsbox .comment-meta, 
-#commentsbox .comment-meta a:link, 
+#commentsbox .comment-meta,
+#commentsbox .comment-meta a:link,
 #commentsbox .comment-meta a:visited {
     font-size: 12px;
     padding-bottom: 10px;
@@ -1378,11 +1373,11 @@ h2#client-text.post-title {
 #smallbusiness-main-menu .current_page_item > a,
 #smallbusiness-main-menu .current_page_ancestor > a{
 	color:#FFFFFF;
-	background:#caa201; 
-	transition: background-color 1s linear; 
-	-moz-transition:  background-color 1s linear;    /* FF3.7+ */  
-	-o-transition: background-color 1s linear;      /* Opera 10.5 */ 
-	-webkit-transition: background-color 1s linear; /* Saf3.2+, Chrome */ 
+	background:#caa201;
+	transition: background-color 1s linear;
+	-moz-transition:  background-color 1s linear;    /* FF3.7+ */
+	-o-transition: background-color 1s linear;      /* Opera 10.5 */
+	-webkit-transition: background-color 1s linear; /* Saf3.2+, Chrome */
 }
 #right-sidebar .widget ul{
 	border-bottom:1px solid #FFFFFF;
@@ -1401,12 +1396,12 @@ input[type="submit"]:hover{
 }
 h3 span{color:#e6cf0d;}
 .read-more, .read-more a{
-	color:#FFFFFF; 
+	color:#FFFFFF;
 	text-shadow: 1px 1px 1px #555555;
 }
 .postmetadata a{color:#e3ae20;}
 .postmetadataw a{color:#15a7f3;}
 
 #today {
-  background: #fff;
+  background: #ffffdf;
 }
