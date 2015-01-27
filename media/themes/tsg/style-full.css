@@ -1,4 +1,4 @@
-/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
+/* Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- */
 
 html, body, div, span, applet, object, iframe,
@@ -77,7 +77,7 @@ section {
 }
 
 
-/* =WordPress Core and Addition
+/* Core and Addition
 -------------------------------------------------------------- */
 .alignnone,
 #content .alignnone,
@@ -166,7 +166,7 @@ a img.aligncenter {
     padding:0 4px 5px;
 }
 
-/* =Structure
+/* Structure
 ----------------------------------------------- */
 
 body {
@@ -646,6 +646,7 @@ margin:0;
 	list-style: none outside none;
     padding: 5px 0 5px 17px;
 	background:url("images/listicon.gif") no-repeat scroll 0 10px transparent;
+	text-align:left;
 	border-bottom:1px solid #CCCCCC;
 	border-top:1px solid #FFFFFF;
 }
@@ -691,6 +692,7 @@ margin:0;
 	list-style: none outside none;
     padding: 3px 0 3px 17px;
 	background: url("images/listiconf.gif") no-repeat scroll 0 7px transparent;
+    text-align: left;
     border-bottom: 1px dotted #111111;
     border-top: 1px dotted #555555;
 }

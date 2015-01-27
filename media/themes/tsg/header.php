@@ -26,9 +26,8 @@
         <!-- Site Titele and Description Goes Here -->
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>"/></a>
 
-        <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2
-
-        ><!-- Site Main Menu Goes Here -->
+        <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2>
+        <!-- Site Main Menu Goes Here -->
         <nav id="tsg2011-main-menu">
         <?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?>
         </nav>

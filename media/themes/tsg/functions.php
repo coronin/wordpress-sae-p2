@@ -20,6 +20,7 @@
   }
   add_action('init', 'my_init');
 
+
 // Load the D5 Framework Optios Page and Meta Page
     define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
     function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 7); }
@@ -54,11 +55,11 @@
 
 
 //  WordPress 3.4 Custom Background Support
-    $tsg2011_custom_background = array(
-    'default-color'          => 'AAAAAA',
-    'default-image'          => '',
-    );
-    add_theme_support( 'custom-background', $tsg2011_custom_background );
+  //  $tsg2011_custom_background = array(
+  //  'default-color'          => 'AAAAAA',
+  //  'default-image'          => '',
+  //  );
+  //  add_theme_support( 'custom-background', $tsg2011_custom_background );
 
 //  WordPress 3.4 Custom Header Support
     $tsg2011_custom_header = array(

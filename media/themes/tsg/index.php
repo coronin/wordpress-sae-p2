@@ -12,7 +12,7 @@
  <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
  <div class="clear"> </div>
  <div class="up-bottom-border">
- <p class="postmetadata">Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+ <p class="postmetadata">Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
  </div>
  </div></div>
 

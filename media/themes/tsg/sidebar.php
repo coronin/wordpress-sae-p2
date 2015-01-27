@@ -1,20 +1,21 @@
 <div id="right-sidebar">
-
 <?php if ( is_page() ) { ?>
+
   <?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
-    <aside id="archives" class="widget">
+    <aside class="widget">
         <h3 class="widget-title">Archives</h3>
         <ul>
             <?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
         </ul>
     </aside>
   <?php endif; ?>
+
 <?php } elseif ( is_single() ) { ?>
 
   <?php $display_categories = array(3,2);
         foreach ($display_categories as $category) { ?>
 
-    <aside id="archives" class="widget">
+    <aside class="widget">
     <?php query_posts("showposts=5&cat=$category"); ?>
       <h3 class="widget-title">
         <a href="<?php echo get_category_link($category); ?>">
@@ -35,12 +36,13 @@
   <?php } ?>
 
 <?php } else { ?>
-    <aside id="archives" class="widget">
+
+    <aside class="widget">
         <h3 class="widget-title">Archives</h3>
         <ul>
             <?php wp_get_archives( array( 'type' => 'monthly', 'order' => 'ASC' ) ); ?>
         </ul>
     </aside>
-<?php } ?>
 
+<?php } ?>
 </div>

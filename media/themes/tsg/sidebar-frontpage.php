@@ -1,11 +1,7 @@
-<?php
-/* Theme's Right Sidebar Area */
-?>
 <div id="right-sidebar">
-
 <?php if ( ! dynamic_sidebar( 'sidebar-2' ) ) : ?>
 
-                <aside id="archives" class="widget">
+                <aside class="widget">
                     <h3 class="widget-title">Archives</h3>
                     <ul>
                         <?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>

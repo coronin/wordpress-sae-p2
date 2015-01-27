@@ -59,7 +59,7 @@ jQuery(document).ready(function($){
 		selector.find('.screenshot').slideUp();
 		selector.find('.remove-file').unbind().addClass('upload-button').removeClass('remove-file').val(optionsframework_l10n.upload);
 		// We don't display the upload button if .upload-notice is present
-		// This means the user doesn't have the WordPress 3.5 Media Library Support
+		// This means the user doesn't have the 3.5 Media Library Support
 		if ( $('.section-upload .upload-notice').length > 0 ) {
 			$('.upload-button').remove();
 		}
