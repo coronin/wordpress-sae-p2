@@ -1,12 +1,28 @@
 <?php
 
-// TSG
-    remove_action('wp_head', 'wp_generator');
+// TSG, 2015-1
+  remove_action('wp_head', 'rsd_link');
+  remove_action('wp_head', 'wp_generator');
+  remove_action('wp_head', 'feed_links', 2);
+  remove_action('wp_head', 'index_rel_link');
+  remove_action('wp_head', 'wlwmanifest_link');
+  remove_action('wp_head', 'feed_links_extra', 3);
+  remove_action('wp_head', 'start_post_rel_link', 10, 0);
+  remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+  remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
 
+  function my_init() {
+    if (!is_admin()) {
+      wp_deregister_script('jquery');
+      wp_register_script('jquery', 'http://libs.useso.com/js/jquery/1.11.1/jquery.min.js', false, '1.11.1');
+      // wp_enqueue_script('jquery');
+    }
+  }
+  add_action('init', 'my_init');
 
 // Load the D5 Framework Optios Page and Meta Page
     define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
-    function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 2 ); }
+    function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 7); }
     require_once get_template_directory() . '/inc/options-framework.php';
 
 //  Tell WordPress for wp_title in order to modify document title content
@@ -80,20 +96,17 @@
 
 ?>
 
-    <style type="text/css">
-    .site-title a,
-    .site-title a:active,
-    .site-title a:hover {
-
+<style type="text/css">
+  .site-title a,
+  .site-title a:active,
+  .site-title a:hover {
     color: #<?php echo get_header_textcolor(); ?>;
-    }
-
-    .entrytext {
+  }
+  .entrytext {
     background: <?php if (is_page()): echo 'transparent;'; endif; ?>
     padding: 10px 0;
-    }
-
-    </style>
+  }
+</style>
 
     <?php
 

@@ -33,7 +33,7 @@
         <?php while (have_posts()) : the_post(); ?>
 
             <div <?php post_class(); ?>>
-                <p class="postmetadataw">Posted on <?php the_time('F j, Y'); ?></p> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
+                <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
                 <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
                 <div class="content-ver-sep"> </div>
                 <div class="entrytext">
@@ -42,9 +42,8 @@
 
                 <div class="clear"> </div>
                 <div class="up-bottom-border">
-                <p class="postmetadata">Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?>  <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+                <p class="postmetadata">Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
                 </div></div>
-
 
                 </div><!--close post class-->
 

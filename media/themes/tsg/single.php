@@ -11,7 +11,7 @@
 
             <div class="clear"> </div>
             <div class="up-bottom-border">
-            <p class="postmetadata">Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+            <p class="postmetadata">Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
             <?php  wp_link_pages( array( 'before' => '<div class="page-link"><span>' . 'Pages:' . '</span>', 'after' => '</div>' ) ); ?>
             <div class="content-ver-sep"> </div>
             <div class="floatleft"><?php previous_post_link('&laquo; %link (Previous Post)'); ?></div>

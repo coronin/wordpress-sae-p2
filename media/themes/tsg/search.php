@@ -22,7 +22,7 @@
  <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
  <div class="clear"> </div>
  <div class="up-bottom-border">
-                <p class="postmetadata"><?php edit_post_link('Edit', '', ' | '); ?>  <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+                <p class="postmetadata"><?php edit_post_link('Edit', '', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
                 </div></div></div>
 
         <?php $counter++; ?>
