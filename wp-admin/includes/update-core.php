@@ -687,6 +687,9 @@ $_new_bundled_files = array(
     'plugins/wp-mail-smtp/' => '0.9.5',
     'plugins/restricted-site-access/' => '5.1',
     'plugins/baidu-sitemap-generator/' => '1.6.5',
+    'plugins/contact-form-7/' => '4.1',
+    'plugins/contact-form-7-to-database-extension/' => '2.8.26',
+    'plugins/really-simple-captcha/' => '1.8.0.1',
 );
 
 /**

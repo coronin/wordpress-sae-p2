@@ -11,7 +11,15 @@
 
             <div class="clear"> </div>
             <div class="up-bottom-border">
-            <p class="postmetadata">Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+            <p class="postmetadata">Viewed by <?php
+  $c = new SaeCounter();
+  $cc = 'c' . $post->ID;
+  if ( $c->create($cc) ) {
+    $c->set($cc, 1); 
+  } else {
+    $c->incr($cc); }
+  echo $c->get($cc);
+?>; Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
             <?php  wp_link_pages( array( 'before' => '<div class="page-link"><span>' . 'Pages:' . '</span>', 'after' => '</div>' ) ); ?>
             <div class="content-ver-sep"> </div>
             <div class="floatleft"><?php previous_post_link('&laquo; %link'); ?></div>
