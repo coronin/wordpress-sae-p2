@@ -14,7 +14,7 @@
  <div class="up-bottom-border">
  <p class="postmetadata">Viewed by <?php
   $c = new SaeCounter();
-  $cc = 'c' . $post->ID;
+  $cc = the_time('Ym'); $cc = 'ym-'.$cc;
   if ( $c->create($cc) ) {
     $c->set($cc, 1); 
   } else {

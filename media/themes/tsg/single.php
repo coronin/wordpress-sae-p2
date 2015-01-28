@@ -13,13 +13,13 @@
             <div class="up-bottom-border">
             <p class="postmetadata">Viewed by <?php
   $c = new SaeCounter();
-  $cc = 'c' . $post->ID;
+  $cc = 'ym-'.get_the_date('ym');
   if ( $c->create($cc) ) {
     $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
   echo $c->get($cc);
-?>; Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+?>; Posted on <a href="<?php get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
             <?php  wp_link_pages( array( 'before' => '<div class="page-link"><span>' . 'Pages:' . '</span>', 'after' => '</div>' ) ); ?>
             <div class="content-ver-sep"> </div>
             <div class="floatleft"><?php previous_post_link('&laquo; %link'); ?></div>
