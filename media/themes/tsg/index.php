@@ -14,13 +14,13 @@
  <div class="up-bottom-border">
  <p class="postmetadata">Viewed by <?php
   $c = new SaeCounter();
-  $cc = the_time('Ym'); $cc = 'ym-'.$cc;
+  $cc = 'c'.get_the_date('Ym');
   if ( $c->create($cc) ) {
     $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
   echo $c->get($cc);
-?>; Posted on <?php the_time('F j, Y'); ?>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+?>; Posted on <a href="<?php echo get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
  </div>
  </div></div>
 

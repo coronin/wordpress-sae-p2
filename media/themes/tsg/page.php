@@ -2,7 +2,14 @@
 
     <div id="content">
 
-        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <?php if (have_posts()) : while (have_posts()) : the_post();
+  $c = new SaeCounter();
+  $cc = 'page'.$post->ID;
+  if ( $c->create($cc) ) {
+    $c->set($cc, 1);
+  } else {
+    $c->incr($cc); }
+?>
         <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
         <h1 class="page-title"><?php the_title(); ?></h1>
             <div class="content-ver-sep"> </div>

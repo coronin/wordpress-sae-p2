@@ -5,7 +5,7 @@
     <aside class="widget">
         <h3 class="widget-title">Archives</h3>
         <ul>
-            <?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
+            <?php wp_get_archives( array( 'type' => 'monthly', 'order'=> 'DESC') ); ?>
         </ul>
     </aside>
   <?php endif; ?>
@@ -38,9 +38,16 @@
 <?php } else { ?>
 
     <aside class="widget">
+        <h3 class="widget-title">TSG Updates</h3>
+        <ul>
+            <?php wp_get_archives( array( 'type' => 'postbypost', 'limit' => 4 ) ); ?>
+        </ul>
+    </aside>
+
+    <aside class="widget">
         <h3 class="widget-title">Archives</h3>
         <ul>
-            <?php wp_get_archives( array( 'type' => 'monthly', 'order' => 'ASC' ) ); ?>
+            <?php wp_get_archives( array( 'type' => 'monthly', 'order' => 'DESC' ) ); ?>
         </ul>
     </aside>
 

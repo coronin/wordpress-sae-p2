@@ -6,7 +6,14 @@ get_header(); ?>
 
 <div id="content">
 
-          <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
+          <?php if ( have_posts() ) while ( have_posts() ) : the_post();
+  $c = new SaeCounter();
+  $cc = 'page'.$post->ID;
+  if ( $c->create($cc) ) {
+    $c->set($cc, 1);
+  } else {
+    $c->incr($cc); }
+?> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
             <h1 class="page-title"><?php the_title(); ?></h1>
 
             <div class="content-ver-sep"> </div>

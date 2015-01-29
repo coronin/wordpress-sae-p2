@@ -9,7 +9,14 @@
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
-<?php  wp_head(); ?>
+<?php  wp_head();
+  $c = new SaeCounter();
+  $cc = 'cAll';
+  if ( $c->create($cc) ) {
+    $c->set($cc, 1);
+  } else {
+    $c->incr($cc); }
+?>
 
 </head>
 <body <?php body_class(); ?> >
