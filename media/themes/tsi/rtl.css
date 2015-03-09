@@ -144,8 +144,8 @@ address {
 
 #tsg2011-top-menu {
 	float: right;
-	border-right:1px solid #886d00;
-	border-left:1px solid #ffe06a;
+	border-right:1px solid #888;
+	border-left:1px solid #e0e0e0;
 }
 
 #tsg2011-top-menu li {
@@ -153,8 +153,8 @@ address {
 }
 
 #tsg2011-top-menu li a {
-	border-right: 1px solid #ffe06a;
-	border-left: 1px solid #886d00;
+	border-right: 1px solid #e0e0e0;
+	border-left: 1px solid #888;
 }
 
 .widget .menu {
@@ -193,7 +193,7 @@ button,
 input[type="reset"],
 input[type="button"],
 input[type="submit"] {
-	background: url("images/btn.png") repeat-x scroll left top #ffe06a;
+	background: url("images/btn.png") repeat-x scroll left top #e0e0e0;
 }
 
 input[type="text"], 
@@ -245,8 +245,8 @@ ul.bjqs-controls li a.bjqs-next {
 
 blockquote,
 q {
-	border-right:10px solid #0e419c;
-	border-left:10px solid #0e419c;
+	border-right:10px solid #287cc1;
+	border-left:10px solid #287cc1;
 }
 
 blockquote:before,

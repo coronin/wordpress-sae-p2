@@ -68,7 +68,7 @@
     'height'                 => 90,
     'flex-height'            => false,
     'flex-width'             => false,
-    'default-text-color'     => 'caa201',
+    'default-text-color'     => 'cfaa00',
     'header-text'            => false,
     'uploads'                => true,
     'wp-head-callback'       => '',
