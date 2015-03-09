@@ -3,7 +3,7 @@
 function optionsframework_option_name() {
 
 	// This gets the theme name from the stylesheet
-	$themename = 'tsg';
+	$themename = 'tsi';
 	$optionsframework_settings = get_option( 'optionsframework' );
 	$optionsframework_settings['id'] = $themename;
 	update_option( 'optionsframework', $optionsframework_settings );

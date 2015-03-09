@@ -38,7 +38,7 @@ final class WP_Theme implements ArrayAccess {
 	 */
 	private static $default_themes = array(
 		'p2' => 'P2 for WordPress',
-		'tsg' => 'TAN School of Genetics',
+		'tsi' => 'TSI Theme by Liang',
 	);
 
 	/**

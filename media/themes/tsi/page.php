@@ -6,7 +6,7 @@
   $c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
-    $c->set($cc, 1);
+    $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
 ?>

@@ -13,7 +13,7 @@
   $c = new SaeCounter();
   $cc = 'cAll';
   if ( $c->create($cc) ) {
-    $c->set($cc, 1);
+    $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
 ?>

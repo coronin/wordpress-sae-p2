@@ -10,7 +10,7 @@ get_header(); ?>
   $c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
-    $c->set($cc, 1);
+    $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
 ?> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
