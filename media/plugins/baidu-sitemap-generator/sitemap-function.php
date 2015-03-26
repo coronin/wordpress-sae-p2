@@ -30,7 +30,7 @@ if (!function_exists('file_get_contents')) {
 			user_error('file_get_contents() failed to open stream: No such file or directory', E_USER_WARNING);
 			return false;
 		}
-		
+
 		clearstatcache();
 		if ($fsize = @filesize($filename)) {
 			$data = fread($fh, $fsize);
@@ -40,7 +40,7 @@ if (!function_exists('file_get_contents')) {
 				$data .= fread($fh, 8192);
 			}
 		}
-		
+
 		fclose($fh);
 		return $data;
 	}
@@ -48,20 +48,20 @@ if (!function_exists('file_get_contents')) {
 
 
 if(!function_exists('file_put_contents')) {
-	
+
 	if (!defined('FILE_USE_INCLUDE_PATH')) {
 		define('FILE_USE_INCLUDE_PATH', 1);
 	}
-	
+
 	if (!defined('LOCK_EX')) {
 		define('LOCK_EX', 2);
 	}
-	
+
 	if (!defined('FILE_APPEND')) {
 		define('FILE_APPEND', 8);
 	}
-	
-	
+
+
 	/**
 	 * Replace file_put_contents()
 	 *
@@ -79,28 +79,28 @@ if(!function_exists('file_put_contents')) {
 		if (is_array($content)) {
 			$content = implode('', $content);
 		}
-		
+
 		// If we don't have a string, throw an error
 		if (!is_scalar($content)) {
 			user_error('file_put_contents() The 2nd parameter should be either a string or an array',E_USER_WARNING);
 			return false;
 		}
-		
+
 		// Get the length of data to write
 		$length = strlen($content);
-		
+
 		// Check what mode we are using
 		$mode = ($flags & FILE_APPEND)?'a':'wb';
-		
+
 		// Check if we're using the include path
 		$use_inc_path = ($flags & FILE_USE_INCLUDE_PATH)?true:false;
-		
+
 		// Open the file for writing
 		if (($fh = @fopen($filename, $mode, $use_inc_path)) === false) {
 			user_error('file_put_contents() failed to open stream: Permission denied',E_USER_WARNING);
 			return false;
 		}
-		
+
 		// Attempt to get an exclusive lock
 		$use_lock = ($flags & LOCK_EX) ? true : false ;
 		if ($use_lock === true) {
@@ -108,7 +108,7 @@ if(!function_exists('file_put_contents')) {
 				return false;
 			}
 		}
-		
+
 		// Write to the file
 		$bytes = 0;
 		if (($bytes = @fwrite($fh, $content)) === false) {
@@ -116,21 +116,21 @@ if(!function_exists('file_put_contents')) {
 			user_error($errormsg, E_USER_WARNING);
 			return false;
 		}
-		
+
 		// Close the handle
 		@fclose($fh);
-		
+
 		// Check all the data was written
 		if ($bytes != $length) {
 			$errormsg = sprintf('file_put_contents() Only %d of %d bytes written, possibly out of free disk space.',$bytes,$length);
 			user_error($errormsg, E_USER_WARNING);
 			return false;
 		}
-		
+
 		// Return length
 		return $bytes;
 	}
-	
+
 }
 #endregion
 
@@ -141,8 +141,9 @@ if(!function_exists('file_put_contents')) {
 */
 if (!function_exists('LCZ_GetHomePath')) {
 function LCZ_GetHomePath() {
-	
-	if(LCZ_IS_SAE()){ return "saestor://wordpress/"; } ## SAE环境
+
+	if(LCZ_IS_SAE()){ return "saestor://files/"; } ## SAE环境
+	#if(LCZ_IS_SAE()){ return "saestor://wordpress/"; } ## SAE环境
 	#if(LCZ_IS_SAE()){ return "saekv://wordpress/"; } ## SAE环境, saestor无法用的，可改为saekv, 两个SAE_XXX.php的文件也需同时修改
 	$res="";
 	//Check if we are in the admin area -> get_home_path() is avaiable
@@ -253,10 +254,10 @@ function LCZ_GetPluginPath() {
  */
 if (!function_exists('LCZ_GetPluginUrl')) {
 function LCZ_GetPluginUrl() {
-	
+
 	//Try to use WP API if possible, introduced in WP 2.6
 	if (function_exists('plugins_url')) return trailingslashit(plugins_url(basename(dirname(__FILE__))));
-	
+
 	//Try to find manually... can't work if wp-content was renamed or is redirected
 	$path = dirname(__FILE__);
 	$path = str_replace("\\","/",$path);
@@ -273,7 +274,7 @@ function LCZ_GetPluginUrl() {
 */
 function load_baidu_language() {
 	//if(!$this->_initiated) {
-		
+
 		//Loading language file...
 		//load_plugin_textdomain('baidu_sitemap');
 		//Hmm, doesn't work if the plugin file has its own directory.
@@ -289,7 +290,7 @@ function LCZ_sidebar() {
 	    global $lc_author, $lc_authorurl, $lc_plugin, $lc_pluginversion, $lc_pluginurl;
 		?>
 		<style type="text/css">
-				
+
 		a.lc_button {
 			padding:4px;
 			display:block;
@@ -299,7 +300,7 @@ function LCZ_sidebar() {
 			text-decoration:none;
 			border:none;
 		}
-		
+
 		a.lc_button:hover {
 			border-bottom-width:1px;
 		}
@@ -307,42 +308,42 @@ function LCZ_sidebar() {
 		a.lc_donatePayPal {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/icon-paypal.gif);
 		}
-		
+
 		a.lc_donateFavorite {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/favorite_icon.png);
 		}
-		
+
 		a.lc_pluginHome {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/liucheng_name16.png);
 		}
-		
+
 		a.lc_pluginList {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/icon-email.gif);
 		}
-		
+
 		a.lc_pluginBugs {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/rss_icon.png);
 		}
-		
+
 		a.lc_resBaidu {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/baidu.png);
 		}
-		
+
 		a.lc_resRss {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/rss_icon.png);
 		}
-		
+
 		a.lc_resWordpress {
 			background-image:url(<?php echo LCZ_GetPluginUrl(); ?>img/wordpress_icon2.png);
 		}
-		
+
 		</style>
 
 		<div class="postbox-container" style="width:2%;">
 		</div>
 		<div class="postbox-container" style="width:21%;">
-			<div class="metabox-holder">	
-				<div class="meta-box-sortables">			
+			<div class="metabox-holder">
+				<div class="meta-box-sortables">
 
 	     <div id="lc_smres" class="postbox">
 			<h3 class="hndle"><span ><?php _e('About Baidu-Sitemap:','baidu_sitemap');?></span></h3>
@@ -405,7 +406,7 @@ function LCZ_rebuild_message() {
 					}else{
 							$diffMsg = __('Donot activate the Auto build the sitema options, you need build the XML file by yourself.','baidu_sitemap');
 					}
-					echo "<strong><p>$diffMsg</p></strong>";	
+					echo "<strong><p>$diffMsg</p></strong>";
 				}
 }
 function xml_file_exist() {
@@ -418,9 +419,9 @@ function xml_file_exist() {
 	_e('XML File Status','baidu_sitemap');
 	print '</h3>';
     if(file_exists($filename)){
-		//$filctime=date("Y-m-d H:i:s",filectime("$filename")); 
-		$filemtime=date("Y-m-d H:i:s",filemtime("$filename")); 
-		//$fileatime=date("Y-m-d H:i:s",fileatime("$filename")); 
+		//$filctime=date("Y-m-d H:i:s",filectime("$filename"));
+		$filemtime=date("Y-m-d H:i:s",filemtime("$filename"));
+		//$fileatime=date("Y-m-d H:i:s",fileatime("$filename"));
 		echo "<p>";
 		#_e('When you change Path of the XML file(Better not). please use 301 redirect to the new XML-file, or setting as 404 page.','baidu_sitemap');
 		echo "</p>";
@@ -435,7 +436,7 @@ function xml_file_exist() {
 }
 function xml_annotate() {
 	global $lc_author, $lc_authorurl, $lc_plugin, $lc_pluginversion, $lc_pluginurl, $wp_version;
-	$blogtime = current_time('mysql'); 
+	$blogtime = current_time('mysql');
 	list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = split( '([^0-9])', $blogtime );
 	$xml_author_annotate = '<!-- baidu-sitemap-generator-version="'.$lc_pluginversion.'" --><!-- generated-on="'."$today_year-$today_month-$today_day $hour:$minute:$second".'" -->';
     return $xml_author_annotate;
