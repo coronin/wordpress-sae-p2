@@ -122,7 +122,7 @@ $category_base       = get_option( 'category_base' );
 $tag_base            = get_option( 'tag_base' );
 $update_required     = false;
 
-if ( $iis7_permalinks ) {
+/*if ( $iis7_permalinks ) {
 	if ( ( ! file_exists($home_path . 'web.config') && win_is_writable($home_path) ) || win_is_writable($home_path . 'web.config') )
 		$writable = true;
 	else
@@ -138,7 +138,8 @@ if ( $iis7_permalinks ) {
 		$new_rules       = array_filter( explode( "\n", $wp_rewrite->mod_rewrite_rules() ) );
 		$update_required = ( $new_rules !== $existing_rules );
 	}
-}
+}*/
+$writable = true;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 if ( $wp_rewrite->using_index_permalinks() )
 	$usingpi = true;
@@ -151,6 +152,7 @@ require( ABSPATH . 'wp-admin/admin-header.php' );
 
 if ( ! empty( $_GET['settings-updated'] ) ) : ?>
 <div id="message" class="updated"><p><?php
+/*
 if ( ! is_multisite() ) {
 	if ( $iis7_permalinks ) {
 		if ( $permalink_structure && ! $usingpi && ! $writable )
@@ -170,7 +172,9 @@ if ( ! is_multisite() ) {
 	}
 } else {
 	_e('Permalink structure updated.');
-}
+}*/ 
+_e('Permalink structure updated.');
+// for SAE, modified by Gimhoy (blog.gimhoy.com) 
 ?>
 </p></div>
 <?php endif; ?>
@@ -254,7 +258,7 @@ printf( __('If you like, you may enter custom structures for your category and t
 
 <?php submit_button(); ?>
   </form>
-<?php if ( !is_multisite() ) { ?>
+<?php if ( false && !is_multisite() ) {   // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
 <?php if ( $iis7_permalinks ) :
 	if ( isset($_POST['submit']) && $permalink_structure && ! $usingpi && ! $writable ) :
 		if ( file_exists($home_path . 'web.config') ) : ?>

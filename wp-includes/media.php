@@ -4,6 +4,7 @@
  *
  * @package WordPress
  * @subpackage Media
+ * @modified by Gimhoy (blog.gimhoy.com)
  */
 
 /**

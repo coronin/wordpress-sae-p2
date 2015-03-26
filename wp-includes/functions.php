@@ -3,6 +3,8 @@
  * Main WordPress API
  *
  * @package WordPress
+ *
+ * @modified by Gimhoy (blog.gimhoy.com)
  */
 
 require( ABSPATH . WPINC . '/option.php' );
@@ -570,7 +572,8 @@ function do_enclose( $content, $post_ID ) {
  * @return bool|string False on failure and string of headers if HEAD request.
  */
 function wp_get_http( $url, $file_path = false, $red = 1 ) {
-	@set_time_limit( 60 );
+	// @set_time_limit( 60 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+
 
 	if ( $red > 5 )
 		return false;
@@ -1467,7 +1470,12 @@ function wp_get_original_referer() {
  */
 function wp_mkdir_p( $target ) {
 	$wrapper = null;
+	if ( substr($target, 0, 10) == 'saestor://' ) {
+		return true;
+	}  
+	$target = str_replace( '//', '/', $target );	// for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
+	/*
 	// Strip the protocol.
 	if( wp_is_stream( $target ) ) {
 		list( $wrapper, $target ) = explode( '://', $target, 2 );
@@ -1480,6 +1488,7 @@ function wp_mkdir_p( $target ) {
 	if( $wrapper !== null ) {
 		$target = $wrapper . '://' . $target;
 	}
+	*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 	/*
 	 * Safe mode fails with a trailing slash under certain PHP versions.
@@ -1787,6 +1796,10 @@ function wp_upload_dir( $time = null ) {
 			$url = trailingslashit( $siteurl ) . 'files';
 		}
 	}
+
+	if(!defined(SAE_STORAGE)) define('SAE_STORAGE', 'wordpress');
+	$dir = 'saestor://'.SAE_STORAGE.SAE_DIR;
+	$url = 'http://' . $_SERVER['HTTP_APPNAME'] . '-'.SAE_STORAGE.'.stor.sinaapp.com'.SAE_DIR;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 	$basedir = $dir;
 	$baseurl = $url;

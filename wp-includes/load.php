@@ -479,6 +479,7 @@ function wp_not_installed() {
 		require( ABSPATH . WPINC . '/formatting.php' );
 
 		$link = wp_guess_url() . '/wp-admin/install.php';
+		$link = 'http://'.$_SERVER["HTTP_HOST"].'/wp-admin/install.php?'.$_SERVER['QUERY_STRING'];  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 		wp_redirect( $link );
 		die();

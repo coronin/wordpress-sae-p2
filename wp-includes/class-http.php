@@ -10,6 +10,7 @@
  * @package WordPress
  * @subpackage HTTP
  * @since 2.7.0
+ * @modified by Gimhoy (blog.gimhoy.com)
  */
 
 /**
@@ -322,7 +323,8 @@ class WP_Http {
 			if ( !call_user_func( array( $class, 'test' ), $args, $url ) )
 				continue;
 
-			return $class;
+			return 'WP_Http_Curl';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+
 		}
 
 		return false;
@@ -1470,6 +1472,7 @@ class WP_Http_Curl {
 			}
 			curl_setopt( $handle, CURLOPT_HTTPHEADER, $headers );
 		}
+		curl_setopt( $handle, CURLINFO_HEADER_OUT, true );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 		if ( $r['httpversion'] == '1.0' )
 			curl_setopt( $handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );

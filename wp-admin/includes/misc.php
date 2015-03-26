@@ -154,7 +154,9 @@ function insert_with_markers( $filename, $marker, $insertion ) {
  *
  * @since 1.5.0
  */
-function save_mod_rewrite_rules() {
+function save_mod_rewrite_rules() {	
+	return;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+
 	if ( is_multisite() )
 		return;
 
