@@ -122,7 +122,7 @@ $category_base       = get_option( 'category_base' );
 $tag_base            = get_option( 'tag_base' );
 $update_required     = false;
 
-/*if ( $iis7_permalinks ) {
+if ( $iis7_permalinks ) {
 	if ( ( ! file_exists($home_path . 'web.config') && win_is_writable($home_path) ) || win_is_writable($home_path . 'web.config') )
 		$writable = true;
 	else
@@ -138,8 +138,7 @@ $update_required     = false;
 		$new_rules       = array_filter( explode( "\n", $wp_rewrite->mod_rewrite_rules() ) );
 		$update_required = ( $new_rules !== $existing_rules );
 	}
-}*/
-$writable = true;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+}
 
 if ( $wp_rewrite->using_index_permalinks() )
 	$usingpi = true;
@@ -152,7 +151,6 @@ require( ABSPATH . 'wp-admin/admin-header.php' );
 
 if ( ! empty( $_GET['settings-updated'] ) ) : ?>
 <div id="message" class="updated"><p><?php
-/*
 if ( ! is_multisite() ) {
 	if ( $iis7_permalinks ) {
 		if ( $permalink_structure && ! $usingpi && ! $writable )
@@ -172,9 +170,7 @@ if ( ! is_multisite() ) {
 	}
 } else {
 	_e('Permalink structure updated.');
-}*/ 
-_e('Permalink structure updated.');
-// for SAE, modified by Gimhoy (blog.gimhoy.com) 
+}
 ?>
 </p></div>
 <?php endif; ?>
@@ -238,14 +234,9 @@ $structures = array(
 </table>
 
 <h3 class="title"><?php _e('Optional'); ?></h3>
-<?php
-$suffix = $prefix;
-if ( $suffix )
-	$suffix = ltrim( $suffix, '/' ) . '/';
-?>
 <p><?php
-/* translators: %s is a placeholder that must come at the start of the URL path. */
-printf( __('If you like, you may enter custom structures for your category and tag <abbr title="Universal Resource Locator">URL</abbr>s here. For example, using <code>topics</code> as your category base would make your category links like <code>http://example.org/%stopics/uncategorized/</code>. If you leave these blank the defaults will be used.'), $suffix ); ?></p>
+/* translators: %s is a placeholder that must come at the start of the URL. */
+printf( __('If you like, you may enter custom structures for your category and tag <abbr title="Universal Resource Locator">URL</abbr>s here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorized/</code>. If you leave these blank the defaults will be used.'), get_option('home') . $blog_prefix . $prefix ); ?></p>
 
 <table class="form-table">
 	<tr>
@@ -263,7 +254,7 @@ printf( __('If you like, you may enter custom structures for your category and t
 
 <?php submit_button(); ?>
   </form>
-<?php if ( false && !is_multisite() ) {   // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
+<?php if ( !is_multisite() ) { ?>
 <?php if ( $iis7_permalinks ) :
 	if ( isset($_POST['submit']) && $permalink_structure && ! $usingpi && ! $writable ) :
 		if ( file_exists($home_path . 'web.config') ) : ?>

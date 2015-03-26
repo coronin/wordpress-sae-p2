@@ -118,7 +118,7 @@ function display_setup_form( $error = null ) {
 				echo '<input name="user_name" type="hidden" value="admin" />';
 			} else {
 				?><input name="user_name" type="text" id="user_login" size="25" value="<?php echo esc_attr( sanitize_user( $user_name, true ) ); ?>" />
-				<p><?php _e( 'Usernames can have only alphanumeric characters, spaces, underscores, hyphens, periods and the @ symbol.' ); ?></p>
+				<p><?php _e( 'Usernames can have only alphanumeric characters, spaces, underscores, hyphens, periods, and the @ symbol.' ); ?></p>
 			<?php
 			} ?>
 			</td>
@@ -133,7 +133,7 @@ function display_setup_form( $error = null ) {
 				<input name="admin_password" type="password" id="pass1" size="25" value="" />
 				<p><input name="admin_password2" type="password" id="pass2" size="25" value="" /></p>
 				<div id="pass-strength-result"><?php _e('Strength indicator'); ?></div>
-				<p><?php _e('Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ &amp; ).'); ?></p>
+				<p><?php echo wp_get_password_hint(); ?></p>
 			</td>
 		</tr>
 		<?php endif; ?>
@@ -217,22 +217,7 @@ switch($step) {
 
 <h1><?php _e( 'Information needed' ); ?></h1>
 <p><?php _e( 'Please provide the following information. Don&#8217;t worry, you can always change these settings later.' ); ?></p>
-<p style="font-weight:bolder; color:red;"><?php @printf( file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=install_announce') ); ?></p>  <?php // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
-<script type="text/javascript">
-    // 提示用户是否要安装在当前版本下。
-    (function(){
-        var loc = window.location;
-        var url = loc.hostname;
-        var ver=url.match(/(\d+.?\.)(.*.sinaapp.com)/i);
-        var ret = false;
-        if(ver){
-            ret = confirm('确定要将程序安装至“'+url+'”地址吗，如果想要安装的地址为“'+ver[2]+'”，请点击确定，程序将自动切换安装地址，如果不是，请选择否。');
-            if(ret==true){
-                window.location.href = loc.protocol+'//'+ver[2]+loc.pathname;
-            }
-        }
-    })();
-</script>
+
 <?php
 		display_setup_form();
 		break;

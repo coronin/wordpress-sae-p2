@@ -40,7 +40,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 		$tabs['dashboard'] = __( 'Search' );
 		if ( 'search' == $tab )
 			$tabs['search']	= __( 'Search Results' );
-		/* $tabs['upload'] = __( 'Upload' ); */ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		$tabs['upload'] = __( 'Upload' );
 		$tabs['featured'] = _x( 'Featured', 'themes' );
 		//$tabs['popular']  = _x( 'Popular', 'themes' );
 		$tabs['new']      = _x( 'Latest', 'themes' );
@@ -106,7 +106,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 		/**
 		 * Filter API request arguments for each Install Themes screen tab.
 		 *
-		 * The dynamic portion of the hook name, $tab, refers to the theme install
+		 * The dynamic portion of the hook name, `$tab`, refers to the theme install
 		 * tabs. Default tabs are 'dashboard', 'search', 'upload', 'featured',
 		 * 'new', and 'updated'.
 		 *

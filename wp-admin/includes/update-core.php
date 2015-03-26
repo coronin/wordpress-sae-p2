@@ -659,6 +659,41 @@ $_old_files = array(
 'wp-includes/js/tinymce/plugins/paste/editor_plugin_src.js',
 'wp-includes/js/tinymce/plugins/paste/pastetext.htm',
 'wp-includes/js/tinymce/langs/wp-langs.php',
+// 4.1
+'wp-includes/js/jquery/ui/jquery.ui.accordion.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.autocomplete.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.button.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.core.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.datepicker.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.dialog.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.draggable.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.droppable.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-blind.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-bounce.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-clip.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-drop.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-explode.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-fade.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-fold.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-highlight.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-pulsate.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-scale.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-shake.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-slide.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect-transfer.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.effect.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.menu.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.mouse.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.position.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.progressbar.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.resizable.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.selectable.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.slider.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.sortable.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.spinner.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.tabs.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.tooltip.min.js',
+'wp-includes/js/jquery/ui/jquery.ui.widget.min.js',
 );
 
 /**
@@ -682,14 +717,12 @@ global $_new_bundled_files;
 
 $_new_bundled_files = array(
 	'plugins/akismet/'       => '2.0',
-	'themes/p2/'      => '1.5.5',
-	'themes/tsi/'   => '2.0.1',
-    'plugins/wp-mail-smtp/' => '0.9.5',
-    'plugins/restricted-site-access/' => '5.1',
-    'plugins/baidu-sitemap-generator/' => '1.6.5',
-    'plugins/contact-form-7/' => '4.1',
-    'plugins/contact-form-7-to-database-extension/' => '2.8.26',
-    'plugins/really-simple-captcha/' => '1.8.0.1',
+	'themes/twentyten/'      => '3.0',
+	'themes/twentyeleven/'   => '3.2',
+	'themes/twentytwelve/'   => '3.5',
+	'themes/twentythirteen/' => '3.6',
+	'themes/twentyfourteen/' => '3.8',
+	'themes/twentyfifteen/'  => '4.1',
 );
 
 /**
@@ -741,7 +774,7 @@ $_new_bundled_files = array(
 function update_core($from, $to) {
 	global $wp_filesystem, $_old_files, $_new_bundled_files, $wpdb;
 
-	// @set_time_limit( 300 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	@set_time_limit( 300 );
 
 	/**
 	 * Filter feedback messages displayed during the core update process.

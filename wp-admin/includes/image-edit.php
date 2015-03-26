@@ -6,6 +6,10 @@
  * @subpackage Administration
  */
 
+/**
+ * @param int $post_id
+ * @param bool|object $msg
+ */
 function wp_image_editor($post_id, $msg = false) {
 	$nonce = wp_create_nonce("image_editor-$post_id");
 	$meta = wp_get_attachment_metadata($post_id);
@@ -310,18 +314,16 @@ function wp_save_image_file( $filename, $image, $mime_type, $post_id ) {
 
 		if ( null !== $saved )
 			return $saved;
-		
-		$tmpfile = tempnam(SAE_TMP_PATH, 'WPIMG');  // for SAE, modified by Gimhoy (blog.gimhoy.com) 			
 
 		switch ( $mime_type ) {
 			case 'image/jpeg':
 
 				/** This filter is documented in wp-includes/class-wp-image-editor.php */
-				return imagejpeg( $image, $tmpfile, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
+				return imagejpeg( $image, $filename, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
 			case 'image/png':
-				return imagepng($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+				return imagepng( $image, $filename );
 			case 'image/gif':
-				return imagegif($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+				return imagegif( $image, $filename );
 			default:
 				return false;
 		}
@@ -401,9 +403,11 @@ function _crop_image_resource($img, $x, $y, $w, $h) {
 /**
  * Performs group of changes on Editor specified.
  *
- * @param WP_Image_Editor $image
- * @param type $changes
- * @return WP_Image_Editor
+ * @since 2.9.0
+ *
+ * @param WP_Image_Editor $image   {@see WP_Image_Editor} instance.
+ * @param array           $changes Array of change operations.
+ * @return WP_Image_Editor {@see WP_Image_Editor} instance with changes applied.
  */
 function image_edit_apply_changes( $image, $changes ) {
 	if ( is_resource( $image ) )
@@ -556,6 +560,10 @@ function stream_preview_image( $post_id ) {
 	return wp_stream_image( $img, $post->post_mime_type, $post_id );
 }
 
+/**
+ * @param int $post_id
+ * @return stdClass
+ */
 function wp_restore_image($post_id) {
 	$meta = wp_get_attachment_metadata($post_id);
 	$file = get_attached_file($post_id);

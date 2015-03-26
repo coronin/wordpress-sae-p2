@@ -56,7 +56,6 @@ $parent_file = 'tools.php';
 <?php if ( ! empty( $_GET['invalid'] ) ) : ?>
 	<div class="error"><p><strong><?php _e('ERROR:')?></strong> <?php printf( __('The <strong>%s</strong> importer is invalid or is not installed.'), esc_html( $_GET['invalid'] ) ); ?></p></div>
 <?php endif; ?>
-<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导入可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将数据库导入。</p>   <?php // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?>
 <p><?php _e('If you have posts or comments in another system, WordPress can import those into this site. To get started, choose a system to import from below:'); ?></p>
 
 <?php
@@ -121,10 +120,9 @@ if ( empty( $importers ) ) {
 </table>
 <?php
 }
-/*
+
 if ( current_user_can('install_plugins') )
 	echo '<p>' . sprintf( __('If the importer you need is not listed, <a href="%s">search the plugin directory</a> to see if an importer is available.'), esc_url( network_admin_url( 'plugin-install.php?tab=search&type=tag&s=importer' ) ) ) . '</p>';
-*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 ?>
 
 </div>

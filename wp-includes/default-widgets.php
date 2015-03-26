@@ -287,7 +287,7 @@ class WP_Widget_Archives extends WP_Widget {
 		if ( $d ) {
 ?>
 		<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'>
-			<option value=""><?php echo esc_attr( __( 'Select Month' ) ); ?></option>
+			<option value=""><?php esc_attr_e( 'Select Month' ); ?></option>
 
 			<?php
 			/**
@@ -394,14 +394,12 @@ class WP_Widget_Meta extends WP_Widget {
 			 * @since 3.6.0
 			 *
 			 * @param string $title_text Default title text for the WordPress.org link.
-
+			 */
 			echo apply_filters( 'widget_meta_poweredby', sprintf( '<li><a href="%s" title="%s">%s</a></li>',
 				esc_url( __( 'https://wordpress.org/' ) ),
 				esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.' ),
 				_x( 'WordPress.org', 'meta widget link text' )
 			) );
-
-			 */
 
 			wp_meta();
 ?>
@@ -851,7 +849,7 @@ class WP_Widget_Recent_Comments extends WP_Widget {
 		 *
 		 * @since 3.4.0
 		 *
-		 * @see get_comments()
+		 * @see WP_Comment_Query::query() for information on accepted arguments.
 		 *
 		 * @param array $comment_args An array of arguments used to retrieve the recent comments.
 		 */
@@ -1346,7 +1344,7 @@ class WP_Widget_Tag_Cloud extends WP_Widget {
 		$nav_menu = isset( $instance['nav_menu'] ) ? $instance['nav_menu'] : '';
 
 		// Get menus
-		$menus = wp_get_nav_menus( array( 'orderby' => 'name' ) );
+		$menus = wp_get_nav_menus();
 
 		// If no menus exists, direct the user to go and create some.
 		if ( !$menus ) {

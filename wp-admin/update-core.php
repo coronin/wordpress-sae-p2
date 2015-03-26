@@ -47,11 +47,9 @@ function list_core_update( $update ) {
 		$download = __('Download nightly build');
 	} else {
 		if ( $current ) {
-			$message = sprintf(__('您正在使用最新版本的 WordPress。您无需升级。尽管如此，您还是可以下载 %s 的安装包手动重新安装'),$version_string);
-			/*
+			$message = sprintf( __( 'If you need to re-install version %s, you can do so here or download the package and re-install manually:' ), $version_string );
 			$submit = __('Re-install Now');
 			$form_action = 'update-core.php?action=do-core-reinstall';
-			*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 		} else {
 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
@@ -66,7 +64,7 @@ function list_core_update( $update ) {
 			elseif ( !$mysql_compat )
 				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
 			else
-				$message = 	sprintf(__('您可以下载 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">WordPress %2$s 版本</a> 的安装包手动安装：'), $update->current, $version_string);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+				$message = 	sprintf(__('You can update to <a href="http://codex.wordpress.org/Version_%1$s">WordPress %2$s</a> automatically or download the package and install it manually:'), $update->current, $version_string);
 			if ( !$mysql_compat || !$php_compat )
 				$show_buttons = false;
 		}
@@ -83,10 +81,10 @@ function list_core_update( $update ) {
 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
 	if ( $show_buttons ) {
 		if ( $first_pass ) {
-			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+			submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false );
 			$first_pass = false;
 		} else {
-			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+			submit_button( $submit, 'button', 'upgrade', false );
 		}
 		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
 	}
@@ -221,27 +219,32 @@ function list_plugin_updates() {
 		$core_update_version = $core_updates[0]->current;
 	?>
 <h3><?php _e( 'Plugins' ); ?></h3>
-<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后通过SVN手动升级。' ); // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?></p>
+<p><?php _e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' ); ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
+<p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
 <table class="widefat" id="update-plugins-table">
 	<thead>
 	<tr>
-		<th scope="col" class="manage-column check-column"></th>
-		<th scope="col" class="manage-column"></th>
+		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all" /></th>
+		<th scope="col" class="manage-column"><label for="plugins-select-all"><?php _e('Select All'); ?></label></th>
 	</tr>
 	</thead>
 
 	<tfoot>
 	<tr>
-		<th scope="col" class="manage-column check-column"></th>
-		<th scope="col" class="manage-column"></th>
+		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all-2" /></th>
+		<th scope="col" class="manage-column"><label for="plugins-select-all-2"><?php _e('Select All'); ?></label></th>
 	</tr>
 	</tfoot>
 	<tbody class="plugins">
 <?php
 	foreach ( (array) $plugins as $plugin_file => $plugin_data) {
 		$info = plugins_api('plugin_information', array('slug' => $plugin_data->update->slug ));
+		if ( is_wp_error( $info ) ) {
+			continue;
+		}
+
 		// Get plugin compat for running version of WordPress.
 		if ( isset($info->tested) && version_compare($info->tested, $cur_wp_version, '>=') ) {
 			$compat = '<br />' . sprintf(__('Compatibility with WordPress %1$s: 100%% (according to its author)'), $cur_wp_version);
@@ -280,6 +283,7 @@ function list_plugin_updates() {
 ?>
 	</tbody>
 </table>
+<p><input id="upgrade-plugins-2" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
 </form>
 <?php
 }
@@ -377,19 +381,23 @@ function do_core_upgrade( $reinstall = false ) {
 	if ( !$update )
 		return;
 
+	// Allow relaxed file ownership writes for User-initiated upgrades when the API specifies
+	// that it's safe to do so. This only happens when there are no new files to create.
+	$allow_relaxed_file_ownership = ! $reinstall && isset( $update->new_files ) && ! $update->new_files;
+
 ?>
 	<div class="wrap">
 	<h2><?php _e('Update WordPress'); ?></h2>
 <?php
 
-	if ( false === ( $credentials = request_filesystem_credentials( $url, '', false, ABSPATH ) ) ) {
+	if ( false === ( $credentials = request_filesystem_credentials( $url, '', false, ABSPATH, array(), $allow_relaxed_file_ownership ) ) ) {
 		echo '</div>';
 		return;
 	}
 
-	if ( ! WP_Filesystem( $credentials, ABSPATH ) ) {
+	if ( ! WP_Filesystem( $credentials, ABSPATH, $allow_relaxed_file_ownership ) ) {
 		// Failed to connect, Error and request again
-		request_filesystem_credentials( $url, '', true, ABSPATH );
+		request_filesystem_credentials( $url, '', true, ABSPATH, array(), $allow_relaxed_file_ownership );
 		echo '</div>';
 		return;
 	}
@@ -407,7 +415,9 @@ function do_core_upgrade( $reinstall = false ) {
 	add_filter( 'update_feedback', 'show_message' );
 
 	$upgrader = new Core_Upgrader();
-	$result = $upgrader->upgrade( $update );
+	$result = $upgrader->upgrade( $update, array(
+		'allow_relaxed_file_ownership' => $allow_relaxed_file_ownership
+	) );
 
 	if ( is_wp_error($result) ) {
 		show_message($result);
@@ -639,7 +649,7 @@ if ( 'upgrade-core' == $action ) {
 	/**
 	 * Fires for each custom update action on the WordPress Updates screen.
 	 *
-	 * The dynamic portion of the hook name, $action, refers to the
+	 * The dynamic portion of the hook name, `$action`, refers to the
 	 * passed update action. The hook fires in lieu of all available
 	 * default update actions.
 	 *

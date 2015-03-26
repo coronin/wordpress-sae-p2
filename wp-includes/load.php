@@ -471,7 +471,7 @@ function wp_not_installed() {
 
 			wp_die( __( 'The site you have requested is not installed properly. Please contact the system administrator.' ) );
 		}
-	} elseif ( ! is_blog_installed() && false === strpos( $_SERVER['PHP_SELF'], 'install.php' ) && !defined( 'WP_INSTALLING' ) ) {
+	} elseif ( ! is_blog_installed() && ! defined( 'WP_INSTALLING' ) ) {
 		nocache_headers();
 
 		require( ABSPATH . WPINC . '/kses.php' );
@@ -479,7 +479,6 @@ function wp_not_installed() {
 		require( ABSPATH . WPINC . '/formatting.php' );
 
 		$link = wp_guess_url() . '/wp-admin/install.php';
-		$link = 'http://'.$_SERVER["HTTP_HOST"].'/wp-admin/install.php?'.$_SERVER['QUERY_STRING'];  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
 
 		wp_redirect( $link );
 		die();

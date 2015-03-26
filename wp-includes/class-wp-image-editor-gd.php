@@ -15,8 +15,10 @@
  * @uses WP_Image_Editor Extends class
  */
 class WP_Image_Editor_GD extends WP_Image_Editor {
-
-	protected $image = false; // GD Resource
+	/**
+	 * @var resource
+	 */
+	protected $image; // GD Resource
 
 	public function __destruct() {
 		if ( $this->image ) {
@@ -95,7 +97,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		 *                          Accepts an integer (bytes), or a shorthand string notation, such as '256M'.
 		 */
 		// Set artificially high because GD uses uncompressed images in memory
-		// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
 		$this->image = @imagecreatefromstring( file_get_contents( $this->file ) );
 
@@ -114,7 +116,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		$this->update_size( $size[0], $size[1] );
 		$this->mime_type = $size['mime'];
 
-		return true;
+		return $this->set_quality();
 	}
 
 	/**
@@ -253,7 +255,6 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-	 * @param string|int $src The source file or Attachment ID.
 	 * @param int $src_x The start x position to crop from.
 	 * @param int $src_y The start y position to crop from.
 	 * @param int $src_w The width to crop.
@@ -353,8 +354,8 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 * @since 3.5.0
 	 * @access public
 	 *
-	 * @param string $destfilename
-	 * @param string $mime_type
+	 * @param string|null $filename
+	 * @param string|null $mime_type
 	 * @return array|WP_Error {'path'=>string, 'file'=>string, 'width'=>int, 'height'=>int, 'mime-type'=>string}
 	 */
 	public function save( $filename = null, $mime_type = null ) {
@@ -368,6 +369,12 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		return $saved;
 	}
 
+	/**
+	 * @param resource $image
+	 * @param string|null $filename
+	 * @param string|null $mime_type
+	 * @return WP_Error|array
+	 */
 	protected function _save( $image, $filename = null, $mime_type = null ) {
 		list( $filename, $extension, $mime_type ) = $this->get_output_format( $filename, $mime_type );
 
@@ -394,13 +401,11 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
 		}
 
-		/*
 		// Set correct file permissions
 		$stat = stat( dirname( $filename ) );
 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
 		@ chmod( $filename, $perms );
-		*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
-		
+
 		/**
 		 * Filter the name of the saved image file.
 		 *
