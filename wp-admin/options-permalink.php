@@ -139,7 +139,7 @@ $update_required     = false;
 		$update_required = ( $new_rules !== $existing_rules );
 	}
 }*/
-$writable = true;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+$writable = true;  // for SAE
 
 if ( $wp_rewrite->using_index_permalinks() )
 	$usingpi = true;
@@ -172,9 +172,9 @@ if ( ! is_multisite() ) {
 	}
 } else {
 	_e('Permalink structure updated.');
-}*/ 
+}*/
 _e('Permalink structure updated.');
-// for SAE, modified by Gimhoy (blog.gimhoy.com) 
+// for SAE
 ?>
 </p></div>
 <?php endif; ?>
@@ -258,7 +258,7 @@ printf( __('If you like, you may enter custom structures for your category and t
 
 <?php submit_button(); ?>
   </form>
-<?php if ( false && !is_multisite() ) {   // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
+<?php if ( false && !is_multisite() ) {  // for SAE ?>
 <?php if ( $iis7_permalinks ) :
 	if ( isset($_POST['submit']) && $permalink_structure && ! $usingpi && ! $writable ) :
 		if ( file_exists($home_path . 'web.config') ) : ?>

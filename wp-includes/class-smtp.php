@@ -209,7 +209,7 @@ class SMTP
             $socket_context
         );
 		*/
-		$this->smtp_conn = fsockopen($host, $port, $errno, $errstr); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		$this->smtp_conn = fsockopen($host, $port, $errno, $errstr); // for SAE
 
         // Verify we connected properly
         if (empty($this->smtp_conn)) {
@@ -234,7 +234,7 @@ class SMTP
             /*$max = ini_get('max_execution_time');
             if ($max != 0 && $timeout > $max) { // Don't bother if unlimited
                 @set_time_limit($timeout);
-            } */// for SAE, modified by Gimhoy (blog.gimhoy.com) 
+            } */// for SAE
 
             stream_set_timeout($this->smtp_conn, $timeout, 0);
         }

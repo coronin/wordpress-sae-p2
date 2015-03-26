@@ -217,7 +217,6 @@ switch($step) {
 
 <h1><?php _e( 'Information needed' ); ?></h1>
 <p><?php _e( 'Please provide the following information. Don&#8217;t worry, you can always change these settings later.' ); ?></p>
-<p style="font-weight:bolder; color:red;"><?php @printf( file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=install_announce') ); ?></p>  <?php // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
 <script type="text/javascript">
     // 提示用户是否要安装在当前版本下。
     (function(){

@@ -828,7 +828,7 @@ function wp_ajax_get_tagcloud() {
 	if ( ! $tax ) {
 		wp_die( 0 );
 	}
-	
+
 	if ( ! current_user_can( $tax->cap->assign_terms ) ) {
 		wp_die( -1 );
 	}
@@ -2551,7 +2551,7 @@ function wp_ajax_get_revision_diffs() {
 		wp_send_json_error();
 
 	$return = array();
-	// @set_time_limit( 0 );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	// @set_time_limit( 0 );  // for SAE
 
 	foreach ( $_REQUEST['compare'] as $compare_key ) {
 		list( $compare_from, $compare_to ) = explode( ':', $compare_key ); // from:to
@@ -2793,7 +2793,7 @@ function wp_ajax_destroy_sessions() {
 		$message = __( 'You are now logged out everywhere else.' );
 	} else {
 		$sessions->destroy_all();
-		/* translators: 1: User's display name. */ 
+		/* translators: 1: User's display name. */
 		$message = sprintf( __( '%s has been logged out.' ), $user->display_name );
 	}
 

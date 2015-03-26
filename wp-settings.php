@@ -9,7 +9,6 @@
  *
  * @package WordPress
  *
- * @modified by Gimhoy (blog.gimhoy.com)
  */
 
 /**

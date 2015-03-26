@@ -129,7 +129,7 @@ if ( current_user_can( 'manage_options' ) ) {
 	 *
 	 * @param string 'WP_MAX_MEMORY_LIMIT' The maximum WordPress memory limit. Default 256M.
 	 */
-	// @ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	// @ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE
 
 }
 

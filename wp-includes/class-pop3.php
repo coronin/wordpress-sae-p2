@@ -57,14 +57,14 @@ class POP3 {
             settype($timeout,"integer");
             $this->TIMEOUT = $timeout;
            // if (!ini_get('safe_mode'))
-            //    set_time_limit($timeout); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+            //    set_time_limit($timeout); // for SAE
         }
         return true;
     }
 
     function update_timer () {
        // if (!ini_get('safe_mode'))
-         //   set_time_limit($this->TIMEOUT);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+         //   set_time_limit($this->TIMEOUT);  // for SAE
         return true;
     }
 

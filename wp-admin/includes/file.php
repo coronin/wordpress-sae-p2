@@ -346,7 +346,7 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 	$stat = stat( dirname( $new_file ));
 	$perms = $stat['mode'] & 0000666;
 	@ chmod( $new_file, $perms );
-	*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	*/ // for SAE
 
 
 	// Compute the URL.
@@ -520,7 +520,7 @@ function unzip_file($file, $to) {
 
 	// Unzip can use a lot of memory, but not this much hopefully
 	/** This filter is documented in wp-admin/admin.php */
-	//@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+	//@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );  // for SAE
 
 	$needed_dirs = array();
 	$to = trailingslashit($to);
@@ -928,7 +928,7 @@ function get_filesystem_method( $args = array(), $context = false, $allow_relaxe
 			}
 
 			if ( $wp_file_owner !== false && $wp_file_owner === $temp_file_owner ) {
-				// WordPress is creating files as the same owner as the WordPress files, 
+				// WordPress is creating files as the same owner as the WordPress files,
 				// this means it's safe to modify & create new files via PHP.
 				$method = 'direct';
 				$GLOBALS['_wp_filesystem_direct_method'] = 'file_owner';

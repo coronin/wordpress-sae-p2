@@ -49,7 +49,7 @@ function wp_initial_constants() {
 			$wp_limit_int *= 1024;
 
 		//if ( -1 != $current_limit && ( -1 == WP_MEMORY_LIMIT || $current_limit_int < $wp_limit_int ) )
-		//	@ini_set( 'memory_limit', WP_MEMORY_LIMIT ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		//	@ini_set( 'memory_limit', WP_MEMORY_LIMIT ); // for SAE
 
 	}
 

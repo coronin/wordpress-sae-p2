@@ -51,7 +51,7 @@ function list_core_update( $update ) {
 			/*
 			$submit = __('Re-install Now');
 			$form_action = 'update-core.php?action=do-core-reinstall';
-			*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+			*/ // for SAE
 		} else {
 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
@@ -66,7 +66,7 @@ function list_core_update( $update ) {
 			elseif ( !$mysql_compat )
 				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
 			else
-				$message = 	sprintf(__('您可以下载 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">WordPress %2$s 版本</a> 的安装包手动安装：'), $update->current, $version_string);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+				$message = 	sprintf(__('您可以下载 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">WordPress %2$s 版本</a> 的安装包手动安装：'), $update->current, $version_string);  // for SAE, modified by Gimhoy (blog.gimhoy.com)
 			if ( !$mysql_compat || !$php_compat )
 				$show_buttons = false;
 		}
@@ -83,10 +83,10 @@ function list_core_update( $update ) {
 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
 	if ( $show_buttons ) {
 		if ( $first_pass ) {
-			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE
 			$first_pass = false;
 		} else {
-			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE
 		}
 		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
 	}
@@ -221,7 +221,7 @@ function list_plugin_updates() {
 		$core_update_version = $core_updates[0]->current;
 	?>
 <h3><?php _e( 'Plugins' ); ?></h3>
-<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后通过SVN手动升级。' ); // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?></p>
+<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后通过SVN手动升级。' ); // for SAE ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
 

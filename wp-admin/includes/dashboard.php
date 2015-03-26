@@ -952,7 +952,7 @@ function wp_dashboard_primary() {
 			 *
 			 * @param string $title Title attribute for the widget's primary link.
 			 */
-			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress SAE - Gimhoy\'s Blog' ) ),
+			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress SAE by Gimhoy' ) ),
 			'items'        => 1,
 			'show_summary' => 1,
 			'show_author'  => 0,

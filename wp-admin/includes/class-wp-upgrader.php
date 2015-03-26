@@ -334,7 +334,7 @@ class WP_Upgrader {
 		$destination = $args['destination'];
 		$clear_destination = $args['clear_destination'];
 
-		// @set_time_limit( 300 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+		// @set_time_limit( 300 ); // for SAE
 
 
 		if ( empty( $source ) || empty( $destination ) ) {
