@@ -775,7 +775,8 @@ $_new_bundled_files = array(
 function update_core($from, $to) {
 	global $wp_filesystem, $_old_files, $_new_bundled_files, $wpdb;
 
-	@set_time_limit( 300 );
+	// @set_time_limit( 300 ); // for SAE
+
 
 	/**
 	 * Filter feedback messages displayed during the core update process.

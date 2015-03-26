@@ -934,7 +934,7 @@ function wp_dashboard_primary() {
 			 *
 			 * @param string $link The widget's primary link URL.
 			 */
-			'link' => apply_filters( 'dashboard_primary_link', __( 'http://wordpress.org/news/' ) ),
+			'link' => apply_filters( 'dashboard_primary_link', __( 'http://blog.gimhoy.com' ) ),
 
 			/**
 			 * Filter the primary feed URL for the 'WordPress News' dashboard widget.
@@ -943,7 +943,7 @@ function wp_dashboard_primary() {
 			 *
 			 * @param string $url The widget's primary feed URL.
 			 */
-			'url' => apply_filters( 'dashboard_primary_feed', __( 'http://wordpress.org/news/feed/' ) ),
+			'url' => apply_filters( 'dashboard_primary_feed', __( 'http://blog.gimhoy.com/feed/' ) ),
 
 			/**
 			 * Filter the primary link title for the 'WordPress News' dashboard widget.
@@ -952,7 +952,7 @@ function wp_dashboard_primary() {
 			 *
 			 * @param string $title Title attribute for the widget's primary link.
 			 */
-			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress Blog' ) ),
+			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress SAE by Gimhoy' ) ),
 			'items'        => 1,
 			'show_summary' => 1,
 			'show_author'  => 0,

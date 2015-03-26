@@ -322,7 +322,8 @@ class WP_Http {
 			if ( !call_user_func( array( $class, 'test' ), $args, $url ) )
 				continue;
 
-			return $class;
+			return 'WP_Http_Curl';  // for SAE
+
 		}
 
 		return false;
@@ -1470,6 +1471,7 @@ class WP_Http_Curl {
 			}
 			curl_setopt( $handle, CURLOPT_HTTPHEADER, $headers );
 		}
+		curl_setopt( $handle, CURLINFO_HEADER_OUT, true );  // for SAE
 
 		if ( $r['httpversion'] == '1.0' )
 			curl_setopt( $handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );

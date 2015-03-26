@@ -168,10 +168,10 @@ class WP_Themes_List_Table extends WP_List_Table {
 					. __( 'Live Preview' ) . '</a>';
 			}
 
-			if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
+			/* if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
 				$actions['delete'] = '<a class="submitdelete deletion" href="' . wp_nonce_url( 'themes.php?action=delete&amp;stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet )
 					. '" onclick="' . "return confirm( '" . esc_js( sprintf( __( "You are about to delete this theme '%s'\n  'Cancel' to stop, 'OK' to delete." ), $title ) )
-					. "' );" . '">' . __( 'Delete' ) . '</a>';
+					. "' );" . '">' . __( 'Delete' ) . '</a>'; */ // for SAE
 
 			/** This filter is documented in wp-admin/includes/class-wp-ms-themes-list-table.php */
 			$actions       = apply_filters( 'theme_action_links', $actions, $theme );
