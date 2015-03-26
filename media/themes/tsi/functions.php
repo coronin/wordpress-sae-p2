@@ -22,7 +22,7 @@
 
 // Load the D5 Framework Optios Page and Meta Page
     define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
-    function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 7); }
+    function tsg2011_ppp() { return array( 'post_type'=> 'post', 'ignore_sticky_posts' => 1, 'posts_per_page'  => 5); }
     require_once get_template_directory() . '/inc/options-framework.php';
 
 //  Tell WordPress for wp_title in order to modify document title content
