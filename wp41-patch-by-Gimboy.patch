@@ -1,0 +1,944 @@
+From 8163fdff8a03f7092c3aed72e44a697cb859c403 Mon Sep 17 00:00:00 2001
+From: Liang <coronin+m11x@gmail.com>
+Date: Thu, 26 Mar 2015 23:04:52 +0800
+Subject: [PATCH 1/2] wp41 patch by G
+
+---
+ wp-admin/admin-footer.php                          |  1 +
+ wp-admin/admin.php                                 |  3 ++-
+ wp-admin/export.php                                |  1 +
+ wp-admin/import.php                                |  3 +++
+ wp-admin/includes/ajax-actions.php                 |  2 +-
+ .../class-wp-plugin-install-list-table.php         |  2 +-
+ wp-admin/includes/class-wp-plugins-list-table.php  | 12 +++++------
+ .../includes/class-wp-theme-install-list-table.php |  2 +-
+ wp-admin/includes/class-wp-themes-list-table.php   |  4 ++--
+ wp-admin/includes/class-wp-upgrader.php            |  3 ++-
+ wp-admin/includes/dashboard.php                    |  6 +++---
+ wp-admin/includes/file.php                         |  5 ++++-
+ wp-admin/includes/image-edit.php                   |  8 +++++---
+ wp-admin/includes/misc.php                         |  4 +++-
+ wp-admin/includes/plugin-install.php               |  4 ++--
+ wp-admin/includes/update-core.php                  |  3 ++-
+ wp-admin/includes/update.php                       |  3 ++-
+ wp-admin/includes/upgrade.php                      | 22 ++++++++++----------
+ wp-admin/install.php                               | 16 +++++++++++++++
+ wp-admin/menu.php                                  |  3 ++-
+ wp-admin/options-permalink.php                     | 12 +++++++----
+ wp-admin/plugin-editor.php                         |  2 +-
+ wp-admin/plugins.php                               |  5 ++++-
+ wp-admin/theme-editor.php                          |  2 +-
+ wp-admin/themes.php                                |  3 ++-
+ wp-admin/update-core.php                           | 24 ++++++++++++----------
+ wp-includes/ID3/module.audio.mp3.php               |  3 ++-
+ wp-includes/capabilities.php                       |  4 ++++
+ wp-includes/class-http.php                         |  5 ++++-
+ wp-includes/class-pop3.php                         |  8 ++++----
+ wp-includes/class-smtp.php                         |  9 ++++++--
+ wp-includes/class-wp-image-editor-gd.php           |  5 ++++-
+ wp-includes/class-wp-image-editor-imagick.php      |  2 +-
+ wp-includes/comment.php                            |  3 ++-
+ wp-includes/default-constants.php                  |  5 +++--
+ wp-includes/deprecated.php                         |  3 ++-
+ wp-includes/functions.php                          | 15 +++++++++++++-
+ wp-includes/load.php                               |  1 +
+ wp-includes/media.php                              |  1 +
+ wp-includes/version.php                            |  2 ++
+ 40 files changed, 150 insertions(+), 71 deletions(-)
+
+diff --git a/wp-admin/admin-footer.php b/wp-admin/admin-footer.php
+index f7ef110..cc967e1 100644
+--- a/wp-admin/admin-footer.php
++++ b/wp-admin/admin-footer.php
+@@ -53,6 +53,7 @@ if ( !defined('ABSPATH') )
+ 		 */
+ 		echo apply_filters( 'update_footer', '' );
+ 		?>
++		由 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">Gimhoy</a> 移植至 SAE
+ 	</p>
+ 	<div class="clear"></div>
+ </div>
+diff --git a/wp-admin/admin.php b/wp-admin/admin.php
+index 793dc51..dab4343 100644
+--- a/wp-admin/admin.php
++++ b/wp-admin/admin.php
+@@ -129,7 +129,8 @@ if ( current_user_can( 'manage_options' ) ) {
+ 	 *
+ 	 * @param string 'WP_MAX_MEMORY_LIMIT' The maximum WordPress memory limit. Default 256M.
+ 	 */
+-	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
++	// @ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ }
+ 
+ /**
+diff --git a/wp-admin/export.php b/wp-admin/export.php
+index 78ccf13..f7a3bf2 100644
+--- a/wp-admin/export.php
++++ b/wp-admin/export.php
+@@ -150,6 +150,7 @@ function export_date_options( $post_type = 'post' ) {
+ <p><?php _e('When you click the button below WordPress will create an XML file for you to save to your computer.'); ?></p>
+ <p><?php _e('This format, which we call WordPress eXtended RSS or WXR, will contain your posts, pages, comments, custom fields, categories, and tags.'); ?></p>
+ <p><?php _e('Once you&#8217;ve saved the download file, you can use the Import function in another WordPress installation to import the content from this site.'); ?></p>
++<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导出可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将Mysql数据导出。</p>  <?php // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?>
+ 
+ <h3><?php _e( 'Choose what to export' ); ?></h3>
+ <form action="" method="get" id="export-filters">
+diff --git a/wp-admin/import.php b/wp-admin/import.php
+index e6f05e0..2ea073d 100644
+--- a/wp-admin/import.php
++++ b/wp-admin/import.php
+@@ -56,6 +56,7 @@ $parent_file = 'tools.php';
+ <?php if ( ! empty( $_GET['invalid'] ) ) : ?>
+ 	<div class="error"><p><strong><?php _e('ERROR:')?></strong> <?php printf( __('The <strong>%s</strong> importer is invalid or is not installed.'), esc_html( $_GET['invalid'] ) ); ?></p></div>
+ <?php endif; ?>
++<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导入可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将数据库导入。</p>   <?php // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?>
+ <p><?php _e('If you have posts or comments in another system, WordPress can import those into this site. To get started, choose a system to import from below:'); ?></p>
+ 
+ <?php
+@@ -121,8 +122,10 @@ if ( empty( $importers ) ) {
+ <?php
+ }
+ 
++/*
+ if ( current_user_can('install_plugins') )
+ 	echo '<p>' . sprintf( __('If the importer you need is not listed, <a href="%s">search the plugin directory</a> to see if an importer is available.'), esc_url( network_admin_url( 'plugin-install.php?tab=search&type=tag&s=importer' ) ) ) . '</p>';
++*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ ?>
+ 
+ </div>
+diff --git a/wp-admin/includes/ajax-actions.php b/wp-admin/includes/ajax-actions.php
+index 9024a2c..ea2a9af 100644
+--- a/wp-admin/includes/ajax-actions.php
++++ b/wp-admin/includes/ajax-actions.php
+@@ -2551,7 +2551,7 @@ function wp_ajax_get_revision_diffs() {
+ 		wp_send_json_error();
+ 
+ 	$return = array();
+-	@set_time_limit( 0 );
++	// @set_time_limit( 0 );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 	foreach ( $_REQUEST['compare'] as $compare_key ) {
+ 		list( $compare_from, $compare_to ) = explode( ':', $compare_key ); // from:to
+diff --git a/wp-admin/includes/class-wp-plugin-install-list-table.php b/wp-admin/includes/class-wp-plugin-install-list-table.php
+index 07bfa0c..9230e88 100644
+--- a/wp-admin/includes/class-wp-plugin-install-list-table.php
++++ b/wp-admin/includes/class-wp-plugin-install-list-table.php
+@@ -72,7 +72,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
+ 		if ( current_user_can( 'upload_plugins' ) ) {
+ 			// No longer a real tab. Here for filter compatibility.
+ 			// Gets skipped in get_views().
+-			$tabs['upload'] = __( 'Upload Plugin' );
++			//$tabs['upload'] = __( 'Upload Plugin' ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		}
+ 
+ 		$nonmenu_tabs = array( 'plugin-information' ); // Valid actions to perform which do not have a Menu item.
+diff --git a/wp-admin/includes/class-wp-plugins-list-table.php b/wp-admin/includes/class-wp-plugins-list-table.php
+index 1ade73c..c2535c9 100644
+--- a/wp-admin/includes/class-wp-plugins-list-table.php
++++ b/wp-admin/includes/class-wp-plugins-list-table.php
+@@ -313,8 +313,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
+ 		if ( !is_multisite() || $this->screen->in_admin( 'network' ) ) {
+ 			if ( current_user_can( 'update_plugins' ) )
+ 				$actions['update-selected'] = __( 'Update' );
+-			if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
+-				$actions['delete-selected'] = __( 'Delete' );
++			/* if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
++				$actions['delete-selected'] = __( 'Delete' ); */ //for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		}
+ 
+ 		return $actions;
+@@ -429,8 +429,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
+ 				} else {
+ 					if ( current_user_can( 'manage_network_plugins' ) )
+ 						$actions['activate'] = '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file) . '" title="' . esc_attr__('Activate this plugin for all sites in this network') . '" class="edit">' . __('Network Activate') . '</a>';
+-					if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
+-						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>';
++					/* if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
++						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 				}
+ 			} else {
+ 				if ( $is_active ) {
+@@ -444,8 +444,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
+ 
+ 			 } // end if $screen->in_admin( 'network' )
+ 
+-			if ( ( ! is_multisite() || $screen->in_admin( 'network' ) ) && current_user_can('edit_plugins') && is_writable(WP_PLUGIN_DIR . '/' . $plugin_file) )
+-				$actions['edit'] = '<a href="plugin-editor.php?file=' . $plugin_file . '" title="' . esc_attr__('Open this file in the Plugin Editor') . '" class="edit">' . __('Edit') . '</a>';
++					/* if ( ! is_multisite() && current_user_can('delete_plugins') )
++						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		} // end if $context
+ 
+ 		$prefix = $screen->in_admin( 'network' ) ? 'network_admin_' : '';
+diff --git a/wp-admin/includes/class-wp-theme-install-list-table.php b/wp-admin/includes/class-wp-theme-install-list-table.php
+index eb8498a..b9f041c 100644
+--- a/wp-admin/includes/class-wp-theme-install-list-table.php
++++ b/wp-admin/includes/class-wp-theme-install-list-table.php
+@@ -40,7 +40,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
+ 		$tabs['dashboard'] = __( 'Search' );
+ 		if ( 'search' == $tab )
+ 			$tabs['search']	= __( 'Search Results' );
+-		$tabs['upload'] = __( 'Upload' );
++		/* $tabs['upload'] = __( 'Upload' ); */ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		$tabs['featured'] = _x( 'Featured', 'themes' );
+ 		//$tabs['popular']  = _x( 'Popular', 'themes' );
+ 		$tabs['new']      = _x( 'Latest', 'themes' );
+diff --git a/wp-admin/includes/class-wp-themes-list-table.php b/wp-admin/includes/class-wp-themes-list-table.php
+index 6311e75..0c827b9 100644
+--- a/wp-admin/includes/class-wp-themes-list-table.php
++++ b/wp-admin/includes/class-wp-themes-list-table.php
+@@ -168,10 +168,10 @@ class WP_Themes_List_Table extends WP_List_Table {
+ 					. __( 'Live Preview' ) . '</a>';
+ 			}
+ 
+-			if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
++			/* if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
+ 				$actions['delete'] = '<a class="submitdelete deletion" href="' . wp_nonce_url( 'themes.php?action=delete&amp;stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet )
+ 					. '" onclick="' . "return confirm( '" . esc_js( sprintf( __( "You are about to delete this theme '%s'\n  'Cancel' to stop, 'OK' to delete." ), $title ) )
+-					. "' );" . '">' . __( 'Delete' ) . '</a>';
++					. "' );" . '">' . __( 'Delete' ) . '</a>'; */ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 			/** This filter is documented in wp-admin/includes/class-wp-ms-themes-list-table.php */
+ 			$actions       = apply_filters( 'theme_action_links', $actions, $theme );
+diff --git a/wp-admin/includes/class-wp-upgrader.php b/wp-admin/includes/class-wp-upgrader.php
+index 0f1ca8b..5bcf002 100644
+--- a/wp-admin/includes/class-wp-upgrader.php
++++ b/wp-admin/includes/class-wp-upgrader.php
+@@ -334,7 +334,8 @@ class WP_Upgrader {
+ 		$destination = $args['destination'];
+ 		$clear_destination = $args['clear_destination'];
+ 
+-		@set_time_limit( 300 );
++		// @set_time_limit( 300 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 
+ 		if ( empty( $source ) || empty( $destination ) ) {
+ 			return new WP_Error( 'bad_request', $this->strings['bad_request'] );
+diff --git a/wp-admin/includes/dashboard.php b/wp-admin/includes/dashboard.php
+index bf37176..68bb3f7 100644
+--- a/wp-admin/includes/dashboard.php
++++ b/wp-admin/includes/dashboard.php
+@@ -934,7 +934,7 @@ function wp_dashboard_primary() {
+ 			 *
+ 			 * @param string $link The widget's primary link URL.
+ 			 */
+-			'link' => apply_filters( 'dashboard_primary_link', __( 'http://wordpress.org/news/' ) ),
++			'link' => apply_filters( 'dashboard_primary_link', __( 'http://blog.gimhoy.com' ) ),
+ 
+ 			/**
+ 			 * Filter the primary feed URL for the 'WordPress News' dashboard widget.
+@@ -943,7 +943,7 @@ function wp_dashboard_primary() {
+ 			 *
+ 			 * @param string $url The widget's primary feed URL.
+ 			 */
+-			'url' => apply_filters( 'dashboard_primary_feed', __( 'http://wordpress.org/news/feed/' ) ),
++			'url' => apply_filters( 'dashboard_primary_feed', __( 'http://blog.gimhoy.com/feed/' ) ),
+ 
+ 			/**
+ 			 * Filter the primary link title for the 'WordPress News' dashboard widget.
+@@ -952,7 +952,7 @@ function wp_dashboard_primary() {
+ 			 *
+ 			 * @param string $title Title attribute for the widget's primary link.
+ 			 */
+-			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress Blog' ) ),
++			'title'        => apply_filters( 'dashboard_primary_title', __( 'WordPress SAE - Gimhoy\'s Blog' ) ),
+ 			'items'        => 1,
+ 			'show_summary' => 1,
+ 			'show_author'  => 0,
+diff --git a/wp-admin/includes/file.php b/wp-admin/includes/file.php
+index 156437f..3ca5014 100644
+--- a/wp-admin/includes/file.php
++++ b/wp-admin/includes/file.php
+@@ -341,10 +341,13 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
+ 		return $upload_error_handler( $file, sprintf( __('The uploaded file could not be moved to %s.' ), $error_path ) );
+ 	}
+ 
++	/*
+ 	// Set correct file permissions.
+ 	$stat = stat( dirname( $new_file ));
+ 	$perms = $stat['mode'] & 0000666;
+ 	@ chmod( $new_file, $perms );
++	*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 
+ 	// Compute the URL.
+ 	$url = $uploads['url'] . "/$filename";
+@@ -517,7 +520,7 @@ function unzip_file($file, $to) {
+ 
+ 	// Unzip can use a lot of memory, but not this much hopefully
+ 	/** This filter is documented in wp-admin/admin.php */
+-	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
++	//@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 	$needed_dirs = array();
+ 	$to = trailingslashit($to);
+diff --git a/wp-admin/includes/image-edit.php b/wp-admin/includes/image-edit.php
+index 7e3e7f7..ae9333b 100644
+--- a/wp-admin/includes/image-edit.php
++++ b/wp-admin/includes/image-edit.php
+@@ -315,15 +315,17 @@ function wp_save_image_file( $filename, $image, $mime_type, $post_id ) {
+ 		if ( null !== $saved )
+ 			return $saved;
+ 
++		$tmpfile = tempnam(SAE_TMP_PATH, 'WPIMG');  // for SAE, modified by Gimhoy (blog.gimhoy.com) 			
++
+ 		switch ( $mime_type ) {
+ 			case 'image/jpeg':
+ 
+ 				/** This filter is documented in wp-includes/class-wp-image-editor.php */
+-				return imagejpeg( $image, $filename, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
++				return imagejpeg( $image, $tmpfile, apply_filters( 'jpeg_quality', 90, 'edit_image' ) );
+ 			case 'image/png':
+-				return imagepng( $image, $filename );
++				return imagepng($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 			case 'image/gif':
+-				return imagegif( $image, $filename );
++				return imagegif($image, $tmpfile) && copy($tmpfile, $filename);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 			default:
+ 				return false;
+ 		}
+diff --git a/wp-admin/includes/misc.php b/wp-admin/includes/misc.php
+index 7b710cb..73b62d5 100644
+--- a/wp-admin/includes/misc.php
++++ b/wp-admin/includes/misc.php
+@@ -154,7 +154,9 @@ function insert_with_markers( $filename, $marker, $insertion ) {
+  *
+  * @since 1.5.0
+  */
+-function save_mod_rewrite_rules() {
++function save_mod_rewrite_rules() {	
++	return;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 	if ( is_multisite() )
+ 		return;
+ 
+diff --git a/wp-admin/includes/plugin-install.php b/wp-admin/includes/plugin-install.php
+index 3031341..97b30ec 100644
+--- a/wp-admin/includes/plugin-install.php
++++ b/wp-admin/includes/plugin-install.php
+@@ -542,12 +542,12 @@ function install_plugin_information() {
+ 		switch ( $status['status'] ) {
+ 			case 'install':
+ 				if ( $status['url'] ) {
+-					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Now' ) . '</a>';
++					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载') . '</a>';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 				}
+ 				break;
+ 			case 'update_available':
+ 				if ( $status['url'] ) {
+-					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Update Now' ) .'</a>';
++					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载更新') .'</a>';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 				}
+ 				break;
+ 			case 'newer_installed':
+diff --git a/wp-admin/includes/update-core.php b/wp-admin/includes/update-core.php
+index 71a50da..8aa3b22 100644
+--- a/wp-admin/includes/update-core.php
++++ b/wp-admin/includes/update-core.php
+@@ -774,7 +774,8 @@ $_new_bundled_files = array(
+ function update_core($from, $to) {
+ 	global $wp_filesystem, $_old_files, $_new_bundled_files, $wpdb;
+ 
+-	@set_time_limit( 300 );
++	// @set_time_limit( 300 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 
+ 	/**
+ 	 * Filter feedback messages displayed during the core update process.
+diff --git a/wp-admin/includes/update.php b/wp-admin/includes/update.php
+index 502666a..e74547d 100644
+--- a/wp-admin/includes/update.php
++++ b/wp-admin/includes/update.php
+@@ -230,7 +230,8 @@ function update_right_now_message() {
+ 			$msg .= " <a href='" . network_admin_url( 'update-core.php' ) . "' class='button'>" . sprintf( __('Update to %s'), $cur->current ? $cur->current : __( 'Latest' ) ) . '</a>';
+ 	}
+ 
+-	echo "<p id='wp-version-message'>$msg</p>";
++	echo "<p id='wp-version-message'>$msg<b>由 <a href='http://blog.gimhoy.com/archives/wordpress-on-sae.html'>Gimhoy</a> 移植至 SAE。<a href='http://go.gimhoy.com/donate'><span style='color:red'>捐赠</span></a></b></p>";
++
+ }
+ 
+ function get_plugin_updates() {
+diff --git a/wp-admin/includes/upgrade.php b/wp-admin/includes/upgrade.php
+index 15a1097..6ffbff1 100644
+--- a/wp-admin/includes/upgrade.php
++++ b/wp-admin/includes/upgrade.php
+@@ -156,13 +156,18 @@ function wp_install_defaults( $user_id ) {
+ 		$first_post = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');
+ 	}
+ 
++	$first_title = @file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=first-post-title&v=4.1&p=SAE');
++    if(!$first_title){$first_title = __('Hello world!');}
++    $first_post = @file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=first-post-content&v=4.1&p=SAE');
++    if(!$first_post){$first_post = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');}
++
+ 	$wpdb->insert( $wpdb->posts, array(
+ 								'post_author' => $user_id,
+ 								'post_date' => $now,
+ 								'post_date_gmt' => $now_gmt,
+ 								'post_content' => $first_post,
+ 								'post_excerpt' => '',
+-								'post_title' => __('Hello world!'),
++								'post_title' => $first_title,
+ 								/* translators: Default post slug */
+ 								'post_name' => sanitize_title( _x('hello-world', 'Default post slug') ),
+ 								'post_modified' => $now,
+@@ -176,19 +181,14 @@ function wp_install_defaults( $user_id ) {
+ 	$wpdb->insert( $wpdb->term_relationships, array('term_taxonomy_id' => $cat_tt_id, 'object_id' => 1) );
+ 
+ 	// Default comment
+-	$first_comment_author = __('Mr WordPress');
+-	$first_comment_url = 'https://wordpress.org/';
+-	$first_comment = __('Hi, this is a comment.
+-To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.');
+-	if ( is_multisite() ) {
+-		$first_comment_author = get_site_option( 'first_comment_author', $first_comment_author );
+-		$first_comment_url = get_site_option( 'first_comment_url', network_home_url() );
+-		$first_comment = get_site_option( 'first_comment', $first_comment );
+-	}
++
++		$first_comment_author = __('Gimhoy');
++		$first_comment_url = 'http://blog.gimhoy.com/';
++		$first_comment = __('Hello, 欢迎使用WordPress on SAE. 如果在使用过程中有任何问题或建议，欢迎到<a title="Gimhoy\'s Blog" href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">我的博客</a>指出。祝使用愉快~');
+ 	$wpdb->insert( $wpdb->comments, array(
+ 								'comment_post_ID' => 1,
+ 								'comment_author' => $first_comment_author,
+-								'comment_author_email' => '',
++								'comment_author_email' => 'Gimhoy0608@gmail.com',
+ 								'comment_author_url' => $first_comment_url,
+ 								'comment_date' => $now,
+ 								'comment_date_gmt' => $now_gmt,
+diff --git a/wp-admin/install.php b/wp-admin/install.php
+index 93c9d72..379fed9 100644
+--- a/wp-admin/install.php
++++ b/wp-admin/install.php
+@@ -217,6 +217,22 @@ switch($step) {
+ 
+ <h1><?php _e( 'Information needed' ); ?></h1>
+ <p><?php _e( 'Please provide the following information. Don&#8217;t worry, you can always change these settings later.' ); ?></p>
++<p style="font-weight:bolder; color:red;"><?php @printf( file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=install_announce') ); ?></p>  <?php // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
++<script type="text/javascript">
++    // 提示用户是否要安装在当前版本下。
++    (function(){
++        var loc = window.location;
++        var url = loc.hostname;
++        var ver=url.match(/(\d+.?\.)(.*.sinaapp.com)/i);
++        var ret = false;
++        if(ver){
++            ret = confirm('确定要将程序安装至“'+url+'”地址吗，如果想要安装的地址为“'+ver[2]+'”，请点击确定，程序将自动切换安装地址，如果不是，请选择否。');
++            if(ret==true){
++                window.location.href = loc.protocol+'//'+ver[2]+loc.pathname;
++            }
++        }
++    })();
++</script>
+ 
+ <?php
+ 		display_setup_form();
+diff --git a/wp-admin/menu.php b/wp-admin/menu.php
+index 89c13d9..62e1e56 100644
+--- a/wp-admin/menu.php
++++ b/wp-admin/menu.php
+@@ -192,7 +192,8 @@ $submenu['plugins.php'][5]  = array( __('Installed Plugins'), 'activate_plugins'
+ 
+ 	if ( ! is_multisite() ) {
+ 		/* translators: add new plugin */
+-		$submenu['plugins.php'][10] = array( _x('Add New', 'plugin'), 'install_plugins', 'plugin-install.php' );
++		// $submenu['plugins.php'][10] = array( _x('Add New', 'plugin'), 'install_plugins', 'plugin-install.php' ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 		$submenu['plugins.php'][15] = array( _x('Editor', 'plugin editor'), 'edit_plugins', 'plugin-editor.php' );
+ 	}
+ 
+diff --git a/wp-admin/options-permalink.php b/wp-admin/options-permalink.php
+index 110ceda..010f4c4 100644
+--- a/wp-admin/options-permalink.php
++++ b/wp-admin/options-permalink.php
+@@ -122,7 +122,7 @@ $category_base       = get_option( 'category_base' );
+ $tag_base            = get_option( 'tag_base' );
+ $update_required     = false;
+ 
+-if ( $iis7_permalinks ) {
++/*if ( $iis7_permalinks ) {
+ 	if ( ( ! file_exists($home_path . 'web.config') && win_is_writable($home_path) ) || win_is_writable($home_path . 'web.config') )
+ 		$writable = true;
+ 	else
+@@ -138,7 +138,8 @@ if ( $iis7_permalinks ) {
+ 		$new_rules       = array_filter( explode( "\n", $wp_rewrite->mod_rewrite_rules() ) );
+ 		$update_required = ( $new_rules !== $existing_rules );
+ 	}
+-}
++}*/
++$writable = true;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ if ( $wp_rewrite->using_index_permalinks() )
+ 	$usingpi = true;
+@@ -151,6 +152,7 @@ require( ABSPATH . 'wp-admin/admin-header.php' );
+ 
+ if ( ! empty( $_GET['settings-updated'] ) ) : ?>
+ <div id="message" class="updated"><p><?php
++/*
+ if ( ! is_multisite() ) {
+ 	if ( $iis7_permalinks ) {
+ 		if ( $permalink_structure && ! $usingpi && ! $writable )
+@@ -170,7 +172,9 @@ if ( ! is_multisite() ) {
+ 	}
+ } else {
+ 	_e('Permalink structure updated.');
+-}
++}*/ 
++_e('Permalink structure updated.');
++// for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ ?>
+ </p></div>
+ <?php endif; ?>
+@@ -254,7 +258,7 @@ printf( __('If you like, you may enter custom structures for your category and t
+ 
+ <?php submit_button(); ?>
+   </form>
+-<?php if ( !is_multisite() ) { ?>
++<?php if ( false && !is_multisite() ) {   // for SAE, modified by Gimhoy (blog.gimhoy.com) ?>
+ <?php if ( $iis7_permalinks ) :
+ 	if ( isset($_POST['submit']) && $permalink_structure && ! $usingpi && ! $writable ) :
+ 		if ( file_exists($home_path . 'web.config') ) : ?>
+diff --git a/wp-admin/plugin-editor.php b/wp-admin/plugin-editor.php
+index 1c24295..c09a82b 100644
+--- a/wp-admin/plugin-editor.php
++++ b/wp-admin/plugin-editor.php
+@@ -262,7 +262,7 @@ foreach ( $plugin_files as $plugin_file ) :
+ 	?>
+ 	</p>
+ <?php else : ?>
+-	<p><em><?php _e('You need to make this file writable before you can save your changes. See <a href="http://codex.wordpress.org/Changing_File_Permissions">the Codex</a> for more information.'); ?></em></p>
++	<p><em><?php echo 'WordPress for SAE 禁止在线更改插件代码。您可以将代码下载到本地，修改后重新上传。'  // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?></em></p>
+ <?php endif; ?>
+ </form>
+ <br class="clear" />
+diff --git a/wp-admin/plugins.php b/wp-admin/plugins.php
+index afc83bb..d0e4cc4 100644
+--- a/wp-admin/plugins.php
++++ b/wp-admin/plugins.php
+@@ -4,6 +4,7 @@
+  *
+  * @package WordPress
+  * @subpackage Administration
++ * @modified by Gimhoy (blog.gimhoy.com) 
+  */
+ 
+ /** WordPress Administration Bootstrap */
+@@ -40,6 +41,8 @@ if ( $action ) {
+ 			$result = activate_plugin($plugin, self_admin_url('plugins.php?error=true&plugin=' . $plugin), is_network_admin() );
+ 			if ( is_wp_error( $result ) ) {
+ 				if ( 'unexpected_output' == $result->get_error_code() ) {
++					WP_DEBUG && file_put_contents('saemc://plugin_error', $result->get_error_data());  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 					$redirect = self_admin_url('plugins.php?error=true&charsout=' . strlen($result->get_error_data()) . '&plugin=' . $plugin . "&plugin_status=$status&paged=$page&s=$s");
+ 					wp_redirect(add_query_arg('_error_nonce', wp_create_nonce('plugin-activation-error_' . $plugin), $redirect));
+ 					exit;
+@@ -431,7 +434,7 @@ if ( !empty($invalid) )
+ 
+ <div class="wrap">
+ <h2><?php echo esc_html( $title );
+-if ( ( ! is_multisite() || is_network_admin() ) && current_user_can('install_plugins') ) { ?>
++if ( false &&( ! is_multisite() || is_network_admin() ) && current_user_can('install_plugins') ) { // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?>  
+  <a href="<?php echo self_admin_url( 'plugin-install.php' ); ?>" class="add-new-h2"><?php echo esc_html_x('Add New', 'plugin'); ?></a>
+ <?php }
+ if ( $s )
+diff --git a/wp-admin/theme-editor.php b/wp-admin/theme-editor.php
+index d0ecee4..4d36a72 100644
+--- a/wp-admin/theme-editor.php
++++ b/wp-admin/theme-editor.php
+@@ -219,7 +219,7 @@ else : ?>
+ 	if ( is_writeable( $file ) ) :
+ 		submit_button( __( 'Update File' ), 'primary', 'submit', true );
+ 	else : ?>
+-<p><em><?php _e('You need to make this file writable before you can save your changes. See <a href="http://codex.wordpress.org/Changing_File_Permissions">the Codex</a> for more information.'); ?></em></p>
++<p><em><?php echo 'WordPress for SAE 禁止在线更改主题代码。您可以将代码下载到本地，修改后重新上传。' // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?></em></p>
+ <?php endif; ?>
+ 		</div>
+ 	</form>
+diff --git a/wp-admin/themes.php b/wp-admin/themes.php
+index bf265b8..1ce515d 100644
+--- a/wp-admin/themes.php
++++ b/wp-admin/themes.php
+@@ -123,7 +123,8 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
+ <div class="wrap">
+ 	<h2><?php esc_html_e( 'Themes' ); ?>
+ 		<span class="title-count theme-count"><?php echo count( $themes ); ?></span>
+-	<?php if ( ! is_multisite() && current_user_can( 'install_themes' ) ) : ?>
++	<?php if ( false && ! is_multisite() && current_user_can( 'install_themes' ) ) : // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?>
++
+ 		<a href="<?php echo admin_url( 'theme-install.php' ); ?>" class="hide-if-no-js add-new-h2"><?php echo esc_html_x( 'Add New', 'Add new theme' ); ?></a>
+ 	<?php endif; ?>
+ 	</h2>
+diff --git a/wp-admin/update-core.php b/wp-admin/update-core.php
+index 7c939e7..2eff698 100644
+--- a/wp-admin/update-core.php
++++ b/wp-admin/update-core.php
+@@ -47,9 +47,11 @@ function list_core_update( $update ) {
+ 		$download = __('Download nightly build');
+ 	} else {
+ 		if ( $current ) {
+-			$message = sprintf( __( 'If you need to re-install version %s, you can do so here or download the package and re-install manually:' ), $version_string );
++			$message = sprintf(__('您正在使用最新版本的 WordPress。您无需升级。尽管如此，您还是可以下载 %s 的安装包手动重新安装'),$version_string);
++			/*
+ 			$submit = __('Re-install Now');
+ 			$form_action = 'update-core.php?action=do-core-reinstall';
++			*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		} else {
+ 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
+ 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
+@@ -64,7 +66,7 @@ function list_core_update( $update ) {
+ 			elseif ( !$mysql_compat )
+ 				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
+ 			else
+-				$message = 	sprintf(__('You can update to <a href="http://codex.wordpress.org/Version_%1$s">WordPress %2$s</a> automatically or download the package and install it manually:'), $update->current, $version_string);
++				$message = 	sprintf(__('您可以下载 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">WordPress %2$s 版本</a> 的安装包手动安装：'), $update->current, $version_string);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 			if ( !$mysql_compat || !$php_compat )
+ 				$show_buttons = false;
+ 		}
+@@ -81,10 +83,10 @@ function list_core_update( $update ) {
+ 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
+ 	if ( $show_buttons ) {
+ 		if ( $first_pass ) {
+-			submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false );
++			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 			$first_pass = false;
+ 		} else {
+-			submit_button( $submit, 'button', 'upgrade', false );
++			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 		}
+ 		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
+ 	}
+@@ -219,22 +221,22 @@ function list_plugin_updates() {
+ 		$core_update_version = $core_updates[0]->current;
+ 	?>
+ <h3><?php _e( 'Plugins' ); ?></h3>
+-<p><?php _e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' ); ?></p>
++<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后通过SVN手动升级。' ); // for SAE, modified by Gimhoy (blog.gimhoy.com)  ?></p>
+ <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
+ <?php wp_nonce_field('upgrade-core'); ?>
+-<p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
++
+ <table class="widefat" id="update-plugins-table">
+ 	<thead>
+ 	<tr>
+-		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all" /></th>
+-		<th scope="col" class="manage-column"><label for="plugins-select-all"><?php _e('Select All'); ?></label></th>
++		<th scope="col" class="manage-column check-column"></th>
++		<th scope="col" class="manage-column"></th>
+ 	</tr>
+ 	</thead>
+ 
+ 	<tfoot>
+ 	<tr>
+-		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all-2" /></th>
+-		<th scope="col" class="manage-column"><label for="plugins-select-all-2"><?php _e('Select All'); ?></label></th>
++		<th scope="col" class="manage-column check-column"></th>
++		<th scope="col" class="manage-column"></th>
+ 	</tr>
+ 	</tfoot>
+ 	<tbody class="plugins">
+@@ -283,7 +285,7 @@ function list_plugin_updates() {
+ ?>
+ 	</tbody>
+ </table>
+-<p><input id="upgrade-plugins-2" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
++
+ </form>
+ <?php
+ }
+diff --git a/wp-includes/ID3/module.audio.mp3.php b/wp-includes/ID3/module.audio.mp3.php
+index 98877a9..f2eb6c6 100644
+--- a/wp-includes/ID3/module.audio.mp3.php
++++ b/wp-includes/ID3/module.audio.mp3.php
+@@ -1225,7 +1225,8 @@ class getid3_mp3 extends getid3_handler
+ 
+ 		$previousvalidframe = $info['avdataoffset'];
+ 		while ($this->ftell() < $info['avdataend']) {
+-			set_time_limit(30);
++			//set_time_limit(30); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 			$head4 = $this->fread(4);
+ 			if (strlen($head4) < 4) {
+ 				break;
+diff --git a/wp-includes/capabilities.php b/wp-includes/capabilities.php
+index 894a149..61408e2 100644
+--- a/wp-includes/capabilities.php
++++ b/wp-includes/capabilities.php
+@@ -1353,6 +1353,10 @@ function map_meta_cap( $cap, $user_id ) {
+  * @return bool
+  */
+ function current_user_can( $capability ) {
++	$block_action = array('install_plugins','install_themes', 'edit_plugins', 'update_plugins', 'install_plugins', 'update_themes','delete_plugins','delete_themes','delete_plugins');
++    if (in_array($capability, $block_action)!=false) {
++        return false;
++    }  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 	$current_user = wp_get_current_user();
+ 
+ 	if ( empty( $current_user ) )
+diff --git a/wp-includes/class-http.php b/wp-includes/class-http.php
+index 8f7351d..af097fe 100644
+--- a/wp-includes/class-http.php
++++ b/wp-includes/class-http.php
+@@ -10,6 +10,7 @@
+  * @package WordPress
+  * @subpackage HTTP
+  * @since 2.7.0
++ * @modified by Gimhoy (blog.gimhoy.com)
+  */
+ 
+ /**
+@@ -322,7 +323,8 @@ class WP_Http {
+ 			if ( !call_user_func( array( $class, 'test' ), $args, $url ) )
+ 				continue;
+ 
+-			return $class;
++			return 'WP_Http_Curl';  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 		}
+ 
+ 		return false;
+@@ -1470,6 +1472,7 @@ class WP_Http_Curl {
+ 			}
+ 			curl_setopt( $handle, CURLOPT_HTTPHEADER, $headers );
+ 		}
++		curl_setopt( $handle, CURLINFO_HEADER_OUT, true );  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 		if ( $r['httpversion'] == '1.0' )
+ 			curl_setopt( $handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );
+diff --git a/wp-includes/class-pop3.php b/wp-includes/class-pop3.php
+index d0455d7..f06655a 100644
+--- a/wp-includes/class-pop3.php
++++ b/wp-includes/class-pop3.php
+@@ -56,15 +56,15 @@ class POP3 {
+         if(!empty($timeout)) {
+             settype($timeout,"integer");
+             $this->TIMEOUT = $timeout;
+-            if (!ini_get('safe_mode'))
+-                set_time_limit($timeout);
++           // if (!ini_get('safe_mode'))
++            //    set_time_limit($timeout); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+         }
+         return true;
+     }
+ 
+     function update_timer () {
+-        if (!ini_get('safe_mode'))
+-            set_time_limit($this->TIMEOUT);
++       // if (!ini_get('safe_mode'))
++         //   set_time_limit($this->TIMEOUT);  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+         return true;
+     }
+ 
+diff --git a/wp-includes/class-smtp.php b/wp-includes/class-smtp.php
+index eddc991..47e2892 100644
+--- a/wp-includes/class-smtp.php
++++ b/wp-includes/class-smtp.php
+@@ -199,7 +199,8 @@ class SMTP
+         $errstr = '';
+         $socket_context = stream_context_create($options);
+         //Suppress errors; connection failures are handled at a higher level
+-        $this->smtp_conn = @stream_socket_client(
++        /*
++		$this->smtp_conn = @stream_socket_client(
+             $host . ":" . $port,
+             $errno,
+             $errstr,
+@@ -207,6 +208,8 @@ class SMTP
+             STREAM_CLIENT_CONNECT,
+             $socket_context
+         );
++		*/
++		$this->smtp_conn = fsockopen($host, $port, $errno, $errstr); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+         // Verify we connected properly
+         if (empty($this->smtp_conn)) {
+@@ -228,9 +231,11 @@ class SMTP
+         // Windows does not have support for this timeout function
+         if (substr(PHP_OS, 0, 3) != 'WIN') {
+             $max = ini_get('max_execution_time');
++            /*$max = ini_get('max_execution_time');
+             if ($max != 0 && $timeout > $max) { // Don't bother if unlimited
+                 @set_time_limit($timeout);
+-            }
++            } */// for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+             stream_set_timeout($this->smtp_conn, $timeout, 0);
+         }
+ 
+diff --git a/wp-includes/class-wp-image-editor-gd.php b/wp-includes/class-wp-image-editor-gd.php
+index ddba1ff..1b2f493 100644
+--- a/wp-includes/class-wp-image-editor-gd.php
++++ b/wp-includes/class-wp-image-editor-gd.php
+@@ -97,7 +97,8 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
+ 		 *                          Accepts an integer (bytes), or a shorthand string notation, such as '256M'.
+ 		 */
+ 		// Set artificially high because GD uses uncompressed images in memory
+-		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
++		// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 
+ 		$this->image = @imagecreatefromstring( file_get_contents( $this->file ) );
+ 
+@@ -401,10 +402,12 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
+ 			return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
+ 		}
+ 
++		/*
+ 		// Set correct file permissions
+ 		$stat = stat( dirname( $filename ) );
+ 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
+ 		@ chmod( $filename, $perms );
++		*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 		/**
+ 		 * Filter the name of the saved image file.
+diff --git a/wp-includes/class-wp-image-editor-imagick.php b/wp-includes/class-wp-image-editor-imagick.php
+index 843b85c..dc4c8a6 100644
+--- a/wp-includes/class-wp-image-editor-imagick.php
++++ b/wp-includes/class-wp-image-editor-imagick.php
+@@ -123,7 +123,7 @@ class WP_Image_Editor_Imagick extends WP_Image_Editor {
+ 
+ 		/** This filter is documented in wp-includes/class-wp-image-editor-imagick.php */
+ 		// Even though Imagick uses less PHP memory than GD, set higher limit for users that have low PHP.ini limits
+-		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
++		// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 		try {
+ 			$this->image = new Imagick( $this->file );
+diff --git a/wp-includes/comment.php b/wp-includes/comment.php
+index c8984f0..20da488 100644
+--- a/wp-includes/comment.php
++++ b/wp-includes/comment.php
+@@ -2597,7 +2597,8 @@ function pingback($content, $post_ID) {
+ 		$pingback_server_url = discover_pingback_server_uri( $pagelinkedto );
+ 
+ 		if ( $pingback_server_url ) {
+-			@ set_time_limit( 60 );
++			// @ set_time_limit( 60 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 			// Now, the RPC call
+ 			$pagelinkedfrom = get_permalink($post_ID);
+ 
+diff --git a/wp-includes/default-constants.php b/wp-includes/default-constants.php
+index ae97efd..f07b93e 100644
+--- a/wp-includes/default-constants.php
++++ b/wp-includes/default-constants.php
+@@ -48,8 +48,9 @@ function wp_initial_constants() {
+ 		if ( false !== strpos( WP_MEMORY_LIMIT, 'G' ) )
+ 			$wp_limit_int *= 1024;
+ 
+-		if ( -1 != $current_limit && ( -1 == WP_MEMORY_LIMIT || $current_limit_int < $wp_limit_int ) )
+-			@ini_set( 'memory_limit', WP_MEMORY_LIMIT );
++		//if ( -1 != $current_limit && ( -1 == WP_MEMORY_LIMIT || $current_limit_int < $wp_limit_int ) )
++		//	@ini_set( 'memory_limit', WP_MEMORY_LIMIT ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 	}
+ 
+ 	if ( !defined('WP_CONTENT_DIR') )
+diff --git a/wp-includes/deprecated.php b/wp-includes/deprecated.php
+index 64291ca..b4a3515 100644
+--- a/wp-includes/deprecated.php
++++ b/wp-includes/deprecated.php
+@@ -3226,7 +3226,8 @@ function wp_load_image( $file ) {
+ 		return __('The GD image library is not installed.');
+ 
+ 	// Set artificially high because GD uses uncompressed images in memory
+-	@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
++	// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 	$image = imagecreatefromstring( file_get_contents( $file ) );
+ 
+ 	if ( !is_resource( $image ) )
+diff --git a/wp-includes/functions.php b/wp-includes/functions.php
+index 76013c9..63b5958 100644
+--- a/wp-includes/functions.php
++++ b/wp-includes/functions.php
+@@ -3,6 +3,8 @@
+  * Main WordPress API
+  *
+  * @package WordPress
++ *
++ * @modified by Gimhoy (blog.gimhoy.com)
+  */
+ 
+ require( ABSPATH . WPINC . '/option.php' );
+@@ -570,7 +572,8 @@ function do_enclose( $content, $post_ID ) {
+  * @return bool|string False on failure and string of headers if HEAD request.
+  */
+ function wp_get_http( $url, $file_path = false, $red = 1 ) {
+-	@set_time_limit( 60 );
++	// @set_time_limit( 60 ); // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 
+ 	if ( $red > 5 )
+ 		return false;
+@@ -1467,7 +1470,12 @@ function wp_get_original_referer() {
+  */
+ function wp_mkdir_p( $target ) {
+ 	$wrapper = null;
++	if ( substr($target, 0, 10) == 'saestor://' ) {
++		return true;
++	}  
++	$target = str_replace( '//', '/', $target );	// for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
++	/*
+ 	// Strip the protocol.
+ 	if( wp_is_stream( $target ) ) {
+ 		list( $wrapper, $target ) = explode( '://', $target, 2 );
+@@ -1480,6 +1488,7 @@ function wp_mkdir_p( $target ) {
+ 	if( $wrapper !== null ) {
+ 		$target = $wrapper . '://' . $target;
+ 	}
++	*/ // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 	/*
+ 	 * Safe mode fails with a trailing slash under certain PHP versions.
+@@ -1788,6 +1797,10 @@ function wp_upload_dir( $time = null ) {
+ 		}
+ 	}
+ 
++	if(!defined(SAE_STORAGE)) define('SAE_STORAGE', 'wordpress');
++	$dir = 'saestor://'.SAE_STORAGE.SAE_DIR;
++	$url = 'http://' . $_SERVER['HTTP_APPNAME'] . '-'.SAE_STORAGE.'.stor.sinaapp.com'.SAE_DIR;  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
++
+ 	$basedir = $dir;
+ 	$baseurl = $url;
+ 
+diff --git a/wp-includes/load.php b/wp-includes/load.php
+index c578c8d..25b0025 100644
+--- a/wp-includes/load.php
++++ b/wp-includes/load.php
+@@ -479,6 +479,7 @@ function wp_not_installed() {
+ 		require( ABSPATH . WPINC . '/formatting.php' );
+ 
+ 		$link = wp_guess_url() . '/wp-admin/install.php';
++		$link = 'http://'.$_SERVER["HTTP_HOST"].'/wp-admin/install.php?'.$_SERVER['QUERY_STRING'];  // for SAE, modified by Gimhoy (blog.gimhoy.com) 
+ 
+ 		wp_redirect( $link );
+ 		die();
+diff --git a/wp-includes/media.php b/wp-includes/media.php
+index c7d092d..253e572 100644
+--- a/wp-includes/media.php
++++ b/wp-includes/media.php
+@@ -4,6 +4,7 @@
+  *
+  * @package WordPress
+  * @subpackage Media
++ * @modified by Gimhoy (blog.gimhoy.com)
+  */
+ 
+ /**
+diff --git a/wp-includes/version.php b/wp-includes/version.php
+index 8b16aa4..8b83808 100644
+--- a/wp-includes/version.php
++++ b/wp-includes/version.php
+@@ -33,3 +33,5 @@ $required_php_version = '5.2.4';
+  * @global string $required_mysql_version
+  */
+ $required_mysql_version = '5.0';
++
++$wp_local_package = 'zh_CN';
+-- 
+1.9.4.msysgit.1
+
