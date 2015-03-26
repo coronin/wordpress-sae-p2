@@ -828,7 +828,7 @@ function wp_ajax_get_tagcloud() {
 	if ( ! $tax ) {
 		wp_die( 0 );
 	}
-
+	
 	if ( ! current_user_can( $tax->cap->assign_terms ) ) {
 		wp_die( -1 );
 	}
@@ -1832,21 +1832,36 @@ function wp_ajax_update_widget() {
  */
 function wp_ajax_upload_attachment() {
 	check_ajax_referer( 'media-form' );
+	/*
+	 * This function does not use wp_send_json_success() / wp_send_json_error()
+	 * as the html4 Plupload handler requires a text/html content-type for older IE.
+	 * See https://core.trac.wordpress.org/ticket/31037
+	 */
 
 	if ( ! current_user_can( 'upload_files' ) ) {
-		wp_send_json_error( array(
-			'message'  => __( "You don't have permission to upload files." ),
-			'filename' => $_FILES['async-upload']['name'],
+		echo wp_json_encode( array(
+			'success' => false,
+			'data'    => array(
+				'message'  => __( "You don't have permission to upload files." ),
+				'filename' => $_FILES['async-upload']['name'],
+			)
 		) );
+
+		wp_die();
 	}
 
 	if ( isset( $_REQUEST['post_id'] ) ) {
 		$post_id = $_REQUEST['post_id'];
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_send_json_error( array(
-				'message'  => __( "You don't have permission to attach files to this post." ),
-				'filename' => $_FILES['async-upload']['name'],
+			echo wp_json_encode( array(
+				'success' => false,
+				'data'    => array(
+					'message'  => __( "You don't have permission to attach files to this post." ),
+					'filename' => $_FILES['async-upload']['name'],
+				)
 			) );
+
+			wp_die();
 		}
 	} else {
 		$post_id = null;
@@ -1858,20 +1873,30 @@ function wp_ajax_upload_attachment() {
 	if ( isset( $post_data['context'] ) && in_array( $post_data['context'], array( 'custom-header', 'custom-background' ) ) ) {
 		$wp_filetype = wp_check_filetype_and_ext( $_FILES['async-upload']['tmp_name'], $_FILES['async-upload']['name'], false );
 		if ( ! wp_match_mime_types( 'image', $wp_filetype['type'] ) ) {
-			wp_send_json_error( array(
-				'message'  => __( 'The uploaded file is not a valid image. Please try again.' ),
-				'filename' => $_FILES['async-upload']['name'],
+			echo wp_json_encode( array(
+				'success' => false,
+				'data'    => array(
+					'message'  => __( 'The uploaded file is not a valid image. Please try again.' ),
+					'filename' => $_FILES['async-upload']['name'],
+				)
 			) );
+
+			wp_die();
 		}
 	}
 
 	$attachment_id = media_handle_upload( 'async-upload', $post_id, $post_data );
 
 	if ( is_wp_error( $attachment_id ) ) {
-		wp_send_json_error( array(
-			'message'  => $attachment_id->get_error_message(),
-			'filename' => $_FILES['async-upload']['name'],
+		echo wp_json_encode( array(
+			'success' => false,
+			'data'    => array(
+				'message'  => $attachment_id->get_error_message(),
+				'filename' => $_FILES['async-upload']['name'],
+			)
 		) );
+
+		wp_die();
 	}
 
 	if ( isset( $post_data['context'] ) && isset( $post_data['theme'] ) ) {
@@ -1885,7 +1910,12 @@ function wp_ajax_upload_attachment() {
 	if ( ! $attachment = wp_prepare_attachment_for_js( $attachment_id ) )
 		wp_die();
 
-	wp_send_json_success( $attachment );
+	echo wp_json_encode( array(
+		'success' => true,
+		'data'    => $attachment,
+	) );
+
+	wp_die();
 }
 
 /**
@@ -2551,7 +2581,7 @@ function wp_ajax_get_revision_diffs() {
 		wp_send_json_error();
 
 	$return = array();
-	// @set_time_limit( 0 );  // for SAE
+	@set_time_limit( 0 );
 
 	foreach ( $_REQUEST['compare'] as $compare_key ) {
 		list( $compare_from, $compare_to ) = explode( ':', $compare_key ); // from:to
@@ -2793,7 +2823,7 @@ function wp_ajax_destroy_sessions() {
 		$message = __( 'You are now logged out everywhere else.' );
 	} else {
 		$sessions->destroy_all();
-		/* translators: 1: User's display name. */
+		/* translators: 1: User's display name. */ 
 		$message = sprintf( __( '%s has been logged out.' ), $user->display_name );
 	}
 

@@ -694,6 +694,7 @@ $_old_files = array(
 'wp-includes/js/jquery/ui/jquery.ui.tabs.min.js',
 'wp-includes/js/jquery/ui/jquery.ui.tooltip.min.js',
 'wp-includes/js/jquery/ui/jquery.ui.widget.min.js',
+'wp-includes/js/tinymce/skins/wordpress/images/dashicon-no-alt.png',
 );
 
 /**
@@ -774,8 +775,7 @@ $_new_bundled_files = array(
 function update_core($from, $to) {
 	global $wp_filesystem, $_old_files, $_new_bundled_files, $wpdb;
 
-	// @set_time_limit( 300 ); // for SAE
-
+	@set_time_limit( 300 );
 
 	/**
 	 * Filter feedback messages displayed during the core update process.

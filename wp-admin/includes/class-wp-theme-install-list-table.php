@@ -40,7 +40,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 		$tabs['dashboard'] = __( 'Search' );
 		if ( 'search' == $tab )
 			$tabs['search']	= __( 'Search Results' );
-		/* $tabs['upload'] = __( 'Upload' ); */ // for SAE
+		$tabs['upload'] = __( 'Upload' );
 		$tabs['featured'] = _x( 'Featured', 'themes' );
 		//$tabs['popular']  = _x( 'Popular', 'themes' );
 		$tabs['new']      = _x( 'Latest', 'themes' );

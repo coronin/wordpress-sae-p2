@@ -341,13 +341,10 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 		return $upload_error_handler( $file, sprintf( __('The uploaded file could not be moved to %s.' ), $error_path ) );
 	}
 
-	/*
 	// Set correct file permissions.
 	$stat = stat( dirname( $new_file ));
 	$perms = $stat['mode'] & 0000666;
 	@ chmod( $new_file, $perms );
-	*/ // for SAE
-
 
 	// Compute the URL.
 	$url = $uploads['url'] . "/$filename";
@@ -520,7 +517,7 @@ function unzip_file($file, $to) {
 
 	// Unzip can use a lot of memory, but not this much hopefully
 	/** This filter is documented in wp-admin/admin.php */
-	//@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );  // for SAE
+	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
 	$needed_dirs = array();
 	$to = trailingslashit($to);
@@ -928,7 +925,7 @@ function get_filesystem_method( $args = array(), $context = false, $allow_relaxe
 			}
 
 			if ( $wp_file_owner !== false && $wp_file_owner === $temp_file_owner ) {
-				// WordPress is creating files as the same owner as the WordPress files,
+				// WordPress is creating files as the same owner as the WordPress files, 
 				// this means it's safe to modify & create new files via PHP.
 				$method = 'direct';
 				$GLOBALS['_wp_filesystem_direct_method'] = 'file_owner';

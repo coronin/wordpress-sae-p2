@@ -542,12 +542,12 @@ function install_plugin_information() {
 		switch ( $status['status'] ) {
 			case 'install':
 				if ( $status['url'] ) {
-					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载') . '</a>';  // for SAE
+					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Now' ) . '</a>';
 				}
 				break;
 			case 'update_available':
 				if ( $status['url'] ) {
-					echo '<a class="button button-primary right" href="' . $api->download_link . '" target="_blank">' . __('现在下载更新') .'</a>';  // for SAE
+					echo '<a class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Update Now' ) .'</a>';
 				}
 				break;
 			case 'newer_installed':

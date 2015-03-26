@@ -2597,8 +2597,7 @@ function pingback($content, $post_ID) {
 		$pingback_server_url = discover_pingback_server_uri( $pagelinkedto );
 
 		if ( $pingback_server_url ) {
-			// @ set_time_limit( 60 ); // for SAE
-
+			@ set_time_limit( 60 );
 			// Now, the RPC call
 			$pagelinkedfrom = get_permalink($post_ID);
 

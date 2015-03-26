@@ -156,18 +156,13 @@ function wp_install_defaults( $user_id ) {
 		$first_post = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');
 	}
 
-	$first_title = @file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=first-post-title&v=4.1&p=SAE');
-    if(!$first_title){$first_title = __('Hello world!');}
-    $first_post = @file_get_contents('http://api.gimhoy.com/WordPress_on_SAE/?a=first-post-content&v=4.1&p=SAE');
-    if(!$first_post){$first_post = __('Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!');}
-
 	$wpdb->insert( $wpdb->posts, array(
 								'post_author' => $user_id,
 								'post_date' => $now,
 								'post_date_gmt' => $now_gmt,
 								'post_content' => $first_post,
 								'post_excerpt' => '',
-								'post_title' => $first_title,
+								'post_title' => __('Hello world!'),
 								/* translators: Default post slug */
 								'post_name' => sanitize_title( _x('hello-world', 'Default post slug') ),
 								'post_modified' => $now,
@@ -181,14 +176,19 @@ function wp_install_defaults( $user_id ) {
 	$wpdb->insert( $wpdb->term_relationships, array('term_taxonomy_id' => $cat_tt_id, 'object_id' => 1) );
 
 	// Default comment
-
-		$first_comment_author = __('Gimhoy');
-		$first_comment_url = 'http://blog.gimhoy.com/';
-		$first_comment = __('Hello, 欢迎使用WordPress on SAE. 如果在使用过程中有任何问题或建议，欢迎到<a title="Gimhoy\'s Blog" href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">我的博客</a>指出。祝使用愉快~');
+	$first_comment_author = __('Mr WordPress');
+	$first_comment_url = 'https://wordpress.org/';
+	$first_comment = __('Hi, this is a comment.
+To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.');
+	if ( is_multisite() ) {
+		$first_comment_author = get_site_option( 'first_comment_author', $first_comment_author );
+		$first_comment_url = get_site_option( 'first_comment_url', network_home_url() );
+		$first_comment = get_site_option( 'first_comment', $first_comment );
+	}
 	$wpdb->insert( $wpdb->comments, array(
 								'comment_post_ID' => 1,
 								'comment_author' => $first_comment_author,
-								'comment_author_email' => 'Gimhoy0608@gmail.com',
+								'comment_author_email' => '',
 								'comment_author_url' => $first_comment_url,
 								'comment_date' => $now,
 								'comment_date_gmt' => $now_gmt,

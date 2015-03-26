@@ -1353,10 +1353,6 @@ function map_meta_cap( $cap, $user_id ) {
  * @return bool
  */
 function current_user_can( $capability ) {
-	$block_action = array('install_plugins','install_themes', 'edit_plugins', 'update_plugins', 'install_plugins', 'update_themes','delete_plugins','delete_themes','delete_plugins');
-    if (in_array($capability, $block_action)!=false) {
-        return false;
-    }  // for SAE
 	$current_user = wp_get_current_user();
 
 	if ( empty( $current_user ) )

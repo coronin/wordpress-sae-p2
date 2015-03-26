@@ -230,6 +230,7 @@ function update_right_now_message() {
 			$msg .= " <a href='" . network_admin_url( 'update-core.php' ) . "' class='button'>" . sprintf( __('Update to %s'), $cur->current ? $cur->current : __( 'Latest' ) ) . '</a>';
 	}
 
+	echo "<p id='wp-version-message'>$msg</p>";
 }
 
 function get_plugin_updates() {
