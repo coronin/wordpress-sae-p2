@@ -57,7 +57,7 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 		exit;
 	}
 
-	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+	define( 'WP_CONTENT_DIR', ABSPATH . 'media' );
 	require_once( ABSPATH . WPINC . '/version.php' );
 
 	wp_check_php_mysql_versions();
