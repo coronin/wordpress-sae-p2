@@ -25,7 +25,7 @@ function weixin_robot_credit_share(share_type){
 				_ajax_nonce: 	weixin_data.nonce
 			},
 			success: function(html){
-				if(weixin_data.notify){
+				if(weixin_data.notify == 1){
 					alert(html);
 				}
 			}
@@ -74,7 +74,7 @@ function weixin_robot_credit_share(share_type){
 				"title":		weixin_data.title
 			}, function(res){
 				if(res.err_msg == 'send_app_msg:cancel'){
-					if(weixin_data.notify){
+					if(weixin_data.notify == 1){
 						alert('取消可是没有积分的哦。');
 					}
 				}else {
@@ -93,7 +93,7 @@ function weixin_robot_credit_share(share_type){
 				"title":		weixin_data.title
 			}, function(res){
 				if(res.err_msg == 'share_timeline:cancel'){
-					if(weixin_data.notify){
+					if(weixin_data.notify == 1){
 						alert('取消可是没有积分的哦。');
 					}
 				}else {
@@ -108,7 +108,7 @@ function weixin_robot_credit_share(share_type){
 				"url":			weixin_data.link
 			}, function(res){
 				if(res.err_msg == 'share_weibo:cancel'){
-					if(weixin_data.notify){
+					if(weixin_data.notify == 1){
 						alert('取消可是没有积分的哦。');
 					}
 				}else {
@@ -127,7 +127,7 @@ function weixin_robot_credit_share(share_type){
 				"title":		weixin_data.title
 			}, function(res){
 				if(res.err_msg == 'share_fb:cancel'){
-					if(weixin_data.notify){
+					if(weixin_data.notify == 1){
 						alert('取消可是没有积分的哦。');
 					}
 				}else {

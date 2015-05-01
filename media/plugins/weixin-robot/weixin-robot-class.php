@@ -243,7 +243,15 @@ class wechatCallback {
 			</Music>
 			</xml>
 		";
-	}	
+	}
+
+	public function get_transfer_customer_serviceTpl(){
+		return "
+			<xml>".$this->get_basicTpl()."
+				<MsgType><![CDATA[transfer_customer_service]]></MsgType>
+			</xml>
+		";
+	}
 
 	public function get_msgType(){
 		return $this->msgType;

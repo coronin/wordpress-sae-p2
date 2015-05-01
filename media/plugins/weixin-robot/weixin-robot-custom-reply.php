@@ -234,7 +234,7 @@ function weixin_robot_custom_reply_page(){
 		'reply'		=> array('title'=>'回复内容',	'type'=>'textarea',	'value'=>$id?$reply:'',		'description'=>'回复类型为图文时，请输入构成图文回复的单篇或者多篇日志的ID，并用英文逗号区分开，如：<code>123,234,345</code>，并且 ID 数量不要超过基本设置里面的返回结果最大条数。<br />回复类型为函数时，请输入相应的处理函数'),
 		'match'		=> array('title'=>'匹配方式',	'type'=>'select',	'value'=>$id?$match:'',		'options'=> array('full'=>'完全匹配','prefix'=>'前缀匹配'),	'description'=>'前缀匹配方式只支持匹配前两个中文字或者字母。'),
 		'time'		=> array('title'=>'添加时间',	'type'=>'datetime',	'value'=>$id?$time:current_time('mysql')),
-		'status'	=> array('title'=>'状态',	'type'=>'checkbox',	'value'=>'1',				'description'=>'是否激活',	'checked'=>$id?($status?'checked':''):'checked')
+		'status'	=> array('title'=>'状态',	'type'=>'checkbox',	'value'=>$id?$status:'',				'description'=>'是否激活')
 	); 
 
 	?>

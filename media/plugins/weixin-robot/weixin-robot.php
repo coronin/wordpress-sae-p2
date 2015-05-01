@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: 微信机器人
+Plugin Name: 微信机器人高级版
 Plugin URI: http://blog.wpjam.com/project/weixin-robot-advanced/
 Description: 微信机器人的主要功能就是能够将你的公众账号和你的 WordPress 博客联系起来，搜索和用户发送信息匹配的日志，并自动回复用户，让你使用微信进行营销事半功倍。
-Version: 4.2.4
+Version: 4.3.5
 Author: Denis
 Author URI: http://blog.wpjam.com/
 */
@@ -87,31 +87,6 @@ function weixin_robot_init($wp){
 			$wechatObj = new wechatCallback();
 			$wechatObj->valid();
 			exit;
-		}
-	}
-
-	// OAuth 2.0 
-	if(weixin_robot_get_setting('weixin_advanced_api') && isset($_GET['weixin_oauth'])){
-		if(isset($_GET['get_userinfo'])){		// 发起获取用户信息的 OAuth 请求
-			wp_redirect(weixin_robot_get_oauth_redirect());
-			exit;
-		}elseif(isset($_GET['get_openid'])){	// 发起获取 weixin_openid 的 OAuth 请求
-			wp_redirect(weixin_robot_get_oauth_redirect($scope='snsapi_base'));
-			exit;
-		}elseif(isset($_GET['code']) && isset($_GET['state'])){	// 微信 OAuth 请求
-			if($_GET['state']=='openid'){	// 仅仅获取 weixin_openid
-				$access_token 	= weixin_robot_get_oauth_access_token($_GET['code']);
-				if($access_token && isset($access_token->openid)){
-					$query_id 		= weixin_robot_get_user_query_id($access_token->openid);
-					weixin_robot_set_query_cookie($query_id);
-				}
-			}elseif($_GET['state']=='userinfo'){	// 获取用户详细信息
-				weixin_robot_oauth_update_user($_GET['code']);
-			}else{
-				if($_GET['code']=='authdeny'){	// 用户取消授权。
-					//echo 'User Deny';
-				}
-			}
 		}
 	}
 

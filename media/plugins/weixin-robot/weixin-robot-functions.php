@@ -139,6 +139,7 @@ function weixin_robot_get_default_option(){
 		'weixin_default_location'		=> "系统暂时还不支持位置回复，直接发送文本来搜索吧。\n获取更多帮助信息请输入：h。",
 		'weixin_default_image'			=> "系统暂时还不支持图片回复，直接发送文本来搜索吧。\n获取更多帮助信息请输入：h。",
 		'weixin_default_link'			=> "已经收到你分享的信息，感谢分享。\n获取更多帮助信息请输入：h。",
+		'weixin_wkd'					=> '00',
 		'weixin_enter'					=> "输入 n 返回最新日志！\n输入 r 返回随机日志！\n输入 t 返回最热日志！\n输入 c 返回最多评论日志！\n输入 t7 返回一周内最热日志！\n输入 c7 返回一周内最多评论日志！\n输入 h 获取帮助信息！",
 
 		'new'			=> 'n',

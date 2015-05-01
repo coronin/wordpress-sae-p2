@@ -143,12 +143,12 @@ function weixin_robot_custom_menu_add(){
 	$type_options			= array('click'=>'点击事件', 'view'=>'访问网页');
 
 	$form_fields = array(
-		'name'			=> array('title'=>'按钮名称',			'type'=>'text',		'value'=>$id?$weixin_robot_custom_menu['name']:'',	'description'=>'按钮描述，既按钮名字，不超过16个字节，子菜单不超过40个字节'),
-		'type'			=> array('title'=>'按钮类型',			'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['type']:'',	'description'=>'',	'options'=> $type_options),
-		'key'			=> array('title'=>'按钮KEY值/URL',	'type'=>'text',		'value'=>$id?$weixin_robot_custom_menu['key']:'',	'description'=>'用于消息接口（event类型）推送，不超过128字节，如果按钮还有子按钮，可以不填，其他必填，否则报错。<br />如果类型为点击事件时候，则为按钮KEY值，如果类型为浏览网页，则为URL。<br />KEY值可以为搜索关键字，或者自定义回复定义的关键字。'),
-		'is_sub'		=> array('title'=>'子按钮',			'type'=>'checkbox',	'value'=>'1',										'description'=>'是否激活', 'checked'=>$id?($weixin_robot_custom_menu['parent']?'checked':''):'', ),
-		'position'		=> array('title'=>'位置',			'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['position']:'','description'=>'设置按钮的位置',	'options'=> $position_options ),
-		'parent'		=> array('title'=>'所属父按钮位置',	'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['parent']:'','description'=>'如果是子按钮则需要设置所属父按钮的位置',	'options'=> $parent_options ),
+		'name'			=> array('title'=>'按钮名称',			'type'=>'text',		'value'=>$id?$weixin_robot_custom_menu['name']:'',		'description'=>'按钮描述，既按钮名字，不超过16个字节，子菜单不超过40个字节'),
+		'type'			=> array('title'=>'按钮类型',			'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['type']:'',		'description'=>'',	'options'=> $type_options),
+		'key'			=> array('title'=>'按钮KEY值/URL',	'type'=>'text',		'value'=>$id?$weixin_robot_custom_menu['key']:'',		'description'=>'用于消息接口（event类型）推送，不超过128字节，如果按钮还有子按钮，可以不填，其他必填，否则报错。<br />如果类型为点击事件时候，则为按钮KEY值，如果类型为浏览网页，则为URL。<br />KEY值可以为搜索关键字，或者自定义回复定义的关键字。'),
+		'is_sub'		=> array('title'=>'子按钮',			'type'=>'checkbox',	'value'=>$id?($weixin_robot_custom_menu['parent']?1:0):'','description'=>'是否激活' ),
+		'position'		=> array('title'=>'位置',			'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['position']:'',	'description'=>'设置按钮的位置',	'options'=> $position_options ),
+		'parent'		=> array('title'=>'所属父按钮位置',	'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['parent']:'',	'description'=>'如果是子按钮则需要设置所属父按钮的位置',	'options'=> $parent_options ),
 		'sub_position'	=> array('title'=>'子按钮的位置',		'type'=>'select',	'value'=>$id?$weixin_robot_custom_menu['sub_position']:'','description'=>'设置子按钮的位置',	'options'=> $sub_position_options )
 	);
 
