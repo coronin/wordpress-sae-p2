@@ -25,7 +25,7 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Tools_Import_Screen" target="_blank">Documentation on Import</a>') . '</p>' .
+	'<p>' . __('<a href="https://codex.wordpress.org/Tools_Import_Screen" target="_blank">Documentation on Import</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -56,7 +56,6 @@ $parent_file = 'tools.php';
 <?php if ( ! empty( $_GET['invalid'] ) ) : ?>
 	<div class="error"><p><strong><?php _e('ERROR:')?></strong> <?php printf( __('The <strong>%s</strong> importer is invalid or is not installed.'), esc_html( $_GET['invalid'] ) ); ?></p></div>
 <?php endif; ?>
-<p style="color:red">由于SAE对脚本执行时间有限制，当数据量非常大时，导入可能会超时而导致失败。您可以使用SAE的Defferred Jobs服务将数据库导入。</p>   <?php // for SAE ?>
 <p><?php _e('If you have posts or comments in another system, WordPress can import those into this site. To get started, choose a system to import from below:'); ?></p>
 
 <?php
@@ -77,10 +76,9 @@ if ( empty( $importers ) ) {
 } else {
 	uasort( $importers, '_usort_by_first_member' );
 ?>
-<table class="widefat importers">
+<table class="widefat importers striped">
 
 <?php
-	$alt = '';
 	foreach ($importers as $importer_id => $data) {
 		$action = '';
 		if ( isset( $data['install'] ) ) {
@@ -109,9 +107,8 @@ if ( empty( $importers ) ) {
 			$action = "<a href='" . esc_url( "admin.php?import=$importer_id" ) . "' title='" . esc_attr( wptexturize( strip_tags( $data[1] ) ) ) ."'>{$data[0]}</a>";
 		}
 
-		$alt = $alt ? '' : ' class="alternate"';
 		echo "
-			<tr$alt>
+			<tr>
 				<td class='import-system row-title'>$action</td>
 				<td class='desc'>{$data[1]}</td>
 			</tr>";
@@ -122,10 +119,8 @@ if ( empty( $importers ) ) {
 <?php
 }
 
-/*
 if ( current_user_can('install_plugins') )
 	echo '<p>' . sprintf( __('If the importer you need is not listed, <a href="%s">search the plugin directory</a> to see if an importer is available.'), esc_url( network_admin_url( 'plugin-install.php?tab=search&type=tag&s=importer' ) ) ) . '</p>';
-*/ // for SAE
 ?>
 
 </div>

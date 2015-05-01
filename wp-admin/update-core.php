@@ -47,11 +47,9 @@ function list_core_update( $update ) {
 		$download = __('Download nightly build');
 	} else {
 		if ( $current ) {
-			$message = sprintf(__('您正在使用最新版本的 WordPress。您无需升级。尽管如此，您还是可以下载 %s 的安装包手动重新安装'),$version_string);
-			/*
+			$message = sprintf( __( 'If you need to re-install version %s, you can do so here or download the package and re-install manually:' ), $version_string );
 			$submit = __('Re-install Now');
 			$form_action = 'update-core.php?action=do-core-reinstall';
-			*/ // for SAE
 		} else {
 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
@@ -60,13 +58,13 @@ function list_core_update( $update ) {
 				$mysql_compat = version_compare( $mysql_version, $update->mysql_version, '>=' );
 
 			if ( !$mysql_compat && !$php_compat )
-				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires PHP version %2$s or higher and MySQL version %3$s or higher. You are running PHP version %4$s and MySQL version %5$s.'), $update->current, $update->php_version, $update->mysql_version, $php_version, $mysql_version );
+				$message = sprintf( __('You cannot update because <a href="https://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires PHP version %2$s or higher and MySQL version %3$s or higher. You are running PHP version %4$s and MySQL version %5$s.'), $update->current, $update->php_version, $update->mysql_version, $php_version, $mysql_version );
 			elseif ( !$php_compat )
-				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires PHP version %2$s or higher. You are running version %3$s.'), $update->current, $update->php_version, $php_version );
+				$message = sprintf( __('You cannot update because <a href="https://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires PHP version %2$s or higher. You are running version %3$s.'), $update->current, $update->php_version, $php_version );
 			elseif ( !$mysql_compat )
-				$message = sprintf( __('You cannot update because <a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
+				$message = sprintf( __('You cannot update because <a href="https://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s.'), $update->current, $update->mysql_version, $mysql_version );
 			else
-				$message = 	sprintf(__('您可以下载 <a href="http://blog.gimhoy.com/archives/wordpress-on-sae.html">WordPress %2$s 版本</a> 的安装包手动安装：'), $update->current, $version_string);  // for SAE, modified by Gimhoy (blog.gimhoy.com)
+				$message = 	sprintf(__('You can update to <a href="https://codex.wordpress.org/Version_%1$s">WordPress %2$s</a> automatically or download the package and install it manually:'), $update->current, $version_string);
 			if ( !$mysql_compat || !$php_compat )
 				$show_buttons = false;
 		}
@@ -83,10 +81,10 @@ function list_core_update( $update ) {
 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
 	if ( $show_buttons ) {
 		if ( $first_pass ) {
-			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE
+			submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false );
 			$first_pass = false;
 		} else {
-			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE
+			submit_button( $submit, 'button', 'upgrade', false );
 		}
 		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
 	}
@@ -165,7 +163,7 @@ function core_upgrade_preamble() {
 		echo '</h3>';
 	} else {
 		echo '<div class="updated inline"><p>';
-		_e('<strong>Important:</strong> before updating, please <a href="http://codex.wordpress.org/WordPress_Backups">back up your database and files</a>. For help with updates, visit the <a href="http://codex.wordpress.org/Updating_WordPress">Updating WordPress</a> Codex page.');
+		_e('<strong>Important:</strong> before updating, please <a href="https://codex.wordpress.org/WordPress_Backups">back up your database and files</a>. For help with updates, visit the <a href="https://codex.wordpress.org/Updating_WordPress">Updating WordPress</a> Codex page.');
 		echo '</p></div>';
 
 		echo '<h3 class="response">';
@@ -221,24 +219,18 @@ function list_plugin_updates() {
 		$core_update_version = $core_updates[0]->current;
 	?>
 <h3><?php _e( 'Plugins' ); ?></h3>
-<p><?php print_r( '以下插件有可用更新，请下载您需要升级的插件之后通过SVN手动升级。' ); // for SAE ?></p>
+<p><?php _e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' ); ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
-
+<p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
 <table class="widefat" id="update-plugins-table">
 	<thead>
 	<tr>
-		<th scope="col" class="manage-column check-column"></th>
-		<th scope="col" class="manage-column"></th>
+		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all" /></th>
+		<th scope="col" class="manage-column"><label for="plugins-select-all"><?php _e('Select All'); ?></label></th>
 	</tr>
 	</thead>
 
-	<tfoot>
-	<tr>
-		<th scope="col" class="manage-column check-column"></th>
-		<th scope="col" class="manage-column"></th>
-	</tr>
-	</tfoot>
 	<tbody class="plugins">
 <?php
 	foreach ( (array) $plugins as $plugin_file => $plugin_data) {
@@ -284,8 +276,15 @@ function list_plugin_updates() {
 	}
 ?>
 	</tbody>
-</table>
 
+	<tfoot>
+	<tr>
+		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all-2" /></th>
+		<th scope="col" class="manage-column"><label for="plugins-select-all-2"><?php _e( 'Select All' ); ?></label></th>
+	</tr>
+	</tfoot>
+</table>
+<p><input id="upgrade-plugins-2" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
 </form>
 <?php
 }
@@ -303,7 +302,7 @@ function list_theme_updates() {
 ?>
 <h3><?php _e( 'Themes' ); ?></h3>
 <p><?php _e( 'The following themes have new versions available. Check the ones you want to update and then click &#8220;Update Themes&#8221;.' ); ?></p>
-<p><?php printf( __( '<strong>Please Note:</strong> Any customizations you have made to theme files will be lost. Please consider using <a href="%s">child themes</a> for modifications.' ), __( 'http://codex.wordpress.org/Child_Themes' ) ); ?></p>
+<p><?php printf( __( '<strong>Please Note:</strong> Any customizations you have made to theme files will be lost. Please consider using <a href="%s">child themes</a> for modifications.' ), __( 'https://codex.wordpress.org/Child_Themes' ) ); ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-themes" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
 <p><input id="upgrade-themes" class="button" type="submit" value="<?php esc_attr_e('Update Themes'); ?>" name="upgrade" /></p>
@@ -315,12 +314,6 @@ function list_theme_updates() {
 	</tr>
 	</thead>
 
-	<tfoot>
-	<tr>
-		<th scope="col" class="manage-column check-column"><input type="checkbox" id="themes-select-all-2" /></th>
-		<th scope="col" class="manage-column"><label for="themes-select-all-2"><?php _e('Select All'); ?></label></th>
-	</tr>
-	</tfoot>
 	<tbody class="plugins">
 <?php
 	foreach ( $themes as $stylesheet => $theme ) {
@@ -332,6 +325,13 @@ function list_theme_updates() {
 	}
 ?>
 	</tbody>
+
+	<tfoot>
+	<tr>
+		<th scope="col" class="manage-column check-column"><input type="checkbox" id="themes-select-all-2" /></th>
+		<th scope="col" class="manage-column"><label for="themes-select-all-2"><?php _e( 'Select All' ); ?></label></th>
+	</tr>
+	</tfoot>
 </table>
 <p><input id="upgrade-themes-2" class="button" type="submit" value="<?php esc_attr_e('Update Themes'); ?>" name="upgrade" /></p>
 </form>
@@ -352,7 +352,7 @@ function list_translation_updates() {
 	?>
 	<h3><?php _e( 'Translations' ); ?></h3>
 	<form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-translations" class="upgrade">
-		<p><?php _e( 'Some of your translations are out of date.' ); ?></p>
+		<p><?php _e( 'New translations are available.' ); ?></p>
 		<?php wp_nonce_field( 'upgrade-translations' ); ?>
 		<p><input class="button" type="submit" value="<?php esc_attr_e( 'Update Translations' ); ?>" name="upgrade" /></p>
 	</form>
@@ -392,14 +392,14 @@ function do_core_upgrade( $reinstall = false ) {
 	<h2><?php _e('Update WordPress'); ?></h2>
 <?php
 
-	if ( false === ( $credentials = request_filesystem_credentials( $url, '', false, ABSPATH, array(), $allow_relaxed_file_ownership ) ) ) {
+	if ( false === ( $credentials = request_filesystem_credentials( $url, '', false, ABSPATH, array( 'version', 'locale' ), $allow_relaxed_file_ownership ) ) ) {
 		echo '</div>';
 		return;
 	}
 
 	if ( ! WP_Filesystem( $credentials, ABSPATH, $allow_relaxed_file_ownership ) ) {
 		// Failed to connect, Error and request again
-		request_filesystem_credentials( $url, '', true, ABSPATH, array(), $allow_relaxed_file_ownership );
+		request_filesystem_credentials( $url, '', true, ABSPATH, array( 'version', 'locale' ), $allow_relaxed_file_ownership );
 		echo '</div>';
 		return;
 	}
@@ -498,7 +498,7 @@ get_current_screen()->add_help_tab( array(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __( '<a href="http://codex.wordpress.org/Dashboard_Updates_Screen" target="_blank">Documentation on Updating WordPress</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://codex.wordpress.org/Dashboard_Updates_Screen" target="_blank">Documentation on Updating WordPress</a>' ) . '</p>' .
 	'<p>' . __( '<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>' ) . '</p>'
 );
 

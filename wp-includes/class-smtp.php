@@ -199,8 +199,7 @@ class SMTP
         $errstr = '';
         $socket_context = stream_context_create($options);
         //Suppress errors; connection failures are handled at a higher level
-        /*
-		$this->smtp_conn = @stream_socket_client(
+        $this->smtp_conn = @stream_socket_client(
             $host . ":" . $port,
             $errno,
             $errstr,
@@ -208,8 +207,6 @@ class SMTP
             STREAM_CLIENT_CONNECT,
             $socket_context
         );
-		*/
-		$this->smtp_conn = fsockopen($host, $port, $errno, $errstr); // for SAE
 
         // Verify we connected properly
         if (empty($this->smtp_conn)) {
@@ -231,11 +228,9 @@ class SMTP
         // Windows does not have support for this timeout function
         if (substr(PHP_OS, 0, 3) != 'WIN') {
             $max = ini_get('max_execution_time');
-            /*$max = ini_get('max_execution_time');
             if ($max != 0 && $timeout > $max) { // Don't bother if unlimited
                 @set_time_limit($timeout);
-            } */// for SAE
-
+            }
             stream_set_timeout($this->smtp_conn, $timeout, 0);
         }
 

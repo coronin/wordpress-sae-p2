@@ -168,10 +168,10 @@ class WP_Themes_List_Table extends WP_List_Table {
 					. __( 'Live Preview' ) . '</a>';
 			}
 
-			/* if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
+			if ( ! is_multisite() && current_user_can( 'delete_themes' ) )
 				$actions['delete'] = '<a class="submitdelete deletion" href="' . wp_nonce_url( 'themes.php?action=delete&amp;stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet )
 					. '" onclick="' . "return confirm( '" . esc_js( sprintf( __( "You are about to delete this theme '%s'\n  'Cancel' to stop, 'OK' to delete." ), $title ) )
-					. "' );" . '">' . __( 'Delete' ) . '</a>'; */ // for SAE
+					. "' );" . '">' . __( 'Delete' ) . '</a>';
 
 			/** This filter is documented in wp-admin/includes/class-wp-ms-themes-list-table.php */
 			$actions       = apply_filters( 'theme_action_links', $actions, $theme );
@@ -213,7 +213,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 				<p><?php echo $theme->display('Description'); ?></p>
 				<?php if ( $theme->parent() ) {
 					printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.' ) . '</p>',
-						__( 'http://codex.wordpress.org/Child_Themes' ),
+						__( 'https://codex.wordpress.org/Child_Themes' ),
 						$theme->parent()->display( 'Name' ) );
 				} ?>
 			</div>

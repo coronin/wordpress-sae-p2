@@ -97,8 +97,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		 *                          Accepts an integer (bytes), or a shorthand string notation, such as '256M'.
 		 */
 		// Set artificially high because GD uses uncompressed images in memory
-		// @ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) ); // for SAE
-
+		@ini_set( 'memory_limit', apply_filters( 'image_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
 		$this->image = @imagecreatefromstring( file_get_contents( $this->file ) );
 
@@ -232,8 +231,9 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			}
 
 			$image = $this->_resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
+			$duplicate = ( ( $orig_size['width'] == $size_data['width'] ) && ( $orig_size['height'] == $size_data['height'] ) );
 
-			if( ! is_wp_error( $image ) ) {
+			if ( ! is_wp_error( $image ) && ! $duplicate ) {
 				$resized = $this->_save( $image );
 
 				imagedestroy( $image );
@@ -307,9 +307,12 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	 */
 	public function rotate( $angle ) {
 		if ( function_exists('imagerotate') ) {
-			$rotated = imagerotate( $this->image, $angle, 0 );
+			$transparency = imagecolorallocatealpha( $this->image, 255, 255, 255, 127 );
+			$rotated = imagerotate( $this->image, $angle, $transparency );
 
 			if ( is_resource( $rotated ) ) {
+				imagealphablending( $rotated, true );
+				imagesavealpha( $rotated, true );
 				imagedestroy( $this->image );
 				$this->image = $rotated;
 				$this->update_size();
@@ -402,12 +405,10 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			return new WP_Error( 'image_save_error', __('Image Editor Save Failed') );
 		}
 
-		/*
 		// Set correct file permissions
 		$stat = stat( dirname( $filename ) );
 		$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
 		@ chmod( $filename, $perms );
-		*/ // for SAE
 
 		/**
 		 * Filter the name of the saved image file.
