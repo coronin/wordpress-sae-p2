@@ -47,9 +47,11 @@ function list_core_update( $update ) {
 		$download = __('Download nightly build');
 	} else {
 		if ( $current ) {
-			$message = sprintf( __( 'If you need to re-install version %s, you can do so here or download the package and re-install manually:' ), $version_string );
+			$message = sprintf(__('您正在使用最新版本的 WordPress。您无需升级。尽管如此，您还是可以下载 %s 的安装包手动重新安装'),$version_string);
+			/*
 			$submit = __('Re-install Now');
 			$form_action = 'update-core.php?action=do-core-reinstall';
+			*/ // for SAE
 		} else {
 			$php_compat     = version_compare( $php_version, $update->php_version, '>=' );
 			if ( file_exists( WP_CONTENT_DIR . '/db.php' ) && empty( $wpdb->is_mysql ) )
@@ -81,10 +83,10 @@ function list_core_update( $update ) {
 	echo '<input name="locale" value="'. esc_attr($update->locale) .'" type="hidden"/>';
 	if ( $show_buttons ) {
 		if ( $first_pass ) {
-			submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false );
+			// submit_button( $submit, $current ? 'button' : 'primary regular', 'upgrade', false ); // for SAE
 			$first_pass = false;
 		} else {
-			submit_button( $submit, 'button', 'upgrade', false );
+			// submit_button( $submit, 'button', 'upgrade', false ); // for SAE
 		}
 		echo '&nbsp;<a href="' . esc_url( $update->download ) . '" class="button">' . $download . '</a>&nbsp;';
 	}
@@ -219,15 +221,15 @@ function list_plugin_updates() {
 		$core_update_version = $core_updates[0]->current;
 	?>
 <h3><?php _e( 'Plugins' ); ?></h3>
-<p><?php _e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' ); ?></p>
+<p><?php _e( 'The following plugins have new versions available. Please contact the admin and update with SAE/SVN.' ); ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
 <?php wp_nonce_field('upgrade-core'); ?>
-<p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
+<p>SAE cannot live update plugins</p>
 <table class="widefat" id="update-plugins-table">
 	<thead>
 	<tr>
-		<th scope="col" class="manage-column check-column"><input type="checkbox" id="plugins-select-all" /></th>
-		<th scope="col" class="manage-column"><label for="plugins-select-all"><?php _e('Select All'); ?></label></th>
+		<th scope="col" class="manage-column check-column"></th>
+		<th scope="col" class="manage-column"></th>
 	</tr>
 	</thead>
 
@@ -284,7 +286,7 @@ function list_plugin_updates() {
 	</tr>
 	</tfoot>
 </table>
-<p><input id="upgrade-plugins-2" class="button" type="submit" value="<?php esc_attr_e('Update Plugins'); ?>" name="upgrade" /></p>
+
 </form>
 <?php
 }
@@ -309,8 +311,8 @@ function list_theme_updates() {
 <table class="widefat" id="update-themes-table">
 	<thead>
 	<tr>
-		<th scope="col" class="manage-column check-column"><input type="checkbox" id="themes-select-all" /></th>
-		<th scope="col" class="manage-column"><label for="themes-select-all"><?php _e('Select All'); ?></label></th>
+		<th scope="col" class="manage-column check-column"></th>
+		<th scope="col" class="manage-column"></th>
 	</tr>
 	</thead>
 

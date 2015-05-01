@@ -1225,7 +1225,8 @@ class getid3_mp3 extends getid3_handler
 
 		$previousvalidframe = $info['avdataoffset'];
 		while ($this->ftell() < $info['avdataend']) {
-			set_time_limit(30);
+			//set_time_limit(30); // for SAE
+
 			$head4 = $this->fread(4);
 			if (strlen($head4) < 4) {
 				break;

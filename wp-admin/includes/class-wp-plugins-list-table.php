@@ -322,8 +322,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		if ( !is_multisite() || $this->screen->in_admin( 'network' ) ) {
 			if ( current_user_can( 'update_plugins' ) )
 				$actions['update-selected'] = __( 'Update' );
-			if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
-				$actions['delete-selected'] = __( 'Delete' );
+			/* if ( current_user_can( 'delete_plugins' ) && ( 'active' != $status ) )
+				$actions['delete-selected'] = __( 'Delete' ); */ //for SAE
 		}
 
 		return $actions;
@@ -438,8 +438,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 				} else {
 					if ( current_user_can( 'manage_network_plugins' ) )
 						$actions['activate'] = '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file) . '" title="' . esc_attr__('Activate this plugin for all sites in this network') . '" class="edit">' . __('Network Activate') . '</a>';
-					if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
-						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>';
+					/* if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) )
+						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */  // for SAE
 				}
 			} else {
 				if ( $is_active ) {
@@ -453,8 +453,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 			 } // end if $screen->in_admin( 'network' )
 
-			if ( ( ! is_multisite() || $screen->in_admin( 'network' ) ) && current_user_can('edit_plugins') && is_writable(WP_PLUGIN_DIR . '/' . $plugin_file) )
-				$actions['edit'] = '<a href="plugin-editor.php?file=' . $plugin_file . '" title="' . esc_attr__('Open this file in the Plugin Editor') . '" class="edit">' . __('Edit') . '</a>';
+					/* if ( ! is_multisite() && current_user_can('delete_plugins') )
+						$actions['delete'] = '<a href="' . wp_nonce_url('plugins.php?action=delete-selected&amp;checked[]=' . $plugin_file . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins') . '" title="' . esc_attr__('Delete this plugin') . '" class="delete">' . __('Delete') . '</a>'; */ // for SAE
 		} // end if $context
 
 		$prefix = $screen->in_admin( 'network' ) ? 'network_admin_' : '';

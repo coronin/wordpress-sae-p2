@@ -232,7 +232,6 @@ function update_right_now_message() {
 
 	$msg .= sprintf( '<span id="wp-version">' . __( 'WordPress %1$s running %2$s theme.' ) . '</span>', get_bloginfo( 'version', 'display' ), $theme_name );
 
-	echo "<p id='wp-version-message'>$msg</p>";
 }
 
 function get_plugin_updates() {

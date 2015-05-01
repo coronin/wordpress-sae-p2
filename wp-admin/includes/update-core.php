@@ -717,13 +717,14 @@ $_old_files = array(
 global $_new_bundled_files;
 
 $_new_bundled_files = array(
-	'plugins/akismet/'       => '2.0',
-	'themes/twentyten/'      => '3.0',
-	'themes/twentyeleven/'   => '3.2',
-	'themes/twentytwelve/'   => '3.5',
-	'themes/twentythirteen/' => '3.6',
-	'themes/twentyfourteen/' => '3.8',
-	'themes/twentyfifteen/'  => '4.1',
+  'themes/p2/'      => '1.5.5',
+  'themes/tsi/'   => '2.0.2',
+  'plugins/wp-mail-smtp/' => '0.9.5',
+  'plugins/restricted-site-access/' => '5.1',
+  'plugins/baidu-sitemap-generator/' => '1.6.5',
+  'plugins/contact-form-7/' => '4.1',
+  'plugins/contact-form-7-to-database-extension/' => '2.8.26',
+  'plugins/really-simple-captcha/' => '1.8.0.1',
 );
 
 /**
@@ -775,7 +776,8 @@ $_new_bundled_files = array(
 function update_core($from, $to) {
 	global $wp_filesystem, $_old_files, $_new_bundled_files, $wpdb;
 
-	@set_time_limit( 300 );
+	// @set_time_limit( 300 ); // for SAE
+
 
 	/**
 	 * Filter feedback messages displayed during the core update process.
