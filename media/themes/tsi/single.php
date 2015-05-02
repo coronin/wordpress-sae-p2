@@ -2,7 +2,7 @@
 
 <div id="content">
 
-          <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
+          <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
             <h1 class="page-title"><?php the_title(); ?></h1>
 
             <div class="content-ver-sep"> </div>

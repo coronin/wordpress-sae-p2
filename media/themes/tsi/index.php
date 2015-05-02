@@ -4,7 +4,6 @@
  <?php if (have_posts()) : while (have_posts()) : the_post();?>
 <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
  <p class="postmetadataw">Posted on <?php the_time('F j, Y'); ?></p>
- <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
  <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
  <div class="content-ver-sep"> </div>
  <div class="entrytext">

@@ -31,7 +31,7 @@
       <div id ="header-content">
 
         <!-- Site Titele and Description Goes Here -->
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>"/></a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>" alt="site logo image" /></a>
 
         <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2>
         <!-- Site Main Menu Goes Here -->

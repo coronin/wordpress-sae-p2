@@ -19,7 +19,7 @@
     <?php query_posts("showposts=5&cat=$category"); ?>
       <h3 class="widget-title">
         <a href="<?php echo get_category_link($category); ?>">
-          TSG <?php single_cat_title(); ?>
+          TSI <?php single_cat_title(); ?>
         </a>
       </h3>
       <ul>
@@ -38,7 +38,7 @@
 <?php } else { ?>
 
     <aside class="widget">
-        <h3 class="widget-title">TSG Updates</h3>
+        <h3 class="widget-title">TSI Updates</h3>
         <ul>
             <?php wp_get_archives( array( 'type' => 'postbypost', 'limit' => 4 ) ); ?>
         </ul>

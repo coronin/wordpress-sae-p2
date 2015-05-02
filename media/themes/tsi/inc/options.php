@@ -22,7 +22,7 @@ function optionsframework_options() {
 	// add_filter( 'wp_default_editor', create_function('', 'return "html";') ); 
 	
 	$options[] = array(
-		'name' => 'TSG Options',
+		'name' => 'Options',
 		'type' => 'heading');
 		
 	$options[] = array(
@@ -61,7 +61,7 @@ function optionsframework_options() {
 		'name' => 'Featured Title',
 		'desc' => 'Input your Featured Title here. Plese limit it within 30 Letters. If you do not want to show anything here leave the box blank.',
 		'id' => 'featured-title' . $fbsinumber,
-		'std' => 'TSG Theme',
+		'std' => 'Theme',
 		'type' => 'text');
 	
 	$options[] = array(

@@ -14,16 +14,25 @@
                 <?php } //endif ?>
 
                 <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-                <p class="postmetadataw">Entry Date: <?php the_time('F j, Y'); ?></p>
-                <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
-                <div class="content-ver-sep"></div>
-                <div class="entrytext">
+                  <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
+                  <div class="content-ver-sep"></div>
+                  <div class="entrytext">
  <?php the_post_thumbnail('thumbnail'); ?>
  <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
- <div class="clear"> </div>
- <div class="up-bottom-border">
-                <p class="postmetadata"><?php edit_post_link('Edit', '', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
-                </div></div></div>
+
+                  <div class="clear"> </div>
+                  <div class="up-bottom-border">
+                  <p class="postmetadata">Viewed by <?php
+  $c = new SaeCounter();
+  $cc = 'c'.get_the_date('Ym');
+  if ( $c->create($cc) ) {
+    $c->set($cc, 1); 
+  } else {
+    $c->incr($cc); }
+  echo $c->get($cc);
+?>; Posted on <a href="<?php echo get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+                  </div></div>
+                  </div><!--close post class-->
 
         <?php $counter++; ?>
 

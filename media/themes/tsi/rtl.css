@@ -176,7 +176,7 @@ address {
 	float:right;
 }
 
-#footer-sidebar #footer-widgets {
+#footer-sidebar .footer-widgets {
 	margin-right: 49.5px;
 	float:right;
 	margin-left: auto;

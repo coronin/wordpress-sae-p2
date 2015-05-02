@@ -13,7 +13,7 @@ get_header(); ?>
     $c->set($cc, 1); 
   } else {
     $c->incr($cc); }
-?> <h3 class="subtitle"><?php echo get_post_meta($post->ID, 'sb_subtitle', 'true'); ?></h3>
+?>
             <h1 class="page-title"><?php the_title(); ?></h1>
 
             <div class="content-ver-sep"> </div>

@@ -82,8 +82,8 @@ class Options_Framework_Admin {
 	static function menu_settings() {
 
 		$menu = array(
-			'page_title' => 'TSG Options',
-			'menu_title' => 'TSG Options',
+			'page_title' => 'Page Options',
+			'menu_title' => 'Menu Options',
 			'capability' => 'edit_theme_options',
 			'menu_slug' => 'options-framework'
 		);

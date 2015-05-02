@@ -1,6 +1,6 @@
 <?php
 
-// TSG, 2015-1
+// by Liang Cai: 2015/1, 2015/5
   remove_action('wp_head', 'rsd_link');
   remove_action('wp_head', 'wp_generator');
   remove_action('wp_head', 'feed_links', 2);
