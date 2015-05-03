@@ -697,14 +697,14 @@ margin:0;
     border-top: 1px dotted #555555;
 }
 
-#right-sidebar input#s,
-#footer-sidebar input#s {
+#right-sidebar input.field,
+#footer-sidebar input.field {
     width: 60%;
 	min-width: 100px;
 }
 
-#right-sidebar form#searchform input[type="submit"],
-#footer-sidebar form#searchform input[type="submit"] {
+#right-sidebar form input[type="submit"],
+#footer-sidebar form input[type="submit"] {
 	padding: 7px;
 	margin-left: 2px;
 }

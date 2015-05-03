@@ -1,5 +1,10 @@
+<?php
+/*
+  Theme's Header
+ */
+?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="no-js">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
@@ -18,32 +23,21 @@
   } else {
     $c->incr($cc); }
 ?>
-
 </head>
+
 <body <?php body_class(); ?> >
+<div id="container">
+    <div id="top-menu-container">
+    <nav id="tsg2011-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
+    <!-- php get_search_form(); -->
+    </div><!-- #top-menu-container -->
 
-  <div id="container">
-      <div id="top-menu-container">
+    <div id ="header">
+    <div id ="header-content">
 
-      <nav id="tsg2011-top-menu"><?php if ( has_nav_menu( 'top-menu' ) ) {  wp_nav_menu( array( 'theme_location' => 'top-menu' )); } ?></nav>
-      <!-- php get_search_form(); -->
-      </div>
-      <div id ="header">
-      <div id ="header-content">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>" alt="site logo image" /></a>
+      <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2>
+      <nav id="tsg2011-main-menu"><?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?></nav>
 
-        <!-- Site Titele and Description Goes Here -->
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="site-logo" src="<?php header_image(); ?>" alt="site logo image" /></a>
-
-        <h2 class="site-title-hidden"><?php bloginfo( 'description' ); ?></h2>
-        <!-- Site Main Menu Goes Here -->
-        <nav id="tsg2011-main-menu">
-        <?php if ( has_nav_menu( 'main-menu' ) ) :  wp_nav_menu( array( 'theme_location' => 'main-menu' )); else: wp_page_menu(); endif; ?>
-        </nav>
-
-      </div><!-- header-content -->
-      </div><!-- header -->
-
-
-
-
-
+    </div><!-- #header-content -->
+    </div><!-- #header -->

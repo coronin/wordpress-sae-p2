@@ -1,4 +1,8 @@
 <?php
+/**
+ *     Options Page
+ *     @ Copyright: D5 Creation, All Rights, www.d5creation.com
+ */
 
 function optionsframework_option_name() {
 

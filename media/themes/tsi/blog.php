@@ -1,33 +1,42 @@
 <?php
 /*  Template Name: Blog
-    based on single wo page-nav
+    based on fullwidth.php
 */
 get_header(); ?>
 
 <div id="content">
+<main class="site-main" role="main">
 
-          <?php if ( have_posts() ) while ( have_posts() ) : the_post();
+    <?php
+    // Start the loop.
+    while (have_posts()) : the_post();
   $c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
-    $c->set($cc, 1); 
+    $c->set($cc, 1);
   } else {
     $c->incr($cc); }
 ?>
-            <h1 class="page-title"><?php the_title(); ?></h1>
 
-            <div class="content-ver-sep"> </div>
-            <div class="entrytext"><?php the_post_thumbnail('category-thumb'); ?>
-            <?php the_content(); ?>
-            <div class="clear"> </div>
-            </div>
+    <header class="entry-header">
+    <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+    </header><!-- .entry-header -->
 
-            <?php endwhile;?>
+    <div class="content-ver-sep"> </div>
+    <div class="entrytext">
+        <?php the_post_thumbnail('category-thumb');
+              the_content(); ?>
+    <br/>
+    </div>
 
-          <!-- End the Loop. -->
+    <?php edit_post_link('Edit This Entry', '<p>', '</p>'); ?>
 
-            <?php comments_template( '', true ); ?>
+    <?php
+    // End the loop.
+    endwhile; ?>
 
+</main><!-- .site-main -->
 </div>
+
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -1,13 +1,35 @@
-<?php get_header(); ?>
+<?php
+/*
+  Theme's 404 Error Page
+ */
+get_header(); ?>
 
-<h1 class="page-title">Not Found</h1>
-<h3 class="arc-src"><span>Apologies, but the page you requested could not be found. Perhaps searching will help.</span></h3>
+<main class="site-main" role="main">
+<header class="page-header">
+<h1 class="arc-post-title">Not Found</h1>
+</header><!-- .page-header -->
+<h3 class="arc-src" style="text-transform:none;">Apologies, sincerely.</h3>
 
-<?php get_search_form(); ?>
-<p><a href="<?php echo home_url(); ?>" title="Browse the Home Page">&laquo; Or Return to the Home Page</a></p><br /><br />
+<section class="error-404 not-found">
+<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
 
-<h2 class="post-title-color">You can also Visit the Following. These are the Featured Contents</h2>
-<div class="content-ver-sep"></div><br />
+            <p><?php printf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'tsi' ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
+
+<?php elseif ( is_search() ) : ?>
+
+            <p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'tsi' ); ?></p>
+            <?php get_search_form(); ?>
+
+<?php else : ?>
+
+            <p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'tsi' ); ?></p>
+            <?php get_search_form(); ?>
+
+<?php endif; ?>
+</section><!-- .error-404 -->
+
+<div class="content-ver-sep"> </div><br/>
 <?php get_template_part( 'featured-box' ); ?>
+</main><!-- .site-main -->
 
 <?php get_footer(); ?>

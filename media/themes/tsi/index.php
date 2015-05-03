@@ -1,51 +1,82 @@
-<?php get_header(); ?>
+<?php
+/*
+  Theme's Index Page
+ */
+get_header(); ?>
 
-<div id="content">
- <?php if (have_posts()) : while (have_posts()) : the_post();?>
+<div id="content"><!-- from index.php -->
+<main class="site-main" role="main">
+
+    <?php if (have_posts()) :
+    // Start the loop.
+    while (have_posts()) : the_post(); ?>
+
 <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
- <p class="postmetadataw">Posted on <?php the_time('F j, Y'); ?></p>
- <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
- <div class="content-ver-sep"> </div>
- <div class="entrytext">
- <?php the_post_thumbnail('thumbnail'); ?>
- <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
- <div class="clear"> </div>
- <div class="up-bottom-border">
- <p class="postmetadata">Viewed by <?php
+    <p class="postmetadataw">Posted on <?php the_time('F j, Y'); ?></p>
+    <header class="entry-header">
+    <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
+    </header><!-- .entry-header -->
+
+    <div class="content-ver-sep"> </div>
+
+    <div class="entrytext">
+        <?php the_post_thumbnail('thumbnail');
+              the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
+        <div class="clear"> </div>
+
+        <div class="up-bottom-border">
+            <p class="postmetadata">Viewed by <?php
   $c = new SaeCounter();
   $cc = 'c'.get_the_date('Ym');
   if ( $c->create($cc) ) {
-    $c->set($cc, 1); 
+    $c->set($cc, 1);
   } else {
     $c->incr($cc); }
   echo $c->get($cc);
 ?>; Posted on <a href="<?php echo get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
- </div>
- </div></div>
+        </div>
+    </div></div>
 
- <?php endwhile; ?>
+<?php
+    // End the loop.
+    endwhile;
 
-<div id="page-nav">
-<div class="alignleft"><?php previous_posts_link('&laquo; Previous Entries') ?></div>
-<div class="alignright"><?php next_posts_link('Next Entries &raquo;','') ?></div>
-</div>
+    // Previous/next page navigation.
+    the_posts_pagination( array(
+        'prev_text'          => __( 'Previous page', 'tsi' ),
+        'next_text'          => __( 'Next page', 'tsi' ),
+        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'tsi' ) . ' </span>',
+    ) );
 
+    else: ?>
 
- <?php else: ?>
+        <header class="page-header">
+        <h1 class="arc-post-title" style="text-transform:none;">Sorry, we find nothing...</h1>
+        </header><!-- .page-header -->
 
- <h1 class="arc-post-title">Sorry, we couldn't find anything that matched your search.</h1>
+        <?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
 
-        <h3 class="arc-src"><span>You Can Try Another Search...</span></h3>
-        <?php get_search_form(); ?>
-        <p><a href="<?php echo home_url(); ?>" title="Browse the Home Page">&laquo; Or Return to the Home Page</a></p><br />
-        <h2 class="post-title-color">You can also Visit the Following. These are the Featured Contents</h2>
-        <div class="content-ver-sep"></div><br />
+            <p><?php printf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'tsi' ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
+
+        <?php elseif ( is_search() ) : ?>
+
+            <p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'tsi' ); ?></p>
+            <?php get_search_form(); ?>
+
+        <?php else : ?>
+
+            <p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'tsi' ); ?></p>
+            <?php get_search_form(); ?>
+
+        <?php endif; ?>
+
+        <div class="content-ver-sep"> </div><br/>
         <?php get_template_part( 'featured-box' ); ?>
 
 <?php endif; ?>
 
-
-</div>
+</main><!-- .site-main -->
+</div><!-- #content -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

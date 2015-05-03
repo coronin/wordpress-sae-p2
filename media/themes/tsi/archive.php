@@ -1,12 +1,18 @@
-<?php get_header(); ?>
+<?php
+/*
+  Theme's Archive Page
+ */
+get_header(); ?>
 
-<div id="content">
-    <?php if (have_posts()) : ?>
-        <?php $post = $posts[0]; // Hack. Set $post so that the_date() works. ?>
-        <?php /* If this is a category archive */ if (is_category()) { ?>
+<div id="content"><!-- from archive.php -->
+<main class="site-main" role="main">
+
+    <?php if (have_posts()) :
+        $post = $posts[0]; // Hack. Set $post so that the_date() works.
+              /* If this is a category archive */ if (is_category()) { ?>
         <h1 class="arc-post-title"><?php single_cat_title(); ?></h1><h3 class="arc-src">now browsing by category</h3>
         <?php if(trim(category_description()) != "<br />" && trim(category_description()) != '') { ?>
-        <div id="description"><?php echo category_description(); ?></div>
+        <!--div id="description"><?php echo category_description(); ?></div-->
         <?php }?>
         <div class="clear">&nbsp;</div>
         <?php /* If this is a tag archive */ } elseif( is_tag() ) { ?>
@@ -32,12 +38,12 @@
 
         <?php while (have_posts()) : the_post(); ?>
 
-            <div <?php post_class(); ?>>
+            <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
                 <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
                 <div class="content-ver-sep"> </div>
                 <div class="entrytext">
- <?php the_post_thumbnail('thumbnail'); ?>
- <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
+ <?php the_post_thumbnail('thumbnail');
+       the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
 
                 <div class="clear"> </div>
                 <div class="up-bottom-border">
@@ -45,7 +51,7 @@
   $c = new SaeCounter();
   $cc = 'c'.get_the_date('Ym');
   if ( $c->create($cc) ) {
-    $c->set($cc, 1); 
+    $c->set($cc, 1);
   } else {
     $c->incr($cc); }
   echo $c->get($cc);
@@ -62,8 +68,9 @@
     </div>
 
     <?php else : ?>
-
-        <h1 class="arc-post-title">Sorry, we couldn't find anything that matched...</h1>
+        <header class="entry-header">
+        <h1 class="arc-post-title">Sorry, we couldn't find anything that matched.</h1>
+        </header><!-- .entry-header -->
 
         <h3 class="arc-src"><span>You Can Try the Search...</span></h3>
         <?php get_search_form(); ?>
@@ -74,8 +81,8 @@
 
     <?php endif; ?>
 
-</div><!--close content id-->
+</main><!-- .site-main -->
+</div><!-- #content -->
 
 <?php get_sidebar(); ?>
-
 <?php get_footer(); ?>

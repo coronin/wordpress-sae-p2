@@ -1,8 +1,15 @@
-<?php get_header(); ?>
+<?php
+/*
+  Theme's General Page
+ */
+get_header(); ?>
 
     <div id="content">
+    <main class="site-main" role="main">
 
-        <?php if (have_posts()) : while (have_posts()) : the_post();
+        <?php
+        // Start the loop.
+        while (have_posts()) : the_post();
   $c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
@@ -11,24 +18,33 @@
     $c->incr($cc); }
 ?>
         <div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-        <h1 class="page-title"><?php the_title(); ?></h1>
+
+            <header class="entry-header">
+            <?php the_title( '<h1 class="page-title" style="text-transform:none;">', '</h1>' ); ?>
+            </header><!-- .entry-header -->
+
             <div class="content-ver-sep"> </div>
+
             <div class="entrytext">
- <?php the_post_thumbnail('category-thumb'); ?>
- <?php the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
-
-                <?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
-
+                <?php the_post_thumbnail('category-thumb');
+                      the_content();
+                      wp_link_pages( array(
+                        'before' => '<p><strong>Pages:</strong> ',
+                        'after' => '</p>',
+                        'next_or_number' => 'number' ) ); ?>
             </div>
         </div>
-        <?php endwhile; ?><div class="clear"> </div>
-    <?php edit_post_link('Edit This Entry', '<p>', '</p>'); ?>
-    <?php comments_template('', true); ?>
-    <?php else: ?>
-        <p>Sorry, no pages matched your criteria.</p>
-    <?php endif; ?>
+        <div class="clear"> </div>
+
+        <?php edit_post_link('Edit This Entry', '<p>', '</p>');
+              comments_template('', true); ?>
+
+        <?php
+        // End the loop.
+        endwhile; ?>
+
+    </main><!-- .site-main -->
     </div>
 
 <?php get_sidebar(); ?>
-
 <?php get_footer(); ?>

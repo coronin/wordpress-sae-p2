@@ -1,4 +1,10 @@
-<div id="right-sidebar">
+<?php
+/*
+  Theme's Front Page Right Sidebar Area
+ */
+?>
+
+<div id="right-sidebar"><!-- from sidebar-frontpage.php -->
 <?php if ( ! dynamic_sidebar( 'sidebar-2' ) ) : ?>
 
                 <aside class="widget">
@@ -17,5 +23,5 @@
                     </ul>
                 </aside>
 
-<?php endif; // end sidebar widget area ?>
+<?php endif; ?>
 </div>

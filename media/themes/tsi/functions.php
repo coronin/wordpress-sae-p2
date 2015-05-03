@@ -1,4 +1,7 @@
 <?php
+/*
+  Theme's Functions
+ */
 
 // by Liang Cai: 2015/1, 2015/5
   remove_action('wp_head', 'rsd_link');
@@ -46,7 +49,7 @@
 //  This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
     add_theme_support( 'post-thumbnails' );
     set_post_thumbnail_size( 150, 150, true ); // default Post Thumbnail dimensions (cropped)
-
+    add_theme_support( 'html5', array('gallery') ); // LC: 'search-form', 'comment-form', 'comment-list',
     // additional image sizes
     // delete the next line if you do not need additional image sizes
     add_image_size( 'category-thumb', 300, 9999 ); //300 pixels wide (and unlimited height)
@@ -111,8 +114,7 @@
     <?php
 
 }
-
-    add_action('wp_head', 'tsg2011_custom_code');
+//    add_action('wp_head', 'tsg2011_custom_code');
 
 
 //  function tied to the excerpt_more filter hook.
@@ -143,14 +145,14 @@
     function tsg2011_widgets_init() {
 
 
-    register_sidebar( array(
-        'name' => 'Front Page Sidebar',
-        'id' => 'sidebar-2',
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget' => "</aside>",
-        'before_title' => '<h3 class="widget-title">',
-        'after_title' => '</h3>',
-    ) );
+//    register_sidebar( array(
+//        'name' => 'Front Page Sidebar',
+//        'id' => 'sidebar-2',
+//        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+//        'after_widget' => "</aside>",
+//        'before_title' => '<h3 class="widget-title">',
+//        'after_title' => '</h3>',
+//    ) );
 
 
     register_sidebar( array(

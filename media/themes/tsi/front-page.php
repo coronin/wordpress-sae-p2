@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=780, maximum-scale=1">
-    <title>TAN School of Innovation &raquo; Front Page</title>
+    <title>TAN School of Innovation &raquo; 2015 BIOS call for applicants</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://tsg2011.vipsinaapp.com/xmlrpc.php" />
     <link rel="shortcut icon" href="http://tsg2011-byduck.stor.sinaapp.com/favicon.ico" />
 
     <!-- Tools http://tsg2011-byduck.stor.sinaapp.com/squadfree/ -->
-    <link href="http://libs.useso.com/js/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="http://libs.useso.com/js/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://tsg2011-byduck.stor.sinaapp.com/squadfree/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://tsg2011-byduck.stor.sinaapp.com/squadfree/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="http://tsg2011-byduck.stor.sinaapp.com/squadfree/css/animate.css" rel="stylesheet" />
-    <link href="http://tsg2011-byduck.stor.sinaapp.com/squadfree/css/style.min.css" rel="stylesheet">
+    <link href="http://tsg2011-byduck.stor.sinaapp.com/squadfree/css/style.min.css" rel="stylesheet" />
     <!--link href="color/default.css" rel="stylesheet"-->
     <style media="screen" type="text/css">
 a,
@@ -44,7 +44,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
   background-color: #cfaa00;
 }
 .intro {
-  background: url(http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/bg<?php echo rand(1,4); ?>.jpg) no-repeat top center;
+  background: url(http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fudan<?php echo rand(1,7); ?>.jpg) no-repeat top center;
 }
 .text-white {
   color: #fff;
@@ -65,7 +65,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/198/bios-call-for-applicants/">
+                <a class="navbar-brand" href="/students/undergraduate-students/bios/">
                     <h1>2015 BIOS</h1>
                 </a>
             </div>
@@ -75,27 +75,30 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
       <ul class="nav navbar-nav">
         <li class="active"><a href="#intro">Home</a></li>
         <li class="dropdown">
-          <a href="/students/" class="dropdown-toggle" data-toggle="dropdown">students <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">students <b class="caret"></b></a>
           <ul class="dropdown-menu">
+            <li><a href="/students/">Constitution</a></li>
             <li><a href="/students/future-students/">Future students</a></li>
-            <li><a href="/students/undergraduate-students/">Undergraduate students</a></li>
-            <li><a href="/students/graduate-students/">Graduate students</a></li>
+            <li><a href="/students/undergraduate-students/">Undergraduate</a></li>
+            <li><a href="/students/graduate-students/">Graduate</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="/connect/" class="dropdown-toggle" data-toggle="dropdown">connect <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">connect <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="/connect/alumni/">Alumni</a></li>
             <li><a href="/connect/donors-and-friends/">Donors and friends</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="/welcome/" class="dropdown-toggle" data-toggle="dropdown">welcome to TSI <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">TSI <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="/welcome/overview/">Overview</a></li>
+            <li><a href="/welcome/">Welcome!</a></li>
+            <li><a href="/welcome/overview/">TSI overview</a></li>
             <li><a href="/welcome/tsi-staff/">TSI staff</a></li>
           </ul>
         </li>
+        <li><a href="/2015-bios-frontpage-cn/">中文</a></li>
       </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -108,7 +111,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
 
         <div class="slogan">
             <h2><span class="text_color">TAN School</span> of Innovation</h2>
-            <h4> we are passionate about science and life</h4>
+            <h4> Passionate about life sciences </h4>
         </div>
         <div class="page-scroll">
             <a href="#about" class="btn btn-circle">
@@ -126,7 +129,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="wow bounceInDown" data-wow-delay="0.4s">
                     <div class="section-heading">
-                    <h2>BIOS instructors</h2>
+                        <h2><a href="/students/undergraduate-students/bios/">BIOS</a> instructors</h2>
                     <i class="fa fa-2x fa-angle-down"></i>
 
                     </div>
@@ -150,7 +153,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Justin Fendos</h5>
                         <p class="subtitle">program leader</p>
-                        <div class="avatar"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/a250justin.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/400justin.jpg" alt="" class="img-responsive img-circle" /></div>
                     </div>
                 </div>
                 </div>
@@ -294,13 +297,16 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3">
                 <div class="wow bounceInUp" data-wow-delay="1s">
-                <div class="team boxed-grey">
+                <div class="team boxed-grey" style="background:#eaeaea">
                     <div class="inner">
                         <h5>And, YOU!</h5>
-                        <p class="subtitle">click to apply</p>
+                        <p class="subtitle"><a href="https://www.surveymonkey.com/r/MX5PDL5" target="_blank">click</a> to apply</p>
 
                         <div class="wow bounce animated" data-wow-delay="1s" data-wow-duration="2s" data-wow-iteration="infinite">
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/400-logo.png" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar">
+                          <a href="https://www.surveymonkey.com/r/MX5PDL5" target="_blank">
+                          <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/400-logo.png" alt="" class="img-responsive img-circle" />
+                        </a></div>
                         </div>
                     </div>
                 </div>
@@ -321,7 +327,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="wow bounceInDown" data-wow-delay="0.4s">
                     <div class="section-heading">
-                    <h2 class="text-white">BIOS goals</h2>
+                        <h2 class="text-white"><a href="/students/undergraduate-students/bios/">BIOS</a> goals</h2>
 
                     </div>
                     </div>
@@ -338,8 +344,8 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/icons/white-up.png" alt="" />
                     </div>
                     <div class="text-white">
-                        <h5>A preview</h5>
-                        <p>BIOS is designed to provide incoming students with a preview of the laboratory requirements of a B.S. in Biology as well as the pace and tone of cutting edge biology research.</p>
+                        <h5>More Experience</h5>
+                        <p>The main goal of BIOS is to provide students with more research experience and give a preview of the <u>excitement and challenges</u> of biology research.</p>
                     </div>
                 </div>
                 </div>
@@ -351,8 +357,8 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/icons/white-up.png" alt="" />
                     </div>
                     <div class="text-white">
-                        <h5>Better grades</h5>
-                        <p>On average, students who have participated in this type of authentic research experience have higher final grades in other courses compared to their peers because they are better trained to think like scientists.</p>
+                        <h5>Get Better Grades</h5>
+                        <p>BIOS is an authentic research experience lab, designed to teach you how to <u>think like a scientist</u>, something we know improves grades, especially in upper-level classes.</p>
                     </div>
                 </div>
                 </div>
@@ -364,8 +370,8 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/icons/white-up.png" alt="" />
                     </div>
                     <div class="text-white">
-                        <h5>Career in science</h5>
-                        <p>For those of you who are considering a career in life science, this is the best way to discover what it is like to be involved in research.</p>
+                        <h5>Earlier Start</h5>
+                        <p>In the traditional curriculum system, we have found students often start doing research too late to be of maximum benefit, so BIOS is a special opportunity to get a head start.</p>
                     </div>
                 </div>
                 </div>
@@ -377,8 +383,8 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/icons/white-up.png" alt="" />
                     </div>
                     <div class="text-white">
-                        <h5>Beyond...</h5>
-                        <p>Travel scholarships for research overseas, funding for your own startup company, etc.</p>
+                        <h5>Other Benefits</h5>
+                        <p>After BIOS, you could <u>be admitted into TSI</u>, where you will receive travel funds to do research overseas for a semester or more. You will also be eligible to receive funding for your own startup company.</p>
                     </div>
                 </div>
                 </div>
@@ -406,7 +412,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
         <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                  <p style="font-size:1.5em"><img height="258" width="258" src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/03/%E8%AE%A2%E9%98%85%E5%8F%B7-qrcode_for_gh_9f2e8911e52c_258.jpg" alt="wechat: tan-school" />
+                  <p style="font-size:1.5em"><img height="258" width="258" src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/%E8%AE%A2%E9%98%85%E5%8F%B7-qrcode_for_gh_9f2e8911e52c_258.jpg" alt="wechat: tan-school" />
                   <br/>wechat : <a href="http://weixin.qq.com/r/nUw2LoTEaNkXrcBN9xmP" target="_blank">tan-school</a></p>
             </div>
         </div>
@@ -426,7 +432,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         </a>
                     </div>
                     </div>
-<p>&copy; 2013-2015 &middot; TSI &middot; Collaborative Innovation Center of Genetics and Development
+<p>&copy; 2013-2015 TSI &middot; Collaborative Innovation Center of Genetics and Development
   <!-- Fudan University -->
   &middot; All Rights Reserved.</p>
                 </div>
@@ -435,9 +441,9 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
     </footer>
 
     <!-- JavaScript Files http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/ -->
-    <script src="http://libs.useso.com/js/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://libs.useso.com/js/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="http://libs.useso.com/js/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.min.js"></script>
+    <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/bootstrap.min.js"></script> <!-- 3.1.0 -->
+    <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.easing.min.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.scrollTo.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/wow.min.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/custom.js"></script>
