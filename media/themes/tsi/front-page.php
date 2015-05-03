@@ -6,6 +6,7 @@
     <title>TAN School of Innovation &raquo; Front Page</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://tsg2011.vipsinaapp.com/xmlrpc.php" />
+    <link rel="shortcut icon" href="http://tsg2011-byduck.stor.sinaapp.com/favicon.ico" />
 
     <!-- Tools http://tsg2011-byduck.stor.sinaapp.com/squadfree/ -->
     <link href="http://libs.useso.com/js/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
