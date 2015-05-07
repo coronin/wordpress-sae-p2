@@ -29,7 +29,7 @@ get_header(); ?>
                   <div class="content-ver-sep"></div>
                   <div class="entrytext">
  <?php the_post_thumbnail('thumbnail');
-       the_excerpt(); // the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
+       the_content('<p class="read-more">Read the rest of this page &raquo;</p>'); ?>
 
                   <div class="clear"> </div>
                   <div class="up-bottom-border">
@@ -41,7 +41,7 @@ get_header(); ?>
   } else {
     $c->incr($cc); }
   echo $c->get($cc);
-  ?>; Posted on <a href="<?php echo get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a><?php if (get_the_category()) { ?>; Posted in <?php the_category(', '); } edit_post_link('Edit', '| ', ''); ?> <!--more--> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
+?>; Posted on <a href="<?php echo get_month_link('', ''); ?>"><?php the_time('F j, Y'); ?></a>; Posted in <?php the_category(', ') ?> <?php edit_post_link('Edit', '| ', ''); ?> <!-- more --> <?php the_tags('<br />Tags: ', ', ', '<br />'); ?></p>
                   </div></div>
                   </div><!--close post class-->
 

@@ -7,12 +7,11 @@
 
 <?php get_header(); ?>
 
-
-        <?php if (have_posts()) : while (have_posts()) : the_post();
+        <?php while (have_posts()) : the_post();
   $c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
-    $c->set($cc, 1); 
+    $c->set($cc, 1);
   } else {
     $c->incr($cc); }
 ?>
@@ -21,7 +20,7 @@
             <?php the_content(); ?>
           </div>
         </div>
-        <?php endwhile; endif; ?>
+        <?php endwhile; ?>
 
 <div class="clear"> </div>
 <div id="customers-comment">

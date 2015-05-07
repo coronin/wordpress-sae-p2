@@ -32,6 +32,7 @@ get_header(); ?>
                         'before' => '<p><strong>Pages:</strong> ',
                         'after' => '</p>',
                         'next_or_number' => 'number' ) ); ?>
+                <br/><!-- 2015/5/4 bug fix -->
             </div>
         </div>
         <div class="clear"> </div>

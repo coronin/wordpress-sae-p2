@@ -1,4 +1,4 @@
 handle:
-  - rewrite: if (!is_dir() && !is_file()) goto "index.php?%{QUERY_STRING}"
-  - rewrite: if (path ~ "sitemap.xml") goto "http://tsg2011-files.stor.sinaapp.com/sitemap.xml"
-  - rewrite: if (path ~ "sitemap.html") goto "http://tsg2011-files.stor.sinaapp.com/sitemap.html"
+  - rewrite: if ( path ~ "sitemap.xml" ) goto "http://tsg2011-files.stor.sinaapp.com/sitemap.xml"
+  - rewrite: if ( path ~ "sitemap.html" ) goto "http://tsg2011-files.stor.sinaapp.com/sitemap.html"
+  - rewrite: if ( !is_file() && !is_dir() ) goto "index.php?%{QUERY_STRING}"

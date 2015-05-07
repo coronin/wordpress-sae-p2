@@ -16,7 +16,8 @@
 ?>
 
 <?php while (have_posts()) : the_post();
-  $c = new SaeCounter();
+
+$c = new SaeCounter();
   $cc = 'page'.$post->ID;
   if ( $c->create($cc) ) {
     $c->set($cc, 1);
@@ -24,5 +25,9 @@
     $c->incr($cc); }
 
   $raw_entry = get_the_content();
-  echo str_replace("$$$$", rand(1,7), $raw_entry);
-  endwhile; ?>
+  echo str_replace(
+    array("$$$$", "$$$"),
+    array(rand(6,9), rand(0,2)),
+    $raw_entry );
+
+endwhile; ?>

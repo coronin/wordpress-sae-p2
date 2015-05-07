@@ -117,21 +117,28 @@
 //    add_action('wp_head', 'tsg2011_custom_code');
 
 
-//  function tied to the excerpt_more filter hook.
-    function tsg2011_excerpt_length( $length ) {
-    global $sbExcerptLength;
-    if ($sbExcerptLength) {
-    return $sbExcerptLength;
-    } else {
-    return 50; //default value
-    } }
-    add_filter( 'excerpt_length', 'tsg2011_excerpt_length', 999 );
-
-    function tsg2011_excerpt_more($more) {
-       global $post;
-    return '<a href="'. get_permalink($post->ID) . '" class="read-more">Read the Rest...</a>';
+//  Function tied to the excerpt_more filter hook.
+// LC
+//    function tsg2011_excerpt_length( $length ) {
+//      global $sbExcerptLength;
+//      if ($sbExcerptLength) {
+//        return $sbExcerptLength;
+//      } else {
+//        return 50; //default value
+//    } }
+//    add_filter( 'excerpt_length', 'tsg2011_excerpt_length', 999 );
+//    function tsg2011_excerpt_more($more) {
+//       global $post;
+//    return '<a href="'. get_permalink($post->ID) . '" class="read-more">Read the Rest...</a>';
+//    }
+//    add_filter('excerpt_more', 'tsg2011_excerpt_more');
+    function excerpt_by_character($output) {
+      global $post;
+      $output = mb_substr($output,0, 400);
+      return $output;
     }
-    add_filter('excerpt_more', 'tsg2011_excerpt_more');
+    add_filter('the_excerpt', 'excerpt_by_character');
+// 2015-5-4
 
 //  Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link
     function tsg2011_page_menu_args( $args ) {

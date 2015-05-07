@@ -26,7 +26,7 @@ get_header(); ?>
     <div class="entrytext">
         <?php the_post_thumbnail('category-thumb');
               the_content(); ?>
-    <br/>
+    <br/><!-- 2015/5/4 bug fix -->
     </div>
 
     <?php edit_post_link('Edit This Entry', '<p>', '</p>'); ?>

@@ -44,7 +44,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
   background-color: #cfaa00;
 }
 .intro {
-  background: url(http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fudan<?php echo rand(1,7); ?>.jpg) no-repeat top center;
+  background: url(http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fudan<?php echo rand(0,5); ?>.jpg) no-repeat top center;
 }
 .text-white {
   color: #fff;
@@ -58,6 +58,10 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
     <div id="preloader">
       <div id="load"></div>
     </div>
+    <audio autoplay>
+      <source src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/bg<?php $mp3ogg = rand(0,2); echo $mp3ogg; ?>.mp3" type="audio/mpeg" />
+      <source src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/bg<?php echo $mp3ogg; ?>.ogg" type="audio/ogg" />
+    </audio>
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -114,16 +118,17 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
             <h4> Passionate about life sciences </h4>
         </div>
         <div class="page-scroll">
-            <a href="#about" class="btn btn-circle">
+            <a href="#people" class="btn btn-circle">
                 <i class="fa fa-angle-double-down animated"></i>
             </a>
         </div>
     </section>
     <!-- /Section: intro -->
 
-    <!-- Section: about -->
-    <section id="about" class="home-section text-center">
-        <div class="heading-about">
+
+    <!-- Section: people -->
+    <section id="people" class="home-section text-center">
+        <div class="heading-people">
             <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -153,7 +158,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Justin Fendos</h5>
                         <p class="subtitle">program leader</p>
-                        <div class="avatar"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/400justin.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/" target="_blank"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/400justin.jpg" alt="" class="img-responsive img-circle" /></a></div>
                     </div>
                 </div>
                 </div>
@@ -164,7 +169,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Lin Li</h5>
                         <p class="subtitle">plant physiology</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-lilin.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/lilin/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-lilin.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -176,7 +181,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Liang Cai</h5>
                         <p class="subtitle">cell biology</p>
-                        <div class="avatar"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/cail_by_jianglei-.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/cailiang/" target="_blank"><img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/cail_by_jianglei-.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -188,7 +193,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Xiaohui Wu</h5>
                         <p class="subtitle">mouse genetics</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-wuxiaohui.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/wuxiaohui/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-wuxiaohui.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -209,7 +214,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Ruilin Zhang</h5>
                         <p class="subtitle">animal model</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-zhangruilin.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/zhangruilin/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-zhangruilin.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -221,7 +226,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Pingli Lu</h5>
                         <p class="subtitle">plant genetics</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-lupingli.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/lupingli" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-lupingli.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -233,7 +238,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Jinbiao Ma</h5>
                         <p class="subtitle">structural biology</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-majinbiao.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/majinbiao/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-majinbiao.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -245,7 +250,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Guodong Ren</h5>
                         <p class="subtitle">plant biochemistry</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-renguodong.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/renguodong/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-renguodong.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -266,7 +271,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Yan Pi</h5>
                         <p class="subtitle">fish genetics</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-piyan.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/piyan/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-piyan.jpg" alt="" class="img-responsive img-circle" /></a></div>
                     </div>
                 </div>
                 </div>
@@ -277,7 +282,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                     <div class="inner">
                         <h5>Zhiqiang Yan</h5>
                         <p class="subtitle">fly genetics</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-yanzhiqiang.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <div class="avatar"><a href="/welcome/tsi-staff/yanzhiqiang/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-yanzhiqiang.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -288,8 +293,8 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                 <div class="team boxed-grey">
                     <div class="inner">
                         <h5>Boxun Lu</h5>
-                        <p class="subtitle">neuron science</p>
-                        <div class="avatar"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-luboxun.jpg" alt="" class="img-responsive img-circle" /></div>
+                        <p class="subtitle">neuroscience</p>
+                        <div class="avatar"><a href="/welcome/tsi-staff/luboxun/" target="_blank"><img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/fp-luboxun.jpg" alt="" class="img-responsive img-circle" /></a></div>
 
                     </div>
                 </div>
@@ -297,15 +302,15 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3">
                 <div class="wow bounceInUp" data-wow-delay="1s">
-                <div class="team boxed-grey" style="background:#eaeaea">
+                <div class="team boxed-grey" style="background:#fff">
                     <div class="inner">
-                        <h5>And, YOU!</h5>
-                        <p class="subtitle"><a href="https://www.surveymonkey.com/r/MX5PDL5" target="_blank">click</a> to apply</p>
+                        <h5>&nbsp;</h5>
+                        <p class="subtitle"><a href="/students/undergraduate-students/bios/" target="_blank">read more</a></p>
 
-                        <div class="wow bounce animated" data-wow-delay="1s" data-wow-duration="2s" data-wow-iteration="infinite">
+                        <div class="wow pulse animated" data-wow-delay="1s" data-wow-duration="3s" data-wow-iteration="infinite">
                         <div class="avatar">
-                          <a href="https://www.surveymonkey.com/r/MX5PDL5" target="_blank">
-                          <img src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/img/400-logo.png" alt="" class="img-responsive img-circle" />
+                          <a href="/students/undergraduate-students/bios/" target="_blank">
+                          <img src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/300BIOS.png" alt="" class="img-responsive img-circle" />
                         </a></div>
                         </div>
                     </div>
@@ -316,12 +321,12 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
 
         </div>
     </section>
-    <!-- /Section: about -->
+    <!-- /Section: people -->
 
 
-    <!-- Section: goals -->
-    <section id="goal" class="home-section text-center bg-yellow">
-        <div class="heading-about">
+    <!-- Section: yellow -->
+    <section id="yellow" class="home-section text-center bg-yellow">
+        <div class="heading-yellow">
             <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -392,17 +397,17 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
         </div>
         </div>
     </section>
-    <!-- /Section: goals -->
+    <!-- /Section: yellow -->
 
 
-    <!-- Section: contact -->
-    <section id="contact" class="home-section text-center">
-        <div class="heading-contact">
+    <!-- Section: white -->
+    <section id="white" class="home-section text-center">
+        <div class="heading-white">
             <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="section-heading">
-                    <h2>Contact us</h2>
+                    <h2><a href="/students/undergraduate-students/bios/">BIOS</a> introductory video</h2>
 
                     </div>
                 </div>
@@ -412,13 +417,15 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
         <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                  <p style="font-size:1.5em"><img height="258" width="258" src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/%E8%AE%A2%E9%98%85%E5%8F%B7-qrcode_for_gh_9f2e8911e52c_258.jpg" alt="wechat: tan-school" />
-                  <br/>wechat : <a href="http://weixin.qq.com/r/nUw2LoTEaNkXrcBN9xmP" target="_blank">tan-school</a></p>
+               <p><a href="http://tsg2011-byduck.stor.sinaapp.com/ads/BIOS.mp4" target="_blank">
+               <img style="margin:0" src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/gs_2015-05-06-05-33-10.png" alt="wp-image-512" width="639" height="360" />
+               </a></p>
+
             </div>
         </div>
         </div>
     </section>
-    <!-- /Section: contact -->
+    <!-- /Section: white -->
 
 
     <footer>
@@ -432,9 +439,14 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
                         </a>
                     </div>
                     </div>
-<p>&copy; 2013-2015 TSI &middot; Collaborative Innovation Center of Genetics and Development
-  <!-- Fudan University -->
-  &middot; All Rights Reserved.</p>
+<p>&copy; 2013-2015 Fudan University
+  <!-- All Rights Reserved. -->
+  &middot; CICGD
+  &middot; wechat: tan-school</p>
+<p style="font-size:1.5em">
+  <img height="258" width="258" src="http://tsg2011-files.stor.sinaapp.com/uploads/2015/05/%E8%AE%A2%E9%98%85%E5%8F%B7-qrcode_for_gh_9f2e8911e52c_258.jpg" alt="wechat: tan-school" />
+  </p>
+
                 </div>
             </div>
         </div>
@@ -442,7 +454,7 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
 
     <!-- JavaScript Files http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/ -->
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.min.js"></script>
-    <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/bootstrap.min.js"></script> <!-- 3.1.0 -->
+    <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/bootstrap.min.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.easing.min.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/jquery.scrollTo.js"></script>
     <script src="http://tsg2011-byduck.stor.sinaapp.com/squadfree/js/wow.min.js"></script>

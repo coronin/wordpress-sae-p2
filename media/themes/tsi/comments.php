@@ -12,7 +12,7 @@
 
 <div id="commentsbox">
 <?php if ( have_comments() ) : ?>
-    <h2 class="comments"><?php comments_number('No Comments', 'One Comment', '% Comments' );?><?php _e(' to ','tsg2011'); ?> <a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
+    <h2 class="comments"><?php comments_number('No Comments', 'One Comment', '% Comments' );?><?php _e(' to ','tsi'); ?> <a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
     <ol class="commentlist">
         <?php wp_list_comments(); ?>
     </ol>

@@ -398,9 +398,9 @@ function LCZ_for_SAE(){
 	<h3>SAE环境:</h3>
 	<p>提醒：如果是用SAE平台，打开网站根目录下的config.yaml加入两行代码</p>
 	<pre>
-	- rewrite:  if ( path ~ "sitemap.xml" ) goto "wp-content/plugins/baidu-sitemap-generator/SAE_xml.php"
-	- rewrite:  if ( path ~ "sitemap.html" ) goto "wp-content/plugins/baidu-sitemap-generator/SAE_html.php"
-	</pre>
+  - rewrite: if ( path ~ "sitemap.xml" ) goto "http://xxxx-wordpress.stor.sinaapp.com/sitemap.xml"
+  - rewrite: if ( path ~ "sitemap.html" ) goto "http://xxxx-wordpress.stor.sinaapp.com/sitemap.html"
+    </pre>
 	<?php
 	endif;
 }
